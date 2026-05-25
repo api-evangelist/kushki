@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/kushki/main/json-schema/kushki-webhook-event-schema.json",
+  "title": "Kushki Webhook Event",
+  "description": "JSON payload Kushki POSTs to a merchant's configured webhook URL when a transaction state changes. Delivery uses exponential backoff retry until a 2xx response is received.",
+  "type": "object",
+  "required": ["merchantId", "ticketNumber", "transactionStatus", "transactionType"],
+  "properties": {
+    "merchantId": { "type": "string" },
+    "ticketNumber": { "type": "string" },
+    "transactionStatus": {
+      "type": "string",
+      "enum": ["APPROVAL", "DECLINED", "INITIALIZED", "REFUNDED", "VOIDED", "CAPTURED", "PAID", "EXPIRED", "CANCELLED"]
+    },
+    "transactionType": {
+      "type": "string",
+      "enum": ["CARD", "SUBSCRIPTION", "TRANSFER", "CASH", "PAYOUT", "CARD_PRESENT"]
+    },
+    "eventType": {
+      "type": "string",
+      "description": "Logical event name (e.g. charge.approved, charge.declined, refund.completed, payout.completed, voucher.paid).",
+      "enum": [
+        "charge.approved",
+        "charge.declined",
+        "charge.captured",
+        "charge.voided",
+        "refund.completed",
+        "subscription.charged",
+        "subscription.cancelled",
+        "transfer.initialized",
+        "transfer.settled",
+        "transfer.failed",
+        "voucher.created",
+        "voucher.paid",
+        "voucher.expired",
+        "payout.initialized",
+        "payout.completed",
+        "payout.returned"
+      ]
+    },
+    "amount": { "type": "number" },
+    "currencyCode": { "type": "string" },
+    "paymentBrand": { "type": "string" },
+    "transactionReference": { "type": "string" },
+    "approvalCode": { "type": "string" },
+    "responseText": { "type": "string" },
+    "country": {
+      "type": "string",
+      "enum": ["EC", "CO", "PE", "CL", "MX", "BR"]
+    },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "metadata": { "type": "object", "additionalProperties": true }
+  },
+  "additionalProperties": true
+}

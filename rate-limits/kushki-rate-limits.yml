@@ -1,0 +1,62 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Kushki
+providerId: kushki
+created: '2026-05-24'
+modified: '2026-05-24'
+reconciled: false
+tags:
+  - Payments
+  - Rate Limiting
+  - Throughput
+description: |
+  Kushki does not publish a numeric rate-limit table in the public documentation. Operational throttling is
+  applied per merchant key (Private-Merchant-Id) and per endpoint family, with stricter ceilings on
+  tokenization and batch payout endpoints. Throttled requests return HTTP 429 with a retry-after hint.
+  This file is a placeholder for the negotiated limits — confirm with the Kushki integrations team for the
+  merchant's account tier.
+sources:
+  - https://docs.kushki.com/
+  - https://api-docs.kushkipagos.com/api-reference
+algorithm: token-bucket
+responseCodes:
+  throttled: 429
+  serverBusy: 503
+headers:
+  retryAfter: Retry-After
+recommendations:
+  - name: Exponential backoff on 429
+    description: Retry throttled requests with exponential backoff starting at 1 second; cap retries at 5.
+  - name: Single in-flight refund per ticketNumber
+    description: Refund and void operations on the same ticketNumber must be serialized to avoid 409
+      conflicts.
+  - name: Idempotency on charges
+    description: Persist the response ticketNumber before client-side retry to avoid duplicate charges.
+  - name: Batch payouts in chunks
+    description: Payout batches are capped at 1000 beneficiaries per request — chunk large dispersions and
+      check batch status before submitting the next.
+defaultLimits:
+  - endpointFamily: Tokenization (/card/v1/tokens)
+    description: Typically the highest-throughput surface — tokenization happens client-side and rates
+      mirror checkout volume.
+    perKey: contact-sales
+    window: second
+  - endpointFamily: Charges and pre-authorization (/card/v1/charges, /card/v1/preAuthorization)
+    perKey: contact-sales
+    window: second
+  - endpointFamily: Subscriptions (/subscriptions/v1/card)
+    perKey: contact-sales
+    window: second
+  - endpointFamily: Transfers (/transfer/v1/*)
+    perKey: contact-sales
+    window: second
+  - endpointFamily: Cash vouchers (/cash/v1/charges)
+    perKey: contact-sales
+    window: second
+  - endpointFamily: Payouts (/payouts/transfer/v1/*)
+    perKey: contact-sales
+    window: minute
+  - endpointFamily: Webhook deliveries (inbound)
+    description: Kushki retries with exponential backoff until a 2xx is observed; configure receivers to
+      idempotently handle duplicate deliveries.

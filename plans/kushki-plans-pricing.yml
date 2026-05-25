@@ -1,0 +1,152 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Kushki
+providerId: kushki
+created: '2026-05-24'
+modified: '2026-05-24'
+reconciled: false
+tags:
+  - Payments
+  - LatAm
+  - Card Payments
+  - Subscriptions
+  - Cash
+  - Bank Transfers
+  - Payouts
+description: |
+  Kushki does not publish standard list pricing. Per the Kushki and Transbank/PSE/SPEI/PIX network rules
+  surfaced in the public Terms & Conditions, pricing is bespoke per merchant — a Merchant Discount Rate
+  (MDR) plus optional fixed fees, settlement fees, and chargeback fees, negotiated by country and
+  payment method. Annual fixed-fee adjustments track the local consumer price index. This file is a
+  reconciliation surface for the negotiated plan; populate with the actual rates once contracted.
+sources:
+  - https://kushkipagos.com/
+  - https://kushkipagos.com/terminos-y-condiciones
+  - https://docs.kushki.com/
+contactSales:
+  url: https://kushkipagos.com/
+  email: dev@kushkipagos.com
+plans:
+  - id: kushki-card-payments-mdr
+    name: Card Payments — Merchant Discount Rate
+    type: transaction-fee
+    description: Per-transaction MDR (Merchant Discount Rate) on card-not-present and card-present sales,
+      quoted per country and brand. Confirm rates with the Kushki commercial team.
+    entries:
+      - label: MDR percent
+        name: mdr_percent
+        type: per-transaction
+        metric: percent
+        timeFrame: usage
+        geo: LATAM
+        unit: 1
+        price: contact-sales
+        userMultiplied: false
+      - label: Fixed fee per transaction
+        name: fixed_fee
+        type: per-transaction
+        metric: transaction
+        timeFrame: usage
+        geo: LATAM
+        unit: 1
+        price: contact-sales
+        userMultiplied: false
+  - id: kushki-subscriptions
+    name: Subscriptions
+    type: transaction-fee
+    description: MDR applies to each recurring or one-click charge. Optional storage / token-on-file fee per
+      stored card may apply.
+    entries:
+      - label: Recurring charge MDR
+        name: subscription_mdr
+        type: per-transaction
+        metric: percent
+        timeFrame: usage
+        geo: LATAM
+        unit: 1
+        price: contact-sales
+        userMultiplied: false
+  - id: kushki-cash-vouchers
+    name: Cash Payments
+    type: transaction-fee
+    description: Fixed fee or MDR per cash voucher redeemed at OXXO, 7-Eleven, PagoEfectivo, Boleto, or
+      Ecuadorean / Colombian correspondent networks. Network surcharge passes through.
+    entries:
+      - label: Cash voucher fee
+        name: cash_voucher_fee
+        type: per-transaction
+        metric: transaction
+        timeFrame: usage
+        geo: LATAM
+        unit: 1
+        price: contact-sales
+        userMultiplied: false
+  - id: kushki-transfers
+    name: Bank Transfers
+    type: transaction-fee
+    description: Per-transaction fee on PSE, Webpay Transferencia, SPEI, and PIX charges. Generally lower
+      than card MDR; varies by rail and country.
+    entries:
+      - label: Transfer fee
+        name: transfer_fee
+        type: per-transaction
+        metric: transaction
+        timeFrame: usage
+        geo: LATAM
+        unit: 1
+        price: contact-sales
+        userMultiplied: false
+  - id: kushki-payouts
+    name: Payouts (Dispersions)
+    type: transaction-fee
+    description: Per-payout fee on outbound disbursements via ACH, PSE, SPEI, PIX, Webpay Transferencia, or
+      intrabank. Same-day rail surcharges may apply.
+    entries:
+      - label: Payout fee
+        name: payout_fee
+        type: per-transaction
+        metric: transaction
+        timeFrame: usage
+        geo: LATAM
+        unit: 1
+        price: contact-sales
+        userMultiplied: false
+  - id: kushki-card-present
+    name: Card-Present (Kushki One POS)
+    type: transaction-fee
+    description: MDR on in-person EMV chip and contactless sales via Kushki One terminals, plus per-terminal
+      monthly rental or one-time purchase.
+    entries:
+      - label: Terminal MDR
+        name: terminal_mdr
+        type: per-transaction
+        metric: percent
+        timeFrame: usage
+        geo: LATAM
+        unit: 1
+        price: contact-sales
+        userMultiplied: false
+      - label: Terminal rental
+        name: terminal_rental
+        type: subscription
+        metric: terminal
+        timeFrame: month
+        geo: LATAM
+        unit: 1
+        price: contact-sales
+        userMultiplied: false
+ancillaryFees:
+  - name: Chargeback fee
+    description: Fixed fee charged when an issuer initiates a chargeback.
+    price: contact-sales
+  - name: Refund fee
+    description: Some rails pass a per-refund network fee through to the merchant.
+    price: contact-sales
+  - name: Currency conversion / DCC margin
+    description: FX margin on cross-currency settlement.
+    price: contact-sales
+adjustments:
+  - name: Annual CPI adjustment
+    description: 'Per Kushki T&C: fixed-fee components are adjusted each January using the prior year''s
+      country CPI (or the inflation rate certified by the local competent authority).'

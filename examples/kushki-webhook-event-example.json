@@ -1,0 +1,18 @@
+{
+  "merchantId": "20000000010482770000000000000000",
+  "ticketNumber": "175632110000000123",
+  "transactionStatus": "APPROVAL",
+  "transactionType": "CARD",
+  "eventType": "charge.approved",
+  "amount": 1000,
+  "currencyCode": "USD",
+  "paymentBrand": "Visa",
+  "transactionReference": "9c2e1f9a-7e3c-4d68-9f5d-21e2b67b18cd",
+  "approvalCode": "012345",
+  "responseText": "Transacción aprobada",
+  "country": "EC",
+  "timestamp": "2026-05-24T17:32:01.000Z",
+  "metadata": {
+    "orderId": "ORDER-42"
+  }
+}

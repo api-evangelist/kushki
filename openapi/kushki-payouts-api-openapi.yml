@@ -1,0 +1,168 @@
+openapi: 3.1.0
+info:
+  title: Kushki Payouts API
+  description: |
+    Disburse funds to bank accounts, cards, and cash pickup networks across LatAm.
+    Supports single payouts, batch upload, and country-specific compliance metadata
+    (RUT, RFC, CURP, RUC, CPF, NIT).
+  version: "1.0.0"
+  contact:
+    name: Kushki
+    url: https://kushkipagos.com/
+    email: dev@kushkipagos.com
+servers:
+  - url: https://api.kushkipagos.com
+    description: Production
+  - url: https://api-uat.kushkipagos.com
+    description: UAT / Sandbox
+security:
+  - PrivateMerchantId: []
+tags:
+  - name: Payouts
+    description: Single and batch disbursements
+paths:
+  /payouts/transfer/v1/init:
+    post:
+      summary: Kushki Initialize Payout
+      description: Initialize a single payout to a beneficiary bank account.
+      operationId: initPayout
+      tags:
+        - Payouts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutInitRequest'
+            example:
+              beneficiaryName: Maria Lopez
+              documentType: RUT
+              documentNumber: "12345678-9"
+              bankCode: "0012"
+              accountType: SAVINGS
+              accountNumber: "0001234567"
+              email: maria@example.com
+              amount:
+                value: 150000
+                currency: CLP
+              description: Marketplace payout May
+      responses:
+        '200':
+          description: Payout initialized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayoutResponse'
+        '4XX':
+          $ref: '#/components/responses/ErrorResponse'
+  /payouts/transfer/v1/payouts/{payoutId}:
+    get:
+      summary: Kushki Get Payout
+      description: Retrieve the current status of a payout.
+      operationId: getPayout
+      tags:
+        - Payouts
+      parameters:
+        - name: payoutId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Payout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayoutResponse'
+  /payouts/transfer/v1/batch:
+    post:
+      summary: Kushki Create Payout Batch
+      description: Create a batch of payouts. Accepts up to 1000 payouts per batch.
+      operationId: createPayoutBatch
+      tags:
+        - Payouts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [batchName, payouts]
+              properties:
+                batchName: { type: string }
+                payouts:
+                  type: array
+                  maxItems: 1000
+                  items:
+                    $ref: '#/components/schemas/PayoutInitRequest'
+      responses:
+        '200':
+          description: Batch accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  batchId: { type: string }
+                  accepted: { type: integer }
+                  rejected: { type: integer }
+components:
+  securitySchemes:
+    PrivateMerchantId:
+      type: apiKey
+      in: header
+      name: Private-Merchant-Id
+  schemas:
+    PayoutInitRequest:
+      type: object
+      required: [beneficiaryName, documentNumber, accountNumber, amount]
+      properties:
+        beneficiaryName: { type: string }
+        documentType:
+          type: string
+          enum: [CC, NIT, CE, DNI, RUT, CURP, RFC, RUC, CPF, CNPJ]
+        documentNumber: { type: string }
+        bankCode: { type: string }
+        accountType:
+          type: string
+          enum: [SAVINGS, CHECKING, VISTA, ELECTRONIC]
+        accountNumber: { type: string }
+        email: { type: string, format: email }
+        phoneNumber: { type: string }
+        amount:
+          type: object
+          required: [value, currency]
+          properties:
+            value: { type: number }
+            currency: { type: string, enum: [USD, COP, PEN, CLP, MXN, BRL] }
+        description: { type: string }
+        metadata: { type: object, additionalProperties: true }
+    PayoutResponse:
+      type: object
+      properties:
+        payoutId: { type: string }
+        status:
+          type: string
+          enum: [INITIALIZED, PROCESSING, COMPLETED, REJECTED, RETURNED]
+        rail:
+          type: string
+          enum: [ACH, PSE, SPEI, PIX, WEBPAY_TRANSF, INTRA_BANK]
+        amount:
+          type: object
+          properties:
+            value: { type: number }
+            currency: { type: string }
+        responseText: { type: string }
+        completedAt: { type: string, format: date-time }
+    Error:
+      type: object
+      properties:
+        code: { type: string }
+        message: { type: string }
+  responses:
+    ErrorResponse:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

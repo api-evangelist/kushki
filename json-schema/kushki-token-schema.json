@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/kushki/main/json-schema/kushki-token-schema.json",
+  "title": "Kushki Card Token",
+  "description": "A one-time card transactionToken returned by /card/v1/tokens. Exchanged server-side for a charge, pre-authorization, or subscription enrollment.",
+  "type": "object",
+  "required": ["token"],
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "Single-use token representing the tokenized card."
+    },
+    "secureService": {
+      "type": "string",
+      "description": "Identifier of the 3DS provider used during tokenization."
+    },
+    "secureId": {
+      "type": "string",
+      "description": "3DS session identifier."
+    }
+  },
+  "additionalProperties": true
+}

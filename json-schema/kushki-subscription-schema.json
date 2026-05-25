@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/kushki/main/json-schema/kushki-subscription-schema.json",
+  "title": "Kushki Subscription",
+  "description": "A recurring card subscription managed by /subscriptions/v1/card.",
+  "type": "object",
+  "required": ["subscriptionId", "planName", "amount", "periodicity", "startDate", "status"],
+  "properties": {
+    "subscriptionId": { "type": "string" },
+    "planName": { "type": "string" },
+    "amount": {
+      "type": "object",
+      "required": ["subtotalIva", "subtotalIva0", "iva", "currency"],
+      "properties": {
+        "subtotalIva": { "type": "number" },
+        "subtotalIva0": { "type": "number" },
+        "ice": { "type": "number" },
+        "iva": { "type": "number" },
+        "currency": { "type": "string", "enum": ["USD", "COP", "PEN", "CLP", "MXN", "BRL"] }
+      }
+    },
+    "periodicity": {
+      "type": "string",
+      "enum": ["daily", "weekly", "biweekly", "monthly", "bimonthly", "quarterly", "halfYearly", "yearly", "custom"]
+    },
+    "startDate": { "type": "string", "format": "date" },
+    "endDate": { "type": "string", "format": "date" },
+    "status": {
+      "type": "string",
+      "enum": ["active", "pending", "cancelled", "expired", "suspended"]
+    },
+    "contactDetails": {
+      "type": "object",
+      "properties": {
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "phoneNumber": { "type": "string" },
+        "documentType": { "type": "string" },
+        "documentNumber": { "type": "string" }
+      }
+    },
+    "metadata": { "type": "object", "additionalProperties": true }
+  },
+  "additionalProperties": true
+}

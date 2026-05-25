@@ -1,0 +1,117 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Kushki Card Payments API — Pre-Authorization
+  description: 'Kushki Card Payments — Pre-Authorization. 2 operations. Lead operation: Kushki Pre-Authorize Card. Self-contained Naftiko capability covering pre-auth and capture.'
+  tags:
+    - Kushki
+    - Card Payments
+    - Pre-Authorization
+    - Capture
+  created: '2026-05-24'
+  modified: '2026-05-24'
+binds:
+  - namespace: env
+    keys:
+      KUSHKI_PRIVATE_MERCHANT_ID: KUSHKI_PRIVATE_MERCHANT_ID
+capability:
+  consumes:
+    - type: http
+      namespace: card-payments-preauth
+      baseUri: https://api.kushkipagos.com
+      description: Two-step pre-authorization and capture flow.
+      resources:
+        - name: card-v1-preauth
+          path: /card/v1/preAuthorization
+          operations:
+            - name: preauthorizecard
+              method: POST
+              description: Kushki Pre-Authorize Card
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+        - name: card-v1-capture
+          path: /card/v1/capture
+          operations:
+            - name: capturecardcharge
+              method: POST
+              description: Kushki Capture Pre-Authorization
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+      authentication:
+        type: apikey
+        key: Private-Merchant-Id
+        value: '{{env.KUSHKI_PRIVATE_MERCHANT_ID}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: card-payments-preauth-rest
+      port: 8080
+      resources:
+        - path: /v1/card/pre-authorization
+          name: card-v1-preauth
+          operations:
+            - method: POST
+              name: preauthorizecard
+              description: Kushki Pre-Authorize Card
+              call: card-payments-preauth.preauthorizecard
+              with:
+                body: rest.body
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/card/capture
+          name: card-v1-capture
+          operations:
+            - method: POST
+              name: capturecardcharge
+              description: Kushki Capture Pre-Authorization
+              call: card-payments-preauth.capturecardcharge
+              with:
+                body: rest.body
+              outputParameters:
+                - type: object
+                  mapping: $.
+    - type: mcp
+      namespace: card-payments-preauth-mcp
+      port: 9090
+      transport: http
+      tools:
+        - name: kushki-pre-authorize-card
+          description: Kushki Pre-Authorize Card
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: card-payments-preauth.preauthorizecard
+          with:
+            body: tools.body
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: kushki-capture-pre-authorization
+          description: Kushki Capture Pre-Authorization
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: card-payments-preauth.capturecardcharge
+          with:
+            body: tools.body
+          outputParameters:
+            - type: object
+              mapping: $.

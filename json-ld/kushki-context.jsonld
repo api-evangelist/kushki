@@ -1,0 +1,81 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "kushki": "https://api.kushkipagos.com/v1/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Charge": {
+      "@id": "kushki:Charge",
+      "@context": {
+        "ticketNumber":              { "@id": "kushki:Charge/ticketNumber",              "@type": "xsd:string" },
+        "transactionReference":      { "@id": "kushki:Charge/transactionReference",      "@type": "xsd:string" },
+        "approvedTransactionAmount": { "@id": "kushki:Charge/approvedTransactionAmount", "@type": "xsd:decimal" },
+        "currencyCode":              { "@id": "kushki:Charge/currencyCode",              "@type": "xsd:string" },
+        "approvalCode":              { "@id": "kushki:Charge/approvalCode",              "@type": "xsd:string" },
+        "rrn":                       { "@id": "kushki:Charge/rrn",                       "@type": "xsd:string" },
+        "responseText":              { "@id": "kushki:Charge/responseText",              "@type": "xsd:string" },
+        "responseCode":              { "@id": "kushki:Charge/responseCode",              "@type": "xsd:string" }
+      }
+    },
+
+    "Token": {
+      "@id": "kushki:Token",
+      "@context": {
+        "token":         { "@id": "kushki:Token/token",         "@type": "xsd:string" },
+        "secureService": { "@id": "kushki:Token/secureService", "@type": "xsd:string" },
+        "secureId":      { "@id": "kushki:Token/secureId",      "@type": "xsd:string" }
+      }
+    },
+
+    "Subscription": {
+      "@id": "kushki:Subscription",
+      "@context": {
+        "subscriptionId": { "@id": "kushki:Subscription/subscriptionId", "@type": "xsd:string" },
+        "planName":       { "@id": "kushki:Subscription/planName",       "@type": "xsd:string" },
+        "periodicity":    { "@id": "kushki:Subscription/periodicity",    "@type": "xsd:string" },
+        "startDate":      { "@id": "kushki:Subscription/startDate",      "@type": "xsd:date" },
+        "endDate":        { "@id": "kushki:Subscription/endDate",        "@type": "xsd:date" },
+        "status":         { "@id": "kushki:Subscription/status",         "@type": "xsd:string" }
+      }
+    },
+
+    "CashVoucher": {
+      "@id": "kushki:CashVoucher",
+      "@context": {
+        "pin":            { "@id": "kushki:CashVoucher/pin",            "@type": "xsd:string" },
+        "barcode":        { "@id": "kushki:CashVoucher/barcode",        "@type": "xsd:string" },
+        "expirationDate": { "@id": "kushki:CashVoucher/expirationDate", "@type": "xsd:date"   },
+        "paymentBrand":   { "@id": "kushki:CashVoucher/paymentBrand",   "@type": "xsd:string" },
+        "status":         { "@id": "kushki:CashVoucher/status",         "@type": "xsd:string" }
+      }
+    },
+
+    "Payout": {
+      "@id": "kushki:Payout",
+      "@context": {
+        "payoutId":       { "@id": "kushki:Payout/payoutId",       "@type": "xsd:string" },
+        "status":         { "@id": "kushki:Payout/status",         "@type": "xsd:string" },
+        "rail":           { "@id": "kushki:Payout/rail",           "@type": "xsd:string" },
+        "completedAt":    { "@id": "kushki:Payout/completedAt",    "@type": "xsd:dateTime" }
+      }
+    },
+
+    "WebhookEvent": {
+      "@id": "kushki:WebhookEvent",
+      "@context": {
+        "merchantId":        { "@id": "kushki:WebhookEvent/merchantId",        "@type": "xsd:string"   },
+        "ticketNumber":      { "@id": "kushki:WebhookEvent/ticketNumber",      "@type": "xsd:string"   },
+        "transactionStatus": { "@id": "kushki:WebhookEvent/transactionStatus", "@type": "xsd:string"   },
+        "transactionType":   { "@id": "kushki:WebhookEvent/transactionType",   "@type": "xsd:string"   },
+        "eventType":         { "@id": "kushki:WebhookEvent/eventType",         "@type": "xsd:string"   },
+        "amount":            { "@id": "kushki:WebhookEvent/amount",            "@type": "xsd:decimal"  },
+        "currencyCode":      { "@id": "kushki:WebhookEvent/currencyCode",      "@type": "xsd:string"   },
+        "paymentBrand":      { "@id": "kushki:WebhookEvent/paymentBrand",      "@type": "xsd:string"   },
+        "country":           { "@id": "kushki:WebhookEvent/country",           "@type": "xsd:string"   },
+        "timestamp":         { "@id": "kushki:WebhookEvent/timestamp",         "@type": "xsd:dateTime" }
+      }
+    }
+  }
+}

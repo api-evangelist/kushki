@@ -1,0 +1,52 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.kushkipagos.com/subscriptions/v1/card",
+    "headers": {
+      "Private-Merchant-Id": "{{KUSHKI_PRIVATE_MERCHANT_ID}}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "token": "0aabF1aae450476cb7547bda5bdfc11d",
+      "planName": "Pro Monthly",
+      "amount": {
+        "subtotalIva": 0,
+        "subtotalIva0": 2990,
+        "ice": 0,
+        "iva": 0,
+        "currency": "USD"
+      },
+      "startDate": "2026-06-01",
+      "periodicity": "monthly",
+      "contactDetails": {
+        "firstName": "Juan",
+        "lastName": "Perez",
+        "email": "juan@example.com",
+        "phoneNumber": "+593999999999"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "subscriptionId": "sub_3c4d1a7e9b724a85a1d2c5e0f4a86932",
+      "planName": "Pro Monthly",
+      "amount": {
+        "subtotalIva": 0,
+        "subtotalIva0": 2990,
+        "ice": 0,
+        "iva": 0,
+        "currency": "USD"
+      },
+      "periodicity": "monthly",
+      "startDate": "2026-06-01",
+      "status": "active",
+      "contactDetails": {
+        "firstName": "Juan",
+        "lastName": "Perez",
+        "email": "juan@example.com",
+        "phoneNumber": "+593999999999"
+      }
+    }
+  }
+}

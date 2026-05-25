@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/kushki/main/json-schema/kushki-charge-schema.json",
+  "title": "Kushki Charge",
+  "description": "A charge, pre-authorization, or capture response from the Kushki Card REST API.",
+  "type": "object",
+  "required": ["ticketNumber"],
+  "properties": {
+    "ticketNumber": {
+      "type": "string",
+      "description": "Unique identifier of the charge. Used to void or refund."
+    },
+    "transactionReference": { "type": "string" },
+    "approvedTransactionAmount": { "type": "number" },
+    "currencyCode": {
+      "type": "string",
+      "enum": ["USD", "COP", "PEN", "CLP", "MXN", "BRL"]
+    },
+    "approvalCode": { "type": "string" },
+    "rrn": {
+      "type": "string",
+      "description": "Acquirer reference number / retrieval reference number."
+    },
+    "responseText": { "type": "string" },
+    "responseCode": { "type": "string" },
+    "token": { "type": "string" },
+    "details": {
+      "type": "object",
+      "properties": {
+        "transactionId": { "type": "string" },
+        "transactionStatus": {
+          "type": "string",
+          "enum": ["APPROVAL", "DECLINED", "INITIALIZED", "REFUNDED", "VOIDED", "CAPTURED"]
+        },
+        "cardHolderName": { "type": "string" },
+        "paymentBrand": {
+          "type": "string",
+          "description": "Visa, Mastercard, American Express, Diners, Discover, Webpay, OXXO, PagoEfectivo, Boleto, PIX, SPEI, PSE, etc."
+        },
+        "bin": { "type": "string" },
+        "lastFourDigits": { "type": "string" },
+        "cardType": { "type": "string", "enum": ["credit", "debit", "prepaid"] },
+        "cardCountry": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": true
+}

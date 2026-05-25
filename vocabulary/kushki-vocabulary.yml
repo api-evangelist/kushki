@@ -1,0 +1,133 @@
+specification: API Commons Vocabulary
+specificationVersion: '0.1'
+provider: Kushki
+providerId: kushki
+created: '2026-05-24'
+modified: '2026-05-24'
+description: Vocabulary and taxonomy mapping for the Kushki LatAm payments platform — operational concepts, business
+  entities, regional rails, and compliance terms across Ecuador, Colombia, Peru, Chile, Mexico, and Brazil.
+tags:
+  - Payments
+  - LatAm
+  - Card Payments
+  - Bank Transfers
+  - Cash
+  - Payouts
+concepts:
+  - term: Charge
+    description: A single payment authorization-and-capture (or one-step charge) executed via the Card API.
+    aliases: [transaction, cargo, cobro]
+  - term: Token
+    description: A short-lived single-use reference to a tokenized card, produced by Kushki.js / mobile SDKs.
+    aliases: [transactionToken]
+  - term: Pre-Authorization
+    description: A funds reservation against a card that is later captured or voided.
+    aliases: [auth, preAuthorization]
+  - term: Capture
+    description: Settlement of a previously pre-authorized transaction.
+    aliases: [captura]
+  - term: Void
+    description: Same-day cancellation of an approved charge before settlement.
+    aliases: [reverso, anulación]
+  - term: Refund
+    description: Post-settlement reversal of funds to the cardholder.
+    aliases: [reembolso, devolución]
+  - term: Deferred
+    description: Installment financing where the issuer splits a card charge over N months at an interest rate.
+    aliases: [diferido, cuotas]
+  - term: Subscription
+    description: Recurring or scheduled charge against a tokenized card.
+    aliases: [suscripción, recurrente]
+  - term: One Click
+    description: A merchant-initiated charge against a previously stored card (OneClick / Webpay OneClick on the
+      Chilean rail).
+  - term: Transfer
+    description: Bank-rail payment (PSE, Webpay Transferencia, SPEI, PIX, direct debit).
+    aliases: [transferencia]
+  - term: Cash Voucher
+    description: A pay-later barcode/reference redeemable at an authorized cash network.
+    aliases: [voucher, ficha, pago en efectivo]
+  - term: Payout
+    description: Outbound disbursement from the merchant to a beneficiary.
+    aliases: [dispersión, payout]
+  - term: Branch
+    description: A sub-merchant or location under a parent merchant. Marketplaces and franchise networks model
+      sellers and stores as branches.
+    aliases: [sucursal]
+  - term: Public-Merchant-Id
+    description: Client-side API key used by Kushki.js Hosted Fields and mobile SDKs to tokenize a card.
+  - term: Private-Merchant-Id
+    description: Server-side API key required for charging, capturing, voiding, refunding, subscribing, and
+      paying out.
+  - term: Ticket Number
+    description: Kushki's unique transaction identifier returned by every charge/voucher/payout call. The
+      primary key used for void, refund, and webhook correlation.
+    aliases: [ticketNumber]
+rails:
+  - country: EC
+    name: Ecuador
+    currencies: [USD]
+    methods: [Card, Cash (Efectivo EC), Transfer (Direct Debit)]
+  - country: CO
+    name: Colombia
+    currencies: [COP]
+    methods: [Card, PSE, Cash (Efectivo CO), Payout]
+  - country: PE
+    name: Peru
+    currencies: [PEN, USD]
+    methods: [Card, PagoEfectivo, Transfer, Payout]
+  - country: CL
+    name: Chile
+    currencies: [CLP]
+    methods: [Webpay Plus, Webpay OneClick, Webpay Transferencia, Payout]
+  - country: MX
+    name: Mexico
+    currencies: [MXN, USD]
+    methods: [Card, SPEI, OXXO, 7-Eleven, Payout]
+  - country: BR
+    name: Brazil
+    currencies: [BRL]
+    methods: [Card, PIX, Boleto, Payout]
+events:
+  - charge.approved
+  - charge.declined
+  - charge.captured
+  - charge.voided
+  - refund.completed
+  - subscription.charged
+  - subscription.cancelled
+  - transfer.initialized
+  - transfer.settled
+  - transfer.failed
+  - voucher.created
+  - voucher.paid
+  - voucher.expired
+  - payout.initialized
+  - payout.completed
+  - payout.returned
+documentTypes:
+  - code: CC
+    description: Cédula de ciudadanía (Colombia)
+  - code: NIT
+    description: Número de identificación tributaria (Colombia)
+  - code: CE
+    description: Cédula de extranjería (Colombia)
+  - code: DNI
+    description: Documento nacional de identidad (Peru / Argentina)
+  - code: RUT
+    description: Rol único tributario (Chile)
+  - code: CURP
+    description: Clave única de registro de población (Mexico)
+  - code: RFC
+    description: Registro federal de contribuyentes (Mexico)
+  - code: RUC
+    description: Registro único de contribuyentes (Ecuador / Peru)
+  - code: CPF
+    description: Cadastro de pessoas físicas (Brazil)
+  - code: CNPJ
+    description: Cadastro nacional da pessoa jurídica (Brazil)
+compliance:
+  - PCI DSS Level 1
+  - Sift Science integration for fraud signals
+  - 3DS 1.0 and 3DS 2.0
+  - SBS, SFC, CNBV, CMF, and Banco Central do Brasil regulatory regimes (per country)

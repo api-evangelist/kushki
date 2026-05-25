@@ -1,0 +1,156 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Kushki Payouts API — Payouts
+  description: 'Kushki Payouts — Payouts. 3 operations. Lead operation: Kushki Initialize Payout. Self-contained Naftiko capability covering single and batch disbursements.'
+  tags:
+    - Kushki
+    - Payouts
+    - Dispersions
+  created: '2026-05-24'
+  modified: '2026-05-24'
+binds:
+  - namespace: env
+    keys:
+      KUSHKI_PRIVATE_MERCHANT_ID: KUSHKI_PRIVATE_MERCHANT_ID
+capability:
+  consumes:
+    - type: http
+      namespace: payouts-payouts
+      baseUri: https://api.kushkipagos.com
+      description: Bank, card, and cash-pickup payouts across LatAm.
+      resources:
+        - name: payouts-transfer-v1-init
+          path: /payouts/transfer/v1/init
+          operations:
+            - name: initpayout
+              method: POST
+              description: Kushki Initialize Payout
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+        - name: payouts-transfer-v1-payouts-id
+          path: /payouts/transfer/v1/payouts/{payoutId}
+          operations:
+            - name: getpayout
+              method: GET
+              description: Kushki Get Payout
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: payoutId
+                  in: path
+                  type: string
+                  required: true
+        - name: payouts-transfer-v1-batch
+          path: /payouts/transfer/v1/batch
+          operations:
+            - name: createpayoutbatch
+              method: POST
+              description: Kushki Create Payout Batch
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+      authentication:
+        type: apikey
+        key: Private-Merchant-Id
+        value: '{{env.KUSHKI_PRIVATE_MERCHANT_ID}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: payouts-payouts-rest
+      port: 8080
+      resources:
+        - path: /v1/payouts/init
+          name: payouts-transfer-v1-init
+          operations:
+            - method: POST
+              name: initpayout
+              description: Kushki Initialize Payout
+              call: payouts-payouts.initpayout
+              with:
+                body: rest.body
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/payouts/{payout-id}
+          name: payouts-transfer-v1-payouts-id
+          operations:
+            - method: GET
+              name: getpayout
+              description: Kushki Get Payout
+              call: payouts-payouts.getpayout
+              with:
+                payoutId: rest.path.payout-id
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/payouts/batch
+          name: payouts-transfer-v1-batch
+          operations:
+            - method: POST
+              name: createpayoutbatch
+              description: Kushki Create Payout Batch
+              call: payouts-payouts.createpayoutbatch
+              with:
+                body: rest.body
+              outputParameters:
+                - type: object
+                  mapping: $.
+    - type: mcp
+      namespace: payouts-payouts-mcp
+      port: 9090
+      transport: http
+      tools:
+        - name: kushki-initialize-payout
+          description: Kushki Initialize Payout
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: payouts-payouts.initpayout
+          with:
+            body: tools.body
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: kushki-get-payout
+          description: Kushki Get Payout
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: payouts-payouts.getpayout
+          with:
+            payoutId: tools.payoutId
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: kushki-create-payout-batch
+          description: Kushki Create Payout Batch
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: payouts-payouts.createpayoutbatch
+          with:
+            body: tools.body
+          outputParameters:
+            - type: object
+              mapping: $.

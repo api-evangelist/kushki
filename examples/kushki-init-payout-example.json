@@ -1,0 +1,37 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.kushkipagos.com/payouts/transfer/v1/init",
+    "headers": {
+      "Private-Merchant-Id": "{{KUSHKI_PRIVATE_MERCHANT_ID}}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "beneficiaryName": "Maria Lopez",
+      "documentType": "RUT",
+      "documentNumber": "12345678-9",
+      "bankCode": "0012",
+      "accountType": "SAVINGS",
+      "accountNumber": "0001234567",
+      "email": "maria@example.com",
+      "amount": {
+        "value": 150000,
+        "currency": "CLP"
+      },
+      "description": "Marketplace payout May"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "payoutId": "po_d7a31e90428f4c2b9a6d8f50c12b9f44",
+      "status": "INITIALIZED",
+      "rail": "WEBPAY_TRANSF",
+      "amount": {
+        "value": 150000,
+        "currency": "CLP"
+      },
+      "responseText": "Payout queued for next settlement window."
+    }
+  }
+}

@@ -1,0 +1,384 @@
+aid: kushki
+url: https://raw.githubusercontent.com/api-evangelist/kushki/refs/heads/main/apis.yml
+apis:
+- aid: kushki:kushki-card-payments-api
+  name: Kushki Card Payments API
+  tags:
+    - Card Payments
+    - Payments
+    - Tokenization
+    - 3DS
+    - Refunds
+    - Captures
+  humanURL: https://docs.kushki.com/
+  baseURL: https://api.kushkipagos.com
+  properties:
+    - url: https://docs.kushki.com/
+      type: Documentation
+    - url: https://api-docs.kushkipagos.com/api-reference
+      type: APIReference
+    - url: openapi/kushki-card-payments-api-openapi.yml
+      type: OpenAPI
+    - url: json-schema/kushki-charge-schema.json
+      type: JSONSchema
+    - url: json-schema/kushki-token-schema.json
+      type: JSONSchema
+    - url: json-ld/kushki-context.jsonld
+      type: JSONLD
+    - url: capabilities/card-payments-charges.yaml
+      type: NaftikoCapability
+    - url: capabilities/card-payments-tokens.yaml
+      type: NaftikoCapability
+    - url: capabilities/card-payments-preauthorization.yaml
+      type: NaftikoCapability
+  description: Charge, void, refund, capture, and pre-authorize card transactions via the Kushki Card REST API. Card numbers
+    are tokenized client-side (Kushki.js Hosted Fields or mobile SDKs) so PAN never touches the merchant server. One-step and
+    two-step (auth/capture) flows, deferred payments with months and rate-of-interest, partial refunds, and 3DS 2.0
+    authentication are supported across Ecuador, Colombia, Peru, Chile, Mexico, and Brazil.
+- aid: kushki:kushki-subscriptions-api
+  name: Kushki Subscriptions API
+  tags:
+    - Subscriptions
+    - Recurring Payments
+    - Payments
+    - One Click
+  humanURL: https://docs.kushki.com/
+  baseURL: https://api.kushkipagos.com
+  properties:
+    - url: https://docs.kushki.com/
+      type: Documentation
+    - url: openapi/kushki-subscriptions-api-openapi.yml
+      type: OpenAPI
+    - url: json-schema/kushki-subscription-schema.json
+      type: JSONSchema
+    - url: capabilities/subscriptions-subscriptions.yaml
+      type: NaftikoCapability
+  description: Create, update, retrieve, charge, and cancel scheduled card subscriptions and one-click recurring payments.
+    Plans support monthly, weekly, daily, biweekly, quarterly, and yearly periodicity, fixed or variable amounts, start/end
+    dates, contact details, and Webpay OneClick on the Chile rail.
+- aid: kushki:kushki-transfer-payments-api
+  name: Kushki Transfer Payments API
+  tags:
+    - Bank Transfers
+    - Payments
+    - PSE
+    - Webpay
+    - PIX
+    - SPEI
+  humanURL: https://docs.kushki.com/
+  baseURL: https://api.kushkipagos.com
+  properties:
+    - url: https://docs.kushki.com/
+      type: Documentation
+    - url: openapi/kushki-transfer-payments-api-openapi.yml
+      type: OpenAPI
+    - url: capabilities/transfer-payments-transfers.yaml
+      type: NaftikoCapability
+  description: Accept bank-rail transfers across LatAm — PSE in Colombia, Webpay Transferencia in Chile, SPEI in Mexico,
+    PIX in Brazil, and direct debit in Ecuador and Peru. Initiate the charge, return a redirect/QR for the payer, and
+    receive webhook confirmation when the bank settles.
+- aid: kushki:kushki-cash-payments-api
+  name: Kushki Cash Payments API
+  tags:
+    - Cash
+    - Payments
+    - Vouchers
+    - OXXO
+    - PagoEfectivo
+    - Boleto
+  humanURL: https://docs.kushki.com/
+  baseURL: https://api.kushkipagos.com
+  properties:
+    - url: https://docs.kushki.com/
+      type: Documentation
+    - url: openapi/kushki-cash-payments-api-openapi.yml
+      type: OpenAPI
+    - url: capabilities/cash-payments-cash.yaml
+      type: NaftikoCapability
+  description: Generate cash-payment vouchers redeemable at authorized retail networks — OXXO and 7-Eleven in Mexico,
+    PagoEfectivo in Peru, Boleto in Brazil, Western Union and PagoFacil in Argentina, plus Ecuadorean and Colombian
+    correspondent networks. Returns a barcode/reference plus expiry date.
+- aid: kushki:kushki-payouts-api
+  name: Kushki Payouts API
+  tags:
+    - Payouts
+    - Dispersions
+    - Bank Transfers
+    - Mass Payments
+  humanURL: https://docs.kushki.com/
+  baseURL: https://api.kushkipagos.com
+  properties:
+    - url: https://docs.kushki.com/
+      type: Documentation
+    - url: openapi/kushki-payouts-api-openapi.yml
+      type: OpenAPI
+    - url: capabilities/payouts-payouts.yaml
+      type: NaftikoCapability
+  description: Disburse funds to suppliers, partners, payroll, marketplace sellers, and refunds via bank transfer, card
+    push, or cash pickup. Supports same-day and standard rails, batch upload, and country-specific compliance metadata
+    (RUT, RFC, CURP, RUC, CPF).
+- aid: kushki:kushki-card-present-api
+  name: Kushki Card Present API
+  tags:
+    - POS
+    - Card Present
+    - EMV
+    - Kushki One
+    - In Person
+  humanURL: https://docs.kushki.com/
+  baseURL: https://api.kushkipagos.com
+  properties:
+    - url: https://docs.kushki.com/
+      type: Documentation
+    - url: openapi/kushki-card-present-api-openapi.yml
+      type: OpenAPI
+    - url: capabilities/card-present-terminals.yaml
+      type: NaftikoCapability
+  description: Process in-person EMV chip and contactless transactions through Kushki One terminals and the Raw Card
+    Present API. Includes pairing, terminal management, sale, void, settlement, and an encryption envelope so payment
+    data is sealed end-to-end from the PIN pad.
+- aid: kushki:kushki-webhooks
+  name: Kushki Webhooks
+  tags:
+    - Webhooks
+    - Notifications
+    - Events
+  humanURL: https://docs.kushki.com/
+  properties:
+    - url: https://docs.kushki.com/
+      type: Documentation
+    - url: json-schema/kushki-webhook-event-schema.json
+      type: JSONSchema
+    - url: capabilities/webhooks-events.yaml
+      type: NaftikoCapability
+  description: Real-time event notifications for approved, declined, voided, refunded, and captured transactions across
+    every product (card, transfer, cash, subscription, payout). Webhooks ship a signed JSON payload, include retry with
+    exponential backoff, and target merchant-configured endpoints managed in the Kushki Console.
+- aid: kushki:kushki-merchants-api
+  name: Kushki Merchants and Branches API
+  tags:
+    - Merchants
+    - Branches
+    - Administration
+    - Configuration
+  humanURL: https://docs.kushki.com/
+  baseURL: https://api.kushkipagos.com
+  properties:
+    - url: https://docs.kushki.com/
+      type: Documentation
+    - url: openapi/kushki-merchants-api-openapi.yml
+      type: OpenAPI
+    - url: capabilities/merchants-branches.yaml
+      type: NaftikoCapability
+  description: Manage merchant branches (sucursales) and their per-branch configuration — public/private keys, allowed
+    payment methods, country, currency, anti-fraud rules, and webhook URLs. Used by marketplaces, franchise networks,
+    and aggregators that need to onboard sub-merchants programmatically.
+name: Kushki
+tags:
+  - Payments
+  - LatAm
+  - Andean Region
+  - Card Payments
+  - Subscriptions
+  - Cash
+  - Bank Transfers
+  - Payouts
+  - PSE
+  - Webpay
+  - SPEI
+  - PIX
+  - OXXO
+  - PagoEfectivo
+  - Fintech
+  - Ecuador
+  - Colombia
+  - Peru
+  - Chile
+  - Mexico
+  - Brazil
+kind: contract
+image: https://kushki-cdn-production.s3.amazonaws.com/docs/Logo+Kushki+3+Horizontal+White+2019+08.png
+access: 3rd-Party
+common:
+  - type: Portal
+    url: https://kushkipagos.com/
+  - type: Documentation
+    url: https://docs.kushki.com/
+  - type: APIReference
+    url: https://api-docs.kushkipagos.com/api-reference
+  - type: GettingStarted
+    url: https://docs.kushki.com/
+  - type: Support
+    url: https://soporte.kushkipagos.com/
+  - type: StatusPage
+    url: https://status.kushkipagos.com/
+  - type: GitHubOrganization
+    url: https://github.com/Kushki
+  - type: SDK
+    url: https://github.com/Kushki/kushki-php
+    name: PHP SDK
+  - type: SDK
+    url: https://github.com/Kushki/kushki-android
+    name: Android SDK (Kotlin)
+  - type: SDK
+    url: https://github.com/Kushki/kushki-ios
+    name: iOS SDK (Swift)
+  - type: SDK
+    url: https://github.com/Kushki/kushki-ios-intel
+    name: iOS SDK INTEL processor
+  - type: SDK
+    url: https://github.com/Kushki/kushki-ios-arm
+    name: iOS SDK ARM processor
+  - type: Plugin
+    url: https://github.com/Kushki/kushki-woocommerce
+    name: WooCommerce Plugin
+  - type: Plugin
+    url: https://github.com/Kushki/kushki-magento
+    name: Magento Plugin
+  - type: Plugin
+    url: https://github.com/Kushki/kushki-prestashop
+    name: PrestaShop Plugin
+  - type: Plugin
+    url: https://github.com/Kushki/kushki-vtex
+    name: VTEX Plugin
+  - type: Samples
+    url: https://github.com/Kushki/kushki-backend-examples
+    name: Backend Examples (Node.js)
+  - type: Samples
+    url: https://github.com/Kushki/kushki-demo-php
+    name: PHP Demo App
+  - type: Docker
+    url: https://github.com/Kushki/kushki-docker
+    name: Kushki Public Docker Images
+  - type: Console
+    url: https://uat-console.kushkipagos.com/
+    name: UAT Console
+  - type: Console
+    url: https://console.kushkipagos.com/
+    name: Production Console
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/kushki/
+  - type: Twitter
+    url: https://twitter.com/kushkipagos
+  - type: Authentication
+    url: https://docs.kushki.com/
+    name: Public-Merchant-Id / Private-Merchant-Id headers
+  - type: Environments
+    data:
+      - id: production
+        name: Production
+        baseUrl: https://api.kushkipagos.com
+      - id: uat
+        name: UAT / Sandbox
+        baseUrl: https://api-uat.kushkipagos.com
+      - id: staging
+        name: Staging
+        baseUrl: https://api-stg.kushkipagos.com
+  - type: Regions
+    data:
+      - country: Ecuador
+        currencies: ["USD"]
+        rails: ["Card", "Cash", "Transfer", "Payout"]
+      - country: Colombia
+        currencies: ["COP"]
+        rails: ["Card", "PSE", "Cash", "Payout"]
+      - country: Peru
+        currencies: ["PEN", "USD"]
+        rails: ["Card", "Cash (PagoEfectivo)", "Transfer", "Payout"]
+      - country: Chile
+        currencies: ["CLP"]
+        rails: ["Card (Webpay)", "Webpay OneClick", "Webpay Transferencia", "Payout"]
+      - country: Mexico
+        currencies: ["MXN", "USD"]
+        rails: ["Card", "SPEI", "Cash (OXXO/7-Eleven)", "Payout"]
+      - country: Brazil
+        currencies: ["BRL"]
+        rails: ["Card", "PIX", "Boleto", "Payout"]
+  - type: Features
+    data:
+      - Regional non-banking acquirer covering Ecuador, Colombia, Peru, Chile, Mexico, and Brazil from a single integration
+      - Card tokenization via Kushki.js Hosted Fields, iOS SDK, and Android SDK (PAN never touches the merchant server)
+      - One-step charge and two-step pre-authorization + capture for card-not-present transactions
+      - Deferred / installment payments with merchant-defined months and rate-of-interest
+      - Webpay Plus, Webpay OneClick, and Webpay Transferencia integration on the Chilean rail
+      - 3DS 1.0 and 3DS 2.0 issuer authentication, with liability shift handling
+      - Apple Pay support on card-present and card-not-present
+      - PSE bank-transfer flow for Colombia, SPEI for Mexico, PIX for Brazil
+      - Cash voucher generation for OXXO, 7-Eleven, PagoEfectivo, Boleto, and regional correspondent networks
+      - Card-Present POS via Kushki One terminals and the Raw Card Present API with encryption envelope
+      - Payouts (dispersions) to bank accounts, cards, and cash pickup with batch upload and country compliance metadata
+      - Scheduled and one-click subscriptions with monthly / weekly / quarterly / yearly periodicity
+      - Smartlinks shareable payment links for chat, SMS, email, and social channels
+      - Kajita customizable hosted payment form
+      - Payment button hosted redirect flow
+      - Branch / sucursal management for marketplaces, franchises, and aggregators
+      - Webhook notifications with signed payloads, retry policy, and exponential backoff
+      - 4+ layer anti-fraud stack (Sift Science, in-house rules, 3DS, velocity checks, behavioural signals)
+      - PCI DSS Level 1 compliance and PCI-compliant Hosted Fields JS library
+      - E-commerce plugins for Shopify, VTEX, WooCommerce, Magento, and PrestaShop
+      - Official SDKs for PHP, iOS (Swift, INTEL + ARM processors), and Android (Kotlin)
+      - UAT sandbox at api-uat.kushkipagos.com with documented test card numbers
+      - Public/private merchant key authentication model (Public-Merchant-Id, Private-Merchant-Id headers)
+      - Status page at status.kushkipagos.com and support knowledge base at soporte.kushkipagos.com
+    sources:
+      - https://kushkipagos.com/
+      - https://docs.kushki.com/
+      - https://api-docs.kushkipagos.com/api-reference
+      - https://github.com/Kushki
+    updated: '2026-05-24'
+  - type: UseCases
+    data:
+      - LatAm e-commerce checkout with card, cash, and bank transfer in one integration
+      - Marketplace payouts to sellers across Andean and Pacific Alliance countries
+      - SaaS subscription billing with one-click recurring payments
+      - Cross-border ride-hailing, food-delivery, and gig-economy disbursements
+      - Omnichannel retail combining Kushki One POS with e-commerce checkout
+      - Cash-first commerce in markets where cash share remains >40% of consumer payments
+      - Franchise and multi-branch sub-merchant management for regional brands
+      - PIX-first checkout in Brazil with card fallback
+      - PSE bank-transfer integration for Colombian high-ticket purchases
+      - SPEI mass payouts in Mexico for marketplace sellers
+  - type: Integrations
+    data:
+      - Shopify
+      - VTEX
+      - WooCommerce
+      - Magento
+      - PrestaShop
+      - Webpay (Transbank)
+      - Apple Pay
+      - Sift Science (anti-fraud)
+      - PIX (Banco Central do Brasil)
+      - SPEI (Banco de México)
+      - PSE (ACH Colombia)
+      - OXXO
+      - 7-Eleven
+      - PagoEfectivo
+      - Boleto Bancário
+  - type: Plans
+    url: plans/kushki-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/kushki-rate-limits.yml
+  - type: FinOps
+    url: finops/kushki-finops.yml
+  - type: Vocabulary
+    url: vocabulary/kushki-vocabulary.yml
+  - type: SpectralRules
+    url: rules/kushki-rules.yml
+created: '2026-05-24'
+modified: '2026-05-24'
+position: Producing
+description: Kushki is an Ecuador-headquartered LatAm fintech operating as a regional non-banking acquirer for the
+  Andean and Pacific Alliance markets — Ecuador, Colombia, Peru, Chile, Mexico, and Brazil. The Kushki API unifies
+  card payments, scheduled and one-click subscriptions, bank transfers (PSE, Webpay Transferencia, SPEI, PIX), cash
+  vouchers (OXXO, PagoEfectivo, Boleto), payouts/dispersions, and card-present (Kushki One POS) behind a single REST
+  surface. Authentication is split across a Public-Merchant-Id (used in the browser to tokenize cards) and a
+  Private-Merchant-Id (used server-side to charge). PCI DSS Level 1, 3DS 2.0, multi-layer anti-fraud, hosted fields,
+  Kajita payment forms, Smartlinks, and e-commerce plugins (Shopify, VTEX, WooCommerce, Magento, PrestaShop) round out
+  the platform.
+maintainers:
+  - FN: Kin Lane
+    email: info@apievangelist.com
+    X: apievangelist
+    url: https://apievangelist.com
+specificationVersion: '0.16'

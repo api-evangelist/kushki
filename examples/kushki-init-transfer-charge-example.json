@@ -1,0 +1,32 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.kushkipagos.com/transfer/v1/init",
+    "headers": {
+      "Public-Merchant-Id": "{{KUSHKI_PUBLIC_MERCHANT_ID}}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "callbackUrl": "https://merchant.example.com/checkout/return",
+      "userType": "0",
+      "documentType": "CC",
+      "documentNumber": "100000001",
+      "email": "payer@example.com",
+      "paymentDescription": "Order 42",
+      "amount": {
+        "subtotalIva": 0,
+        "subtotalIva0": 50000,
+        "iva": 0,
+        "currency": "COP"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "token": "9c2e1f9a-7e3c-4d68-9f5d-21e2b67b18cd",
+      "redirectUrl": "https://uat-pay.kushkipagos.com/pse/9c2e1f9a",
+      "ticketNumber": "175632110000000789"
+    }
+  }
+}

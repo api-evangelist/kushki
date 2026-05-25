@@ -1,0 +1,33 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.kushkipagos.com/cash/v1/charges",
+    "headers": {
+      "Private-Merchant-Id": "{{KUSHKI_PRIVATE_MERCHANT_ID}}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "Maria",
+      "lastName": "Garcia",
+      "identification": "CURP123456HDFRRN09",
+      "documentType": "CURP",
+      "email": "maria@example.com",
+      "totalAmount": 49900,
+      "currency": "MXN",
+      "description": "Order 42",
+      "expirationDate": "2026-05-31"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "pin": "21345678901",
+      "ticketNumber": "175632110000000654",
+      "barcode": "ALPHA21345678901500",
+      "url": "https://uat-pay.kushkipagos.com/voucher/175632110000000654",
+      "expirationDate": "2026-05-31",
+      "status": "PENDING",
+      "paymentBrand": "OXXO"
+    }
+  }
+}

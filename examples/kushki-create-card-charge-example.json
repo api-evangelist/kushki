@@ -1,0 +1,45 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.kushkipagos.com/card/v1/charges",
+    "headers": {
+      "Private-Merchant-Id": "{{KUSHKI_PRIVATE_MERCHANT_ID}}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "token": "0aabF1aae450476cb7547bda5bdfc11d",
+      "amount": {
+        "subtotalIva": 0,
+        "subtotalIva0": 1000,
+        "ice": 0,
+        "iva": 0,
+        "currency": "USD"
+      },
+      "fullResponse": true
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "ticketNumber": "175632110000000123",
+      "transactionReference": "9c2e1f9a-7e3c-4d68-9f5d-21e2b67b18cd",
+      "approvedTransactionAmount": 1000,
+      "currencyCode": "USD",
+      "approvalCode": "012345",
+      "rrn": "612345678901",
+      "responseText": "Transacción aprobada",
+      "responseCode": "000",
+      "token": "0aabF1aae450476cb7547bda5bdfc11d",
+      "details": {
+        "transactionId": "44222111000033334444",
+        "transactionStatus": "APPROVAL",
+        "cardHolderName": "Juan Perez",
+        "paymentBrand": "Visa",
+        "bin": "424242",
+        "lastFourDigits": "4242",
+        "cardType": "credit",
+        "cardCountry": "EC"
+      }
+    }
+  }
+}

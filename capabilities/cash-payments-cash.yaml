@@ -1,0 +1,152 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Kushki Cash Payments API — Cash
+  description: 'Kushki Cash Payments — Cash. 3 operations. Lead operation: Kushki Create Cash Voucher. Self-contained Naftiko capability covering OXXO, PagoEfectivo, Boleto, and regional correspondent networks.'
+  tags:
+    - Kushki
+    - Cash Payments
+    - OXXO
+    - PagoEfectivo
+    - Boleto
+  created: '2026-05-24'
+  modified: '2026-05-24'
+binds:
+  - namespace: env
+    keys:
+      KUSHKI_PRIVATE_MERCHANT_ID: KUSHKI_PRIVATE_MERCHANT_ID
+capability:
+  consumes:
+    - type: http
+      namespace: cash-payments-cash
+      baseUri: https://api.kushkipagos.com
+      description: Cash voucher generation and lookup.
+      resources:
+        - name: cash-v1-charges
+          path: /cash/v1/charges
+          operations:
+            - name: createcashcharge
+              method: POST
+              description: Kushki Create Cash Voucher
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+        - name: cash-v1-charges-ticketnumber
+          path: /cash/v1/charges/{ticketNumber}
+          operations:
+            - name: getcashcharge
+              method: GET
+              description: Kushki Get Cash Voucher
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: ticketNumber
+                  in: path
+                  type: string
+                  required: true
+            - name: cancelcashcharge
+              method: DELETE
+              description: Kushki Cancel Cash Voucher
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: ticketNumber
+                  in: path
+                  type: string
+                  required: true
+      authentication:
+        type: apikey
+        key: Private-Merchant-Id
+        value: '{{env.KUSHKI_PRIVATE_MERCHANT_ID}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: cash-payments-cash-rest
+      port: 8080
+      resources:
+        - path: /v1/cash/charges
+          name: cash-v1-charges
+          operations:
+            - method: POST
+              name: createcashcharge
+              description: Kushki Create Cash Voucher
+              call: cash-payments-cash.createcashcharge
+              with:
+                body: rest.body
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/cash/charges/{ticket-number}
+          name: cash-v1-charges-ticket-number
+          operations:
+            - method: GET
+              name: getcashcharge
+              description: Kushki Get Cash Voucher
+              call: cash-payments-cash.getcashcharge
+              with:
+                ticketNumber: rest.path.ticket-number
+              outputParameters:
+                - type: object
+                  mapping: $.
+            - method: DELETE
+              name: cancelcashcharge
+              description: Kushki Cancel Cash Voucher
+              call: cash-payments-cash.cancelcashcharge
+              with:
+                ticketNumber: rest.path.ticket-number
+              outputParameters:
+                - type: object
+                  mapping: $.
+    - type: mcp
+      namespace: cash-payments-cash-mcp
+      port: 9090
+      transport: http
+      tools:
+        - name: kushki-create-cash-voucher
+          description: Kushki Create Cash Voucher
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: cash-payments-cash.createcashcharge
+          with:
+            body: tools.body
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: kushki-get-cash-voucher
+          description: Kushki Get Cash Voucher
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: cash-payments-cash.getcashcharge
+          with:
+            ticketNumber: tools.ticketNumber
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: kushki-cancel-cash-voucher
+          description: Kushki Cancel Cash Voucher
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: cash-payments-cash.cancelcashcharge
+          with:
+            ticketNumber: tools.ticketNumber
+          outputParameters:
+            - type: object
+              mapping: $.

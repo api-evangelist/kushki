@@ -1,0 +1,188 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Kushki Card Present API — Terminals
+  description: 'Kushki Card Present — Terminals. 4 operations. Lead operation: Kushki Create Card Present Charge. Self-contained Naftiko capability covering Kushki One terminal management and EMV/contactless sale and void.'
+  tags:
+    - Kushki
+    - Card Present
+    - POS
+    - EMV
+  created: '2026-05-24'
+  modified: '2026-05-24'
+binds:
+  - namespace: env
+    keys:
+      KUSHKI_PRIVATE_MERCHANT_ID: KUSHKI_PRIVATE_MERCHANT_ID
+capability:
+  consumes:
+    - type: http
+      namespace: card-present-terminals
+      baseUri: https://api.kushkipagos.com
+      description: Kushki One terminal management and card-present sale/void.
+      resources:
+        - name: cardpresent-v1-terminals
+          path: /cardpresent/v1/terminals
+          operations:
+            - name: listterminals
+              method: GET
+              description: Kushki List Terminals
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+        - name: cardpresent-v1-terminals-id
+          path: /cardpresent/v1/terminals/{terminalId}
+          operations:
+            - name: getterminal
+              method: GET
+              description: Kushki Get Terminal
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: terminalId
+                  in: path
+                  type: string
+                  required: true
+        - name: cardpresent-v1-charges
+          path: /cardpresent/v1/charges
+          operations:
+            - name: createcardpresentcharge
+              method: POST
+              description: Kushki Create Card Present Charge
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: body
+                  in: body
+                  type: object
+                  required: true
+        - name: cardpresent-v1-charges-id-void
+          path: /cardpresent/v1/charges/{ticketNumber}/void
+          operations:
+            - name: voidcardpresentcharge
+              method: POST
+              description: Kushki Void Card Present Charge
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: $.
+              inputParameters:
+                - name: ticketNumber
+                  in: path
+                  type: string
+                  required: true
+      authentication:
+        type: apikey
+        key: Private-Merchant-Id
+        value: '{{env.KUSHKI_PRIVATE_MERCHANT_ID}}'
+        placement: header
+  exposes:
+    - type: rest
+      namespace: card-present-terminals-rest
+      port: 8080
+      resources:
+        - path: /v1/card-present/terminals
+          name: cardpresent-v1-terminals
+          operations:
+            - method: GET
+              name: listterminals
+              description: Kushki List Terminals
+              call: card-present-terminals.listterminals
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/card-present/terminals/{terminal-id}
+          name: cardpresent-v1-terminals-id
+          operations:
+            - method: GET
+              name: getterminal
+              description: Kushki Get Terminal
+              call: card-present-terminals.getterminal
+              with:
+                terminalId: rest.path.terminal-id
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/card-present/charges
+          name: cardpresent-v1-charges
+          operations:
+            - method: POST
+              name: createcardpresentcharge
+              description: Kushki Create Card Present Charge
+              call: card-present-terminals.createcardpresentcharge
+              with:
+                body: rest.body
+              outputParameters:
+                - type: object
+                  mapping: $.
+        - path: /v1/card-present/charges/{ticket-number}/void
+          name: cardpresent-v1-charges-id-void
+          operations:
+            - method: POST
+              name: voidcardpresentcharge
+              description: Kushki Void Card Present Charge
+              call: card-present-terminals.voidcardpresentcharge
+              with:
+                ticketNumber: rest.path.ticket-number
+              outputParameters:
+                - type: object
+                  mapping: $.
+    - type: mcp
+      namespace: card-present-terminals-mcp
+      port: 9090
+      transport: http
+      tools:
+        - name: kushki-list-terminals
+          description: Kushki List Terminals
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: card-present-terminals.listterminals
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: kushki-get-terminal
+          description: Kushki Get Terminal
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: card-present-terminals.getterminal
+          with:
+            terminalId: tools.terminalId
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: kushki-create-card-present-charge
+          description: Kushki Create Card Present Charge
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: card-present-terminals.createcardpresentcharge
+          with:
+            body: tools.body
+          outputParameters:
+            - type: object
+              mapping: $.
+        - name: kushki-void-card-present-charge
+          description: Kushki Void Card Present Charge
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: card-present-terminals.voidcardpresentcharge
+          with:
+            ticketNumber: tools.ticketNumber
+          outputParameters:
+            - type: object
+              mapping: $.
