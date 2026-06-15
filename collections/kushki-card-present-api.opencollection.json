@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kushki Card Present API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Private-Merchant-Id",
+      "value": "{{Private-Merchant-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Terminals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kushki List Terminals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kushkipagos.com/cardpresent/v1/terminals"
+          },
+          "docs": "List Kushki One terminals registered to the merchant."
+        },
+        {
+          "info": {
+            "name": "Kushki Get Terminal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kushkipagos.com/cardpresent/v1/terminals/:terminalId",
+            "params": [
+              {
+                "name": "terminalId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Kushki One terminal by its identifier."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Card Present Charges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kushki Create Card Present Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/cardpresent/v1/charges",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a card-present charge from an EMV/contactless transaction sealed by the terminal."
+        },
+        {
+          "info": {
+            "name": "Kushki Void Card Present Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/cardpresent/v1/charges/:ticketNumber/void",
+            "params": [
+              {
+                "name": "ticketNumber",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Void a card-present charge."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

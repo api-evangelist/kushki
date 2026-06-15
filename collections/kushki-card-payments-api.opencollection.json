@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kushki Card Payments API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Public-Merchant-Id",
+      "value": "{{Public-Merchant-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kushki Tokenize Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/card/v1/tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Public-Merchant-Id",
+              "value": "{{Public-Merchant-Id}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Tokenize a card. Normally invoked from Kushki.js Hosted Fields in the browser using the Public-Merchant-Id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Charges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kushki Create Card Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/card/v1/charges",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Charge a previously tokenized card in a single step. Returns a ticketNumber used for void or refund."
+        },
+        {
+          "info": {
+            "name": "Kushki Create Deferred Card Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/card/v1/deferred",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Charge a card with deferred/installment terms. Specify months and rate_of_interest per the issuer's deferred catalog."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Pre-Authorization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kushki Pre-Authorize Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/card/v1/preAuthorization",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reserve funds on a card without capturing them. Capture or void within the issuer-specific window."
+        },
+        {
+          "info": {
+            "name": "Kushki Capture Pre-Authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/card/v1/capture",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Capture funds previously held via /card/v1/preAuthorization. Supports partial capture below the original amount."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Voids and Refunds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kushki Void Or Refund Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.kushkipagos.com/v1/charges/:ticketNumber",
+            "params": [
+              {
+                "name": "ticketNumber",
+                "value": "",
+                "type": "path",
+                "description": "Ticket number returned by the original charge."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Void (same day, before settlement) or refund (after settlement) a previously approved charge.\nPass a partial amount in the body to perform a partial refund; omit amount to void the full transaction.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

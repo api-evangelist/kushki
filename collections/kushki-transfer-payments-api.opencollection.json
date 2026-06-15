@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kushki Transfer Payments API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Public-Merchant-Id",
+      "value": "{{Public-Merchant-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transfer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kushki Initialize Transfer Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/transfer/v1/init",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initialize a transfer payment. Returns a redirect URL (PSE / Webpay) or QR/CopyPaste payload (PIX) plus a Kushki ticket number."
+        },
+        {
+          "info": {
+            "name": "Kushki Confirm Transfer Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/transfer/v1/charge",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Confirm a transfer charge after the payer authorizes at the bank. Normally driven by the redirect callback; webhook delivery is the authoritative event."
+        },
+        {
+          "info": {
+            "name": "Kushki Get Transfer Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kushkipagos.com/transfer/v1/charges/:ticketNumber",
+            "params": [
+              {
+                "name": "ticketNumber",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the current status of a transfer charge."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

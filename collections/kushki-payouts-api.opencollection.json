@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kushki Payouts API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Private-Merchant-Id",
+      "value": "{{Private-Merchant-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payouts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kushki Initialize Payout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/payouts/transfer/v1/init",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initialize a single payout to a beneficiary bank account."
+        },
+        {
+          "info": {
+            "name": "Kushki Get Payout",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kushkipagos.com/payouts/transfer/v1/payouts/:payoutId",
+            "params": [
+              {
+                "name": "payoutId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the current status of a payout."
+        },
+        {
+          "info": {
+            "name": "Kushki Create Payout Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/payouts/transfer/v1/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a batch of payouts. Accepts up to 1000 payouts per batch."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

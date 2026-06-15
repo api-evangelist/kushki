@@ -1,0 +1,437 @@
+{
+  "item": [
+    {
+      "id": "f0c5bc37-dbd4-4fab-bbd7-4f2b713cc3d3",
+      "name": "Terminals",
+      "description": {
+        "content": "Kushki One terminal management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3aaf1939-5536-4cd5-98c0-7c9d475705f8",
+          "name": "Kushki List Terminals",
+          "request": {
+            "name": "Kushki List Terminals",
+            "description": {
+              "content": "List Kushki One terminals registered to the merchant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cardpresent",
+                "v1",
+                "terminals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68e4f507-2e9f-46fd-a7ce-14401d1def49",
+              "name": "Terminals",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardpresent",
+                    "v1",
+                    "terminals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Private-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"terminalId\": \"string\",\n    \"serialNumber\": \"string\",\n    \"model\": \"string\",\n    \"status\": \"INACTIVE\",\n    \"branchId\": \"string\",\n    \"lastSeen\": \"1983-10-09T12:55:55.194Z\"\n  },\n  {\n    \"terminalId\": \"string\",\n    \"serialNumber\": \"string\",\n    \"model\": \"string\",\n    \"status\": \"INACTIVE\",\n    \"branchId\": \"string\",\n    \"lastSeen\": \"2003-12-02T04:15:53.084Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30616883-63a9-461d-a697-a26759de1434",
+          "name": "Kushki Get Terminal",
+          "request": {
+            "name": "Kushki Get Terminal",
+            "description": {
+              "content": "Retrieve a Kushki One terminal by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cardpresent",
+                "v1",
+                "terminals",
+                ":terminalId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "terminalId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "289aa5f5-45f5-46da-bf4f-caf35a73c195",
+              "name": "Terminal",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardpresent",
+                    "v1",
+                    "terminals",
+                    ":terminalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "terminalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Private-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"terminalId\": \"string\",\n  \"serialNumber\": \"string\",\n  \"model\": \"string\",\n  \"status\": \"INACTIVE\",\n  \"branchId\": \"string\",\n  \"lastSeen\": \"1996-07-07T00:41:50.859Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "978c875d-621d-47ce-9918-044a6344139f",
+      "name": "Card Present Charges",
+      "description": {
+        "content": "Sale, void, and settlement for card-present",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3278a7b0-f5b5-44fd-bf03-eaa7aa313aef",
+          "name": "Kushki Create Card Present Charge",
+          "request": {
+            "name": "Kushki Create Card Present Charge",
+            "description": {
+              "content": "Create a card-present charge from an EMV/contactless transaction sealed by the terminal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cardpresent",
+                "v1",
+                "charges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"terminalId\": \"<string>\",\n  \"sealedCard\": {\n    \"ksn\": \"<string>\",\n    \"track2\": \"<string>\",\n    \"emvData\": \"<string>\",\n    \"pinBlock\": \"<string>\"\n  },\n  \"amount\": {\n    \"value\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"entryMode\": \"<string>\",\n  \"deferred\": {\n    \"months\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2fcf52d2-c25d-410a-a4b8-00d45ef9c986",
+              "name": "Charge approved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardpresent",
+                    "v1",
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Private-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"terminalId\": \"<string>\",\n  \"sealedCard\": {\n    \"ksn\": \"<string>\",\n    \"track2\": \"<string>\",\n    \"emvData\": \"<string>\",\n    \"pinBlock\": \"<string>\"\n  },\n  \"amount\": {\n    \"value\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"entryMode\": \"<string>\",\n  \"deferred\": {\n    \"months\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ticketNumber\": \"string\",\n  \"approvalCode\": \"string\",\n  \"responseText\": \"string\",\n  \"responseCode\": \"string\",\n  \"cardBrand\": \"string\",\n  \"last4\": \"string\",\n  \"entryMode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "363ade55-5007-4e14-beee-eea42136443a",
+          "name": "Kushki Void Card Present Charge",
+          "request": {
+            "name": "Kushki Void Card Present Charge",
+            "description": {
+              "content": "Void a card-present charge.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cardpresent",
+                "v1",
+                "charges",
+                ":ticketNumber",
+                "void"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticketNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d600cbee-cbe7-4e8e-a175-98ab8887e75c",
+              "name": "Voided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardpresent",
+                    "v1",
+                    "charges",
+                    ":ticketNumber",
+                    "void"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Private-Merchant-Id",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kushkipagos.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Private-Merchant-Id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "70be758f-ec0e-4f97-b292-36b878786893",
+    "name": "Kushki Card Present API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Process in-person EMV chip, contactless, and PIN-pad transactions through Kushki One\nterminals. The Raw Card Present API exchanges sealed card data (encryption envelope\nsourced from the terminal) for a charge response.\n\n\nContact Support:\n Name: Kushki\n Email: dev@kushkipagos.com",
+      "type": "text/plain"
+    }
+  }
+}

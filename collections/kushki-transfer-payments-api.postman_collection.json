@@ -1,0 +1,408 @@
+{
+  "item": [
+    {
+      "id": "975c2ff0-3753-499d-8a54-b18df4a5deae",
+      "name": "Transfer",
+      "description": {
+        "content": "Bank-rail transfer charges",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fe19cfc2-8ee5-4e0b-a3b3-b8b22acbcd5c",
+          "name": "Kushki Initialize Transfer Charge",
+          "request": {
+            "name": "Kushki Initialize Transfer Charge",
+            "description": {
+              "content": "Initialize a transfer payment. Returns a redirect URL (PSE / Webpay) or QR/CopyPaste payload (PIX) plus a Kushki ticket number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transfer",
+                "v1",
+                "init"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"callbackUrl\": \"<uri>\",\n  \"email\": \"<email>\",\n  \"amount\": {\n    \"subtotalIva\": \"<number>\",\n    \"subtotalIva0\": \"<number>\",\n    \"iva\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"ice\": 0\n  },\n  \"userType\": \"<string>\",\n  \"documentType\": \"<string>\",\n  \"documentNumber\": \"<string>\",\n  \"paymentDescription\": \"<string>\",\n  \"bankId\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": 4872.67230610696\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e59e2f25-2b91-4a22-9d8f-17f0e648361c",
+              "name": "Transfer initialized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transfer",
+                    "v1",
+                    "init"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Public-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callbackUrl\": \"https://merchant.example.com/checkout/return\",\n  \"userType\": \"0\",\n  \"documentType\": \"CC\",\n  \"documentNumber\": \"100000001\",\n  \"email\": \"payer@example.com\",\n  \"paymentDescription\": \"Order 42\",\n  \"amount\": {\n    \"subtotalIva\": 0,\n    \"subtotalIva0\": 50000,\n    \"iva\": 0,\n    \"currency\": \"COP\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"redirectUrl\": \"http://SRbmgkEmI.vnvov-KeO1HMj-QOr0OiZM+O\",\n  \"ticketNumber\": \"string\",\n  \"pixCopyPaste\": \"string\",\n  \"qrCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad35f273-3ce8-488c-8fa9-8078629e8495",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transfer",
+                    "v1",
+                    "init"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Public-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callbackUrl\": \"https://merchant.example.com/checkout/return\",\n  \"userType\": \"0\",\n  \"documentType\": \"CC\",\n  \"documentNumber\": \"100000001\",\n  \"email\": \"payer@example.com\",\n  \"paymentDescription\": \"Order 42\",\n  \"amount\": {\n    \"subtotalIva\": 0,\n    \"subtotalIva0\": 50000,\n    \"iva\": 0,\n    \"currency\": \"COP\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "299550c2-cd1e-4610-a5b4-1c141e5988f6",
+          "name": "Kushki Confirm Transfer Charge",
+          "request": {
+            "name": "Kushki Confirm Transfer Charge",
+            "description": {
+              "content": "Confirm a transfer charge after the payer authorizes at the bank. Normally driven by the redirect callback; webhook delivery is the authoritative event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transfer",
+                "v1",
+                "charge"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"<string>\",\n  \"amount\": {\n    \"subtotalIva\": \"<number>\",\n    \"subtotalIva0\": \"<number>\",\n    \"iva\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"ice\": 0\n  },\n  \"metadata\": {\n    \"key_0\": 4339\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fea6f299-829c-4788-ab67-8c40fd1ab3ea",
+              "name": "Charge confirmed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transfer",
+                    "v1",
+                    "charge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Public-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"amount\": {\n    \"subtotalIva\": 9720.923741816474,\n    \"subtotalIva0\": 4285.382463341748,\n    \"iva\": 3463.4898032906904,\n    \"currency\": \"COP\",\n    \"ice\": 0\n  },\n  \"metadata\": {\n    \"key_0\": 7651,\n    \"key_1\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ticketNumber\": \"string\",\n  \"transactionStatus\": \"PENDING\",\n  \"approvalCode\": \"string\",\n  \"responseText\": \"string\",\n  \"paymentBrand\": \"string\",\n  \"bankName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5227e51-77de-4083-b2ac-f9923b054cf8",
+          "name": "Kushki Get Transfer Charge",
+          "request": {
+            "name": "Kushki Get Transfer Charge",
+            "description": {
+              "content": "Retrieve the current status of a transfer charge.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transfer",
+                "v1",
+                "charges",
+                ":ticketNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticketNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d8665f58-bebf-4b63-b592-bf1033e85f2b",
+              "name": "Charge status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transfer",
+                    "v1",
+                    "charges",
+                    ":ticketNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Public-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ticketNumber\": \"string\",\n  \"transactionStatus\": \"PENDING\",\n  \"approvalCode\": \"string\",\n  \"responseText\": \"string\",\n  \"paymentBrand\": \"string\",\n  \"bankName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kushkipagos.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Public-Merchant-Id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f83ad4e8-855c-4fdb-b2cb-b3744c685cd3",
+    "name": "Kushki Transfer Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Bank-rail transfer payments across LatAm — PSE (Colombia), Webpay Transferencia\n(Chile), SPEI (Mexico), PIX (Brazil), and direct debit (Ecuador, Peru). Returns\na redirect URL or QR for the payer; final state is delivered by webhook.\n\n\nContact Support:\n Name: Kushki\n Email: dev@kushkipagos.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,395 @@
+{
+  "item": [
+    {
+      "id": "7bf7eef3-0c72-411d-a7b7-c157ddfd2dd6",
+      "name": "Cash",
+      "description": {
+        "content": "Cash voucher generation and lookup",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "be6ba2d7-06dd-4982-ad30-f529d7629dff",
+          "name": "Kushki Create Cash Voucher",
+          "request": {
+            "name": "Kushki Create Cash Voucher",
+            "description": {
+              "content": "Generate a cash voucher. Returns a unique reference (PIN, barcode, or numeric token) the payer presents at the cash network.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cash",
+                "v1",
+                "charges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"identification\": \"<string>\",\n  \"email\": \"<email>\",\n  \"totalAmount\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"documentType\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"description\": \"<string>\",\n  \"expirationDate\": \"<date>\",\n  \"metadata\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f16708f1-d30a-4120-b870-98b8bd1f7f8c",
+              "name": "Voucher created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cash",
+                    "v1",
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Private-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Juan\",\n  \"lastName\": \"Perez\",\n  \"identification\": \"100000001\",\n  \"documentType\": \"CC\",\n  \"email\": \"payer@example.com\",\n  \"totalAmount\": 50000,\n  \"currency\": \"COP\",\n  \"description\": \"Order 42\",\n  \"expirationDate\": \"2026-05-31\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pin\": \"string\",\n  \"ticketNumber\": \"string\",\n  \"barcode\": \"string\",\n  \"url\": \"https://yBxfHYpDoFUzDCUizsySx.jwwcPnz9bHvmpOe4zLiECjCaDblkcQS48fKcQh.kHTKze2thf9JXDTjW1\",\n  \"expirationDate\": \"2011-12-22\",\n  \"status\": \"CANCELLED\",\n  \"paymentBrand\": \"EFECTIVO_CO\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6dfe35f-8bbb-4e01-bfec-f3234c841b58",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cash",
+                    "v1",
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Private-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Juan\",\n  \"lastName\": \"Perez\",\n  \"identification\": \"100000001\",\n  \"documentType\": \"CC\",\n  \"email\": \"payer@example.com\",\n  \"totalAmount\": 50000,\n  \"currency\": \"COP\",\n  \"description\": \"Order 42\",\n  \"expirationDate\": \"2026-05-31\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b41aad01-dbbb-4126-bd72-d1845633dda5",
+          "name": "Kushki Get Cash Voucher",
+          "request": {
+            "name": "Kushki Get Cash Voucher",
+            "description": {
+              "content": "Retrieve the current status of a cash voucher (PENDING, PAID, EXPIRED, CANCELLED).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cash",
+                "v1",
+                "charges",
+                ":ticketNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticketNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c52f801a-bfeb-4ec7-806a-d50a61c2284e",
+              "name": "Voucher",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cash",
+                    "v1",
+                    "charges",
+                    ":ticketNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Private-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pin\": \"string\",\n  \"ticketNumber\": \"string\",\n  \"barcode\": \"string\",\n  \"url\": \"https://yBxfHYpDoFUzDCUizsySx.jwwcPnz9bHvmpOe4zLiECjCaDblkcQS48fKcQh.kHTKze2thf9JXDTjW1\",\n  \"expirationDate\": \"2011-12-22\",\n  \"status\": \"CANCELLED\",\n  \"paymentBrand\": \"EFECTIVO_CO\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ddb9498-6767-4af1-aba2-9bb5663d73b2",
+          "name": "Kushki Cancel Cash Voucher",
+          "request": {
+            "name": "Kushki Cancel Cash Voucher",
+            "description": {
+              "content": "Cancel an outstanding cash voucher before it is paid.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cash",
+                "v1",
+                "charges",
+                ":ticketNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticketNumber",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c582a3c6-ec75-48fa-b22b-56f8f8521c07",
+              "name": "Cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cash",
+                    "v1",
+                    "charges",
+                    ":ticketNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketNumber",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Private-Merchant-Id",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kushkipagos.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Private-Merchant-Id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1c7bb319-e5c8-4243-acea-ff25cca58f33",
+    "name": "Kushki Cash Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Generate cash-payment vouchers redeemable at LatAm correspondent and convenience-store\nnetworks — OXXO and 7-Eleven in Mexico, PagoEfectivo in Peru, Boleto in Brazil, and\nEcuadorean and Colombian correspondent networks. Returns a barcode/reference and\nan expiry date.\n\n\nContact Support:\n Name: Kushki\n Email: dev@kushkipagos.com",
+      "type": "text/plain"
+    }
+  }
+}

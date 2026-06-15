@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kushki Subscriptions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Private-Merchant-Id",
+      "value": "{{Private-Merchant-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kushki Create Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/subscriptions/v1/card",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a scheduled card subscription. Returns a subscription identifier used for subsequent updates and on-demand charges."
+        },
+        {
+          "info": {
+            "name": "Kushki Retrieve Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kushkipagos.com/subscriptions/v1/card/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Kushki subscription identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve the current state of a subscription."
+        },
+        {
+          "info": {
+            "name": "Kushki Update Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.kushkipagos.com/subscriptions/v1/card/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Kushki subscription identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update plan name, amount, periodicity, or contact details on an existing subscription."
+        },
+        {
+          "info": {
+            "name": "Kushki Cancel Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.kushkipagos.com/subscriptions/v1/card/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Kushki subscription identifier."
+              }
+            ]
+          },
+          "docs": "Cancel an active subscription. No further scheduled charges will be initiated."
+        },
+        {
+          "info": {
+            "name": "Kushki Charge Subscription On Demand",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/subscriptions/v1/card/:subscriptionId/charge",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Kushki subscription identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Trigger an on-demand charge against the card stored on the subscription (one-click flow)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,447 @@
+{
+  "item": [
+    {
+      "id": "85bff9fe-1da6-4129-bddb-50fe3ac1e784",
+      "name": "Branches",
+      "description": {
+        "content": "Branch / sucursal management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d552f49a-cd79-4b62-ae25-ebe0f947d070",
+          "name": "Kushki List Branches",
+          "request": {
+            "name": "Kushki List Branches",
+            "description": {
+              "content": "List branches (sucursales) registered under the parent merchant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchant",
+                "v1",
+                "branches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "19ea1a18-9653-4b4e-be40-ef38af701cc3",
+              "name": "Branches",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchant",
+                    "v1",
+                    "branches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Private-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"branchId\": \"string\",\n    \"name\": \"string\",\n    \"country\": \"EC\",\n    \"currency\": \"USD\",\n    \"publicMerchantId\": \"string\",\n    \"privateMerchantId\": \"string\",\n    \"webhookUrl\": \"https://tJf.wfcXA9s5Sk7dMlxVhXbeI4B6VuBdq-gy8xh5gBaQ7wxl31C\",\n    \"allowedPaymentMethods\": [\n      \"CARD_PRESENT\",\n      \"TRANSFER\"\n    ],\n    \"status\": \"INACTIVE\"\n  },\n  {\n    \"branchId\": \"string\",\n    \"name\": \"string\",\n    \"country\": \"BR\",\n    \"currency\": \"CLP\",\n    \"publicMerchantId\": \"string\",\n    \"privateMerchantId\": \"string\",\n    \"webhookUrl\": \"http://XGzvQMBQDlJVKIvKhjAsuiXmxoRgg.tzESZhN64zKgxTEGOk9G,XsOYGYBu\",\n    \"allowedPaymentMethods\": [\n      \"PAYOUT\",\n      \"CASH\"\n    ],\n    \"status\": \"ACTIVE\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a127db8a-6d6e-435e-8a07-954ef4b23b2b",
+          "name": "Kushki Create Branch",
+          "request": {
+            "name": "Kushki Create Branch",
+            "description": {
+              "content": "Create a new branch (sucursal) under the parent merchant. Returns the new branch's public and private merchant ids.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchant",
+                "v1",
+                "branches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"country\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"webhookUrl\": \"<uri>\",\n  \"allowedPaymentMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "004ef6a0-e6ba-4cac-8d9a-66a854df3c8a",
+              "name": "Branch created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchant",
+                    "v1",
+                    "branches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Private-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"country\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"webhookUrl\": \"<uri>\",\n  \"allowedPaymentMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"branchId\": \"string\",\n  \"name\": \"string\",\n  \"country\": \"MX\",\n  \"currency\": \"COP\",\n  \"publicMerchantId\": \"string\",\n  \"privateMerchantId\": \"string\",\n  \"webhookUrl\": \"http://XsjLCkfrDdu.jpspf6sMjIbM+UKfSu9Ov8FgcH6nKVDCDwAUZ2dIdbFQpUM8vYLoZhVmo\",\n  \"allowedPaymentMethods\": [\n    \"PAYOUT\",\n    \"SUBSCRIPTION\"\n  ],\n  \"status\": \"INACTIVE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3026fb9f-048d-4f3e-aba5-9caef64b65a4",
+          "name": "Kushki Get Branch",
+          "request": {
+            "name": "Kushki Get Branch",
+            "description": {
+              "content": "Retrieve a branch by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchant",
+                "v1",
+                "branches",
+                ":branchId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "branchId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "73674780-9468-42fc-87c5-262cb85fda10",
+              "name": "Branch",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchant",
+                    "v1",
+                    "branches",
+                    ":branchId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "branchId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Private-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"branchId\": \"string\",\n  \"name\": \"string\",\n  \"country\": \"MX\",\n  \"currency\": \"COP\",\n  \"publicMerchantId\": \"string\",\n  \"privateMerchantId\": \"string\",\n  \"webhookUrl\": \"http://XsjLCkfrDdu.jpspf6sMjIbM+UKfSu9Ov8FgcH6nKVDCDwAUZ2dIdbFQpUM8vYLoZhVmo\",\n  \"allowedPaymentMethods\": [\n    \"PAYOUT\",\n    \"SUBSCRIPTION\"\n  ],\n  \"status\": \"INACTIVE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "846987b0-d85e-4cd6-bb0e-d2e1f85051dc",
+          "name": "Kushki Update Branch",
+          "request": {
+            "name": "Kushki Update Branch",
+            "description": {
+              "content": "Update branch configuration (allowed payment methods, anti-fraud rules, webhook URLs).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchant",
+                "v1",
+                "branches",
+                ":branchId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "branchId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"webhookUrl\": \"<uri>\",\n  \"allowedPaymentMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6afd98b4-4a3a-4675-a5ba-da108a30375c",
+              "name": "Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchant",
+                    "v1",
+                    "branches",
+                    ":branchId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "branchId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Private-Merchant-Id",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhookUrl\": \"<uri>\",\n  \"allowedPaymentMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kushkipagos.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Private-Merchant-Id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "495937c3-d22d-4c3c-bd06-9fd674faefa2",
+    "name": "Kushki Merchants and Branches API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Manage merchant branches (sucursales) and their per-branch configuration.\nUsed by marketplaces, franchise networks, and aggregators to onboard and\nadminister sub-merchants programmatically.\n\n\nContact Support:\n Name: Kushki\n Email: dev@kushkipagos.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kushki Cash Payments API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Private-Merchant-Id",
+      "value": "{{Private-Merchant-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cash",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kushki Create Cash Voucher",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/cash/v1/charges",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a cash voucher. Returns a unique reference (PIN, barcode, or numeric token) the payer presents at the cash network."
+        },
+        {
+          "info": {
+            "name": "Kushki Get Cash Voucher",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kushkipagos.com/cash/v1/charges/:ticketNumber",
+            "params": [
+              {
+                "name": "ticketNumber",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the current status of a cash voucher (PENDING, PAID, EXPIRED, CANCELLED)."
+        },
+        {
+          "info": {
+            "name": "Kushki Cancel Cash Voucher",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.kushkipagos.com/cash/v1/charges/:ticketNumber",
+            "params": [
+              {
+                "name": "ticketNumber",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel an outstanding cash voucher before it is paid."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

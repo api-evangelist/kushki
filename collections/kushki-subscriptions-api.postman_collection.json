@@ -1,0 +1,639 @@
+{
+  "item": [
+    {
+      "id": "bf94ba18-5536-4f93-964e-b870f34bc5e3",
+      "name": "Subscriptions",
+      "description": {
+        "content": "Recurring card subscriptions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "48718317-39a3-488c-a82d-a198c0764a44",
+          "name": "Kushki Create Subscription",
+          "request": {
+            "name": "Kushki Create Subscription",
+            "description": {
+              "content": "Create a scheduled card subscription. Returns a subscription identifier used for subsequent updates and on-demand charges.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                "v1",
+                "card"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"<string>\",\n  \"planName\": \"<string>\",\n  \"amount\": {\n    \"subtotalIva\": \"<number>\",\n    \"subtotalIva0\": \"<number>\",\n    \"iva\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"ice\": 0\n  },\n  \"startDate\": \"<date>\",\n  \"periodicity\": \"<string>\",\n  \"contactDetails\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"documentType\": \"<string>\",\n    \"documentNumber\": \"<string>\"\n  },\n  \"endDate\": \"<date>\",\n  \"metadata\": {\n    \"key_0\": 1582,\n    \"key_1\": 8942\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "08ece0d3-d7a7-4818-adaa-d3cef0fca18f",
+              "name": "Subscription created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    "v1",
+                    "card"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Private-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"0aabF1aae450476cb7547bda5bdfc11d\",\n  \"planName\": \"Pro Monthly\",\n  \"amount\": {\n    \"subtotalIva\": 0,\n    \"subtotalIva0\": 2990,\n    \"ice\": 0,\n    \"iva\": 0,\n    \"currency\": \"USD\"\n  },\n  \"startDate\": \"2026-06-01\",\n  \"periodicity\": \"monthly\",\n  \"contactDetails\": {\n    \"firstName\": \"Juan\",\n    \"lastName\": \"Perez\",\n    \"email\": \"juan@example.com\",\n    \"phoneNumber\": \"+593999999999\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"subscriptionId\": \"string\",\n  \"planName\": \"string\",\n  \"amount\": {\n    \"subtotalIva\": 6274.204432621574,\n    \"subtotalIva0\": 7925.274943014685,\n    \"iva\": 2271.7896269795056,\n    \"currency\": \"USD\",\n    \"ice\": 0\n  },\n  \"periodicity\": \"string\",\n  \"startDate\": \"1957-09-05\",\n  \"status\": \"expired\",\n  \"contactDetails\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"vIhFs5HlD9Oo@cwPkKPrNAHFmZrbnIZWjwJk.gcva\",\n    \"phoneNumber\": \"string\",\n    \"documentType\": \"string\",\n    \"documentNumber\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac7ce214-d256-432a-8116-4358dfb37d67",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    "v1",
+                    "card"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Private-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"0aabF1aae450476cb7547bda5bdfc11d\",\n  \"planName\": \"Pro Monthly\",\n  \"amount\": {\n    \"subtotalIva\": 0,\n    \"subtotalIva0\": 2990,\n    \"ice\": 0,\n    \"iva\": 0,\n    \"currency\": \"USD\"\n  },\n  \"startDate\": \"2026-06-01\",\n  \"periodicity\": \"monthly\",\n  \"contactDetails\": {\n    \"firstName\": \"Juan\",\n    \"lastName\": \"Perez\",\n    \"email\": \"juan@example.com\",\n    \"phoneNumber\": \"+593999999999\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "389a0a1a-03a5-482d-8687-e0b7f69b2b6c",
+          "name": "Kushki Retrieve Subscription",
+          "request": {
+            "name": "Kushki Retrieve Subscription",
+            "description": {
+              "content": "Retrieve the current state of a subscription.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                "v1",
+                "card",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Kushki subscription identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b12c070-d99d-45cd-8127-d2da4288688a",
+              "name": "Subscription",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    "v1",
+                    "card",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Kushki subscription identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Private-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"subscriptionId\": \"string\",\n  \"planName\": \"string\",\n  \"amount\": {\n    \"subtotalIva\": 6274.204432621574,\n    \"subtotalIva0\": 7925.274943014685,\n    \"iva\": 2271.7896269795056,\n    \"currency\": \"USD\",\n    \"ice\": 0\n  },\n  \"periodicity\": \"string\",\n  \"startDate\": \"1957-09-05\",\n  \"status\": \"expired\",\n  \"contactDetails\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"vIhFs5HlD9Oo@cwPkKPrNAHFmZrbnIZWjwJk.gcva\",\n    \"phoneNumber\": \"string\",\n    \"documentType\": \"string\",\n    \"documentNumber\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9fd2a029-b9a3-4b24-9c4d-3cd7449ec14e",
+          "name": "Kushki Update Subscription",
+          "request": {
+            "name": "Kushki Update Subscription",
+            "description": {
+              "content": "Update plan name, amount, periodicity, or contact details on an existing subscription.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                "v1",
+                "card",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Kushki subscription identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"planName\": \"<string>\",\n  \"amount\": {\n    \"subtotalIva\": \"<number>\",\n    \"subtotalIva0\": \"<number>\",\n    \"iva\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"ice\": 0\n  },\n  \"periodicity\": \"<string>\",\n  \"contactDetails\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"documentType\": \"<string>\",\n    \"documentNumber\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "39564acc-8c39-4a1a-aee7-554b7b39b6e0",
+              "name": "Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    "v1",
+                    "card",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Kushki subscription identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Private-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planName\": \"<string>\",\n  \"amount\": {\n    \"subtotalIva\": 6588.5159361539045,\n    \"subtotalIva0\": 9231.327485722799,\n    \"iva\": 4530.62797675553,\n    \"currency\": \"BRL\",\n    \"ice\": 0\n  },\n  \"periodicity\": \"<string>\",\n  \"contactDetails\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"S8zJ4cznFJMHq@kAtvkzTNuirUPYcojkiNAiQzwmsHCgYMZ.wv\",\n    \"phoneNumber\": \"string\",\n    \"documentType\": \"string\",\n    \"documentNumber\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"subscriptionId\": \"string\",\n  \"planName\": \"string\",\n  \"amount\": {\n    \"subtotalIva\": 6274.204432621574,\n    \"subtotalIva0\": 7925.274943014685,\n    \"iva\": 2271.7896269795056,\n    \"currency\": \"USD\",\n    \"ice\": 0\n  },\n  \"periodicity\": \"string\",\n  \"startDate\": \"1957-09-05\",\n  \"status\": \"expired\",\n  \"contactDetails\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"vIhFs5HlD9Oo@cwPkKPrNAHFmZrbnIZWjwJk.gcva\",\n    \"phoneNumber\": \"string\",\n    \"documentType\": \"string\",\n    \"documentNumber\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a7a6e09-78fb-4d2f-8dc2-603a9421b305",
+          "name": "Kushki Cancel Subscription",
+          "request": {
+            "name": "Kushki Cancel Subscription",
+            "description": {
+              "content": "Cancel an active subscription. No further scheduled charges will be initiated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                "v1",
+                "card",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Kushki subscription identifier."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68519b29-76d6-4ed8-9579-60667a017630",
+              "name": "Cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    "v1",
+                    "card",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Kushki subscription identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Private-Merchant-Id",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "db2b080d-1af0-4798-84c7-ac065901c52e",
+          "name": "Kushki Charge Subscription On Demand",
+          "request": {
+            "name": "Kushki Charge Subscription On Demand",
+            "description": {
+              "content": "Trigger an on-demand charge against the card stored on the subscription (one-click flow).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscriptions",
+                "v1",
+                "card",
+                ":subscriptionId",
+                "charge"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Kushki subscription identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": {\n    \"subtotalIva\": \"<number>\",\n    \"subtotalIva0\": \"<number>\",\n    \"iva\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"ice\": 0\n  },\n  \"metadata\": {\n    \"key_0\": 6775.935709885735\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "87624c33-8765-418c-a48e-3502ac6dfb6c",
+              "name": "Charge approved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscriptions",
+                    "v1",
+                    "card",
+                    ":subscriptionId",
+                    "charge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Kushki subscription identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Private-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"subtotalIva\": 5369.877315500713,\n    \"subtotalIva0\": 9948.070352623725,\n    \"iva\": 2722.0440074247676,\n    \"currency\": \"COP\",\n    \"ice\": 0\n  },\n  \"metadata\": {\n    \"key_0\": 9943.786475731871,\n    \"key_1\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ticketNumber\": \"string\",\n  \"transactionReference\": \"string\",\n  \"approvedTransactionAmount\": 235.1621277092708,\n  \"currencyCode\": \"string\",\n  \"responseText\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kushkipagos.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Private-Merchant-Id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a85b916b-2a45-496d-be21-78d9545196c6",
+    "name": "Kushki Subscriptions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Scheduled and one-click card subscriptions. Create a subscription against a\ntokenized card, manage its periodicity and amount, charge on demand, update\nthe underlying card, and cancel.\n\n\nContact Support:\n Name: Kushki\n Email: dev@kushkipagos.com",
+      "type": "text/plain"
+    }
+  }
+}

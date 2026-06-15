@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kushki Merchants and Branches API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Private-Merchant-Id",
+      "value": "{{Private-Merchant-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Branches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kushki List Branches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kushkipagos.com/merchant/v1/branches"
+          },
+          "docs": "List branches (sucursales) registered under the parent merchant."
+        },
+        {
+          "info": {
+            "name": "Kushki Create Branch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/merchant/v1/branches",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new branch (sucursal) under the parent merchant. Returns the new branch's public and private merchant ids."
+        },
+        {
+          "info": {
+            "name": "Kushki Get Branch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kushkipagos.com/merchant/v1/branches/:branchId",
+            "params": [
+              {
+                "name": "branchId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a branch by its identifier."
+        },
+        {
+          "info": {
+            "name": "Kushki Update Branch",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.kushkipagos.com/merchant/v1/branches/:branchId",
+            "params": [
+              {
+                "name": "branchId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update branch configuration (allowed payment methods, anti-fraud rules, webhook URLs)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
