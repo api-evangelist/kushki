@@ -202,19 +202,19 @@ common:
     url: https://status.kushkipagos.com/
   - type: GitHubOrganization
     url: https://github.com/Kushki
-  - type: SDK
+  - type: SDKs
     url: https://github.com/Kushki/kushki-php
     name: PHP SDK
-  - type: SDK
+  - type: SDKs
     url: https://github.com/Kushki/kushki-android
     name: Android SDK (Kotlin)
-  - type: SDK
+  - type: SDKs
     url: https://github.com/Kushki/kushki-ios
     name: iOS SDK (Swift)
-  - type: SDK
+  - type: SDKs
     url: https://github.com/Kushki/kushki-ios-intel
     name: iOS SDK INTEL processor
-  - type: SDK
+  - type: SDKs
     url: https://github.com/Kushki/kushki-ios-arm
     name: iOS SDK ARM processor
   - type: Plugin
