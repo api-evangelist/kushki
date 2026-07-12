@@ -188,6 +188,10 @@ kind: contract
 image: https://kushki-cdn-production.s3.amazonaws.com/docs/Logo+Kushki+3+Horizontal+White+2019+08.png
 access: 3rd-Party
 common:
+  - type: DomainSecurity
+    url: security/kushki-domain-security.yml
+  - type: Authentication
+    url: authentication/kushki-authentication.yml
   - type: Portal
     url: https://kushkipagos.com/
   - type: Documentation
@@ -387,6 +391,8 @@ common:
     url: vocabulary/kushki-vocabulary.yml
   - type: SpectralRules
     url: rules/kushki-rules.yml
+  - url: https://www.kushkipagos.com/blog
+    type: Blog
 created: '2026-05-24'
 modified: '2026-05-24'
 position: Producing

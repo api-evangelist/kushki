@@ -1,0 +1,34 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/kushki-card-payments-api-openapi.yml, openapi/kushki-card-present-api-openapi.yml,
+  openapi/kushki-cash-payments-api-openapi.yml, openapi/kushki-merchants-api-openapi.yml, openapi/kushki-payouts-api-openapi.yml,
+  openapi/kushki-subscriptions-api-openapi.yml, openapi/kushki-transfer-payments-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: PublicMerchantId
+  type: apiKey
+  in: header
+  parameter: Public-Merchant-Id
+  description: Client-side merchant key. Used by Kushki.js and mobile SDKs to tokenize cards.
+    Never use server-side for charging.
+  sources:
+  - openapi/kushki-card-payments-api-openapi.yml
+  - openapi/kushki-transfer-payments-api-openapi.yml
+- name: PrivateMerchantId
+  type: apiKey
+  in: header
+  parameter: Private-Merchant-Id
+  description: Server-side merchant key. Required for charge, capture, void, refund, subscription,
+    and payout calls.
+  sources:
+  - openapi/kushki-card-payments-api-openapi.yml
+  - openapi/kushki-card-present-api-openapi.yml
+  - openapi/kushki-cash-payments-api-openapi.yml
+  - openapi/kushki-merchants-api-openapi.yml
+  - openapi/kushki-payouts-api-openapi.yml
+  - openapi/kushki-subscriptions-api-openapi.yml
+  - openapi/kushki-transfer-payments-api-openapi.yml
