@@ -188,6 +188,8 @@ kind: contract
 image: https://kushki-cdn-production.s3.amazonaws.com/docs/Logo+Kushki+3+Horizontal+White+2019+08.png
 access: 3rd-Party
 common:
+  - type: AgenticAccess
+    url: agentic-access/kushki-agentic-access.yml
   - type: DomainSecurity
     url: security/kushki-domain-security.yml
   - type: Authentication
