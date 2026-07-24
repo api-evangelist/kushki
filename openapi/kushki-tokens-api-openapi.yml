@@ -1,0 +1,124 @@
+openapi: 3.1.0
+info:
+  title: Kushki Card Payments Branches Tokens API
+  description: 'Card-not-present REST API for the Kushki regional non-banking acquirer.
+
+    Card numbers are tokenized client-side by Kushki.js Hosted Fields or the
+
+    iOS / Android SDKs and the resulting `transactionToken` is exchanged
+
+    server-side for a charge, pre-authorization, capture, or void.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Kushki
+    url: https://kushkipagos.com/
+    email: dev@kushkipagos.com
+  license:
+    name: Kushki API Terms
+    url: https://kushkipagos.com/legal
+servers:
+- url: https://api.kushkipagos.com
+  description: Production
+- url: https://api-uat.kushkipagos.com
+  description: UAT / Sandbox
+- url: https://api-stg.kushkipagos.com
+  description: Staging
+security:
+- PublicMerchantId: []
+- PrivateMerchantId: []
+tags:
+- name: Tokens
+  description: Card tokenization (client-side via Kushki.js, returns a one-time transactionToken)
+paths:
+  /card/v1/tokens:
+    post:
+      summary: Kushki Tokenize Card
+      description: Tokenize a card. Normally invoked from Kushki.js Hosted Fields in the browser using the Public-Merchant-Id.
+      operationId: createCardToken
+      tags:
+      - Tokens
+      security:
+      - PublicMerchantId: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+            example:
+              card:
+                name: Juan Perez
+                number: '4242424242424242'
+                expiryMonth: '12'
+                expiryYear: '29'
+                cvv: '123'
+              totalAmount: 1000
+              currency: USD
+      responses:
+        '200':
+          description: Token created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  schemas:
+    TokenRequest:
+      type: object
+      required:
+      - card
+      - totalAmount
+      - currency
+      properties:
+        card:
+          type: object
+          properties:
+            name:
+              type: string
+            number:
+              type: string
+            expiryMonth:
+              type: string
+            expiryYear:
+              type: string
+            cvv:
+              type: string
+        totalAmount:
+          type: number
+        currency:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: One-time transactionToken to pass to /card/v1/charges or /card/v1/preAuthorization.
+  responses:
+    ErrorResponse:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    PublicMerchantId:
+      type: apiKey
+      in: header
+      name: Public-Merchant-Id
+      description: Client-side merchant key. Used by Kushki.js and mobile SDKs to tokenize cards. Never use server-side for charging.
+    PrivateMerchantId:
+      type: apiKey
+      in: header
+      name: Private-Merchant-Id
+      description: Server-side merchant key. Required for charge, capture, void, refund, subscription, and payout calls.

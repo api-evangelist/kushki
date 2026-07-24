@@ -1,0 +1,177 @@
+openapi: 3.1.0
+info:
+  title: Kushki Card Payments Branches Voids and Refunds API
+  description: 'Card-not-present REST API for the Kushki regional non-banking acquirer.
+
+    Card numbers are tokenized client-side by Kushki.js Hosted Fields or the
+
+    iOS / Android SDKs and the resulting `transactionToken` is exchanged
+
+    server-side for a charge, pre-authorization, capture, or void.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Kushki
+    url: https://kushkipagos.com/
+    email: dev@kushkipagos.com
+  license:
+    name: Kushki API Terms
+    url: https://kushkipagos.com/legal
+servers:
+- url: https://api.kushkipagos.com
+  description: Production
+- url: https://api-uat.kushkipagos.com
+  description: UAT / Sandbox
+- url: https://api-stg.kushkipagos.com
+  description: Staging
+security:
+- PublicMerchantId: []
+- PrivateMerchantId: []
+tags:
+- name: Voids and Refunds
+  description: Void or refund a previously captured charge
+paths:
+  /v1/charges/{ticketNumber}:
+    delete:
+      summary: Kushki Void Or Refund Charge
+      description: 'Void (same day, before settlement) or refund (after settlement) a previously approved charge.
+
+        Pass a partial amount in the body to perform a partial refund; omit amount to void the full transaction.
+
+        '
+      operationId: voidOrRefundCharge
+      tags:
+      - Voids and Refunds
+      parameters:
+      - name: ticketNumber
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Ticket number returned by the original charge.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoidRequest'
+      responses:
+        '200':
+          description: Void or refund accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeResponse'
+        4XX:
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  schemas:
+    Amount:
+      type: object
+      required:
+      - subtotalIva
+      - subtotalIva0
+      - iva
+      - currency
+      properties:
+        subtotalIva:
+          type: number
+          description: Subtotal taxed at IVA / VAT.
+        subtotalIva0:
+          type: number
+          description: Subtotal at 0% IVA / VAT.
+        ice:
+          type: number
+          description: ICE (Ecuadorian excise tax). Use 0 if not applicable.
+          default: 0
+        iva:
+          type: number
+          description: IVA / VAT amount.
+        extraTaxes:
+          type: object
+          additionalProperties:
+            type: number
+          description: Country-specific extra taxes (e.g. propina, tasaAeroportuaria, agenciaDeViaje).
+        currency:
+          type: string
+          enum:
+          - USD
+          - COP
+          - PEN
+          - CLP
+          - MXN
+          - BRL
+    ChargeResponse:
+      type: object
+      properties:
+        ticketNumber:
+          type: string
+        transactionReference:
+          type: string
+        approvedTransactionAmount:
+          type: number
+        currencyCode:
+          type: string
+        approvalCode:
+          type: string
+        token:
+          type: string
+        rrn:
+          type: string
+        responseText:
+          type: string
+        responseCode:
+          type: string
+        details:
+          type: object
+          properties:
+            transactionId:
+              type: string
+            transactionStatus:
+              type: string
+            cardHolderName:
+              type: string
+            paymentBrand:
+              type: string
+            bin:
+              type: string
+            lastFourDigits:
+              type: string
+            cardType:
+              type: string
+            cardCountry:
+              type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    VoidRequest:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/Amount'
+        fullResponse:
+          type: boolean
+          default: false
+  responses:
+    ErrorResponse:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    PublicMerchantId:
+      type: apiKey
+      in: header
+      name: Public-Merchant-Id
+      description: Client-side merchant key. Used by Kushki.js and mobile SDKs to tokenize cards. Never use server-side for charging.
+    PrivateMerchantId:
+      type: apiKey
+      in: header
+      name: Private-Merchant-Id
+      description: Server-side merchant key. Required for charge, capture, void, refund, subscription, and payout calls.

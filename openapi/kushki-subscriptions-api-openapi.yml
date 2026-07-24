@@ -1,25 +1,36 @@
 openapi: 3.1.0
 info:
-  title: Kushki Subscriptions API
-  description: |
-    Scheduled and one-click card subscriptions. Create a subscription against a
-    tokenized card, manage its periodicity and amount, charge on demand, update
-    the underlying card, and cancel.
-  version: "1.0.0"
+  title: Kushki Card Payments Branches Subscriptions API
+  description: 'Card-not-present REST API for the Kushki regional non-banking acquirer.
+
+    Card numbers are tokenized client-side by Kushki.js Hosted Fields or the
+
+    iOS / Android SDKs and the resulting `transactionToken` is exchanged
+
+    server-side for a charge, pre-authorization, capture, or void.
+
+    '
+  version: 1.0.0
   contact:
     name: Kushki
     url: https://kushkipagos.com/
     email: dev@kushkipagos.com
+  license:
+    name: Kushki API Terms
+    url: https://kushkipagos.com/legal
 servers:
-  - url: https://api.kushkipagos.com
-    description: Production
-  - url: https://api-uat.kushkipagos.com
-    description: UAT / Sandbox
+- url: https://api.kushkipagos.com
+  description: Production
+- url: https://api-uat.kushkipagos.com
+  description: UAT / Sandbox
+- url: https://api-stg.kushkipagos.com
+  description: Staging
 security:
-  - PrivateMerchantId: []
+- PublicMerchantId: []
+- PrivateMerchantId: []
 tags:
-  - name: Subscriptions
-    description: Recurring card subscriptions
+- name: Subscriptions
+  description: Recurring card subscriptions
 paths:
   /subscriptions/v1/card:
     post:
@@ -27,7 +38,7 @@ paths:
       description: Create a scheduled card subscription. Returns a subscription identifier used for subsequent updates and on-demand charges.
       operationId: createSubscription
       tags:
-        - Subscriptions
+      - Subscriptions
       requestBody:
         required: true
         content:
@@ -57,7 +68,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SubscriptionResponse'
-        '4XX':
+        4XX:
           $ref: '#/components/responses/ErrorResponse'
   /subscriptions/v1/card/{subscriptionId}:
     get:
@@ -65,9 +76,9 @@ paths:
       description: Retrieve the current state of a subscription.
       operationId: getSubscription
       tags:
-        - Subscriptions
+      - Subscriptions
       parameters:
-        - $ref: '#/components/parameters/SubscriptionId'
+      - $ref: '#/components/parameters/SubscriptionId'
       responses:
         '200':
           description: Subscription
@@ -80,9 +91,9 @@ paths:
       description: Update plan name, amount, periodicity, or contact details on an existing subscription.
       operationId: updateSubscription
       tags:
-        - Subscriptions
+      - Subscriptions
       parameters:
-        - $ref: '#/components/parameters/SubscriptionId'
+      - $ref: '#/components/parameters/SubscriptionId'
       requestBody:
         required: true
         content:
@@ -101,9 +112,9 @@ paths:
       description: Cancel an active subscription. No further scheduled charges will be initiated.
       operationId: cancelSubscription
       tags:
-        - Subscriptions
+      - Subscriptions
       parameters:
-        - $ref: '#/components/parameters/SubscriptionId'
+      - $ref: '#/components/parameters/SubscriptionId'
       responses:
         '200':
           description: Cancelled
@@ -113,9 +124,9 @@ paths:
       description: Trigger an on-demand charge against the card stored on the subscription (one-click flow).
       operationId: chargeSubscription
       tags:
-        - Subscriptions
+      - Subscriptions
       parameters:
-        - $ref: '#/components/parameters/SubscriptionId'
+      - $ref: '#/components/parameters/SubscriptionId'
       requestBody:
         required: false
         content:
@@ -130,88 +141,151 @@ paths:
               schema:
                 $ref: '#/components/schemas/SubscriptionChargeResponse'
 components:
-  securitySchemes:
-    PrivateMerchantId:
-      type: apiKey
-      in: header
-      name: Private-Merchant-Id
-  parameters:
-    SubscriptionId:
-      name: subscriptionId
-      in: path
-      required: true
-      schema: { type: string }
-      description: Kushki subscription identifier.
   schemas:
-    Amount:
-      type: object
-      required: [subtotalIva, subtotalIva0, iva, currency]
-      properties:
-        subtotalIva: { type: number }
-        subtotalIva0: { type: number }
-        ice: { type: number, default: 0 }
-        iva: { type: number }
-        currency: { type: string, enum: [USD, COP, PEN, CLP, MXN, BRL] }
     ContactDetails:
       type: object
       properties:
-        firstName: { type: string }
-        lastName: { type: string }
-        email: { type: string, format: email }
-        phoneNumber: { type: string }
-        documentType: { type: string }
-        documentNumber: { type: string }
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phoneNumber:
+          type: string
+        documentType:
+          type: string
+        documentNumber:
+          type: string
+    Amount:
+      type: object
+      required:
+      - subtotalIva
+      - subtotalIva0
+      - iva
+      - currency
+      properties:
+        subtotalIva:
+          type: number
+        subtotalIva0:
+          type: number
+        ice:
+          type: number
+          default: 0
+        iva:
+          type: number
+        currency:
+          type: string
+          enum:
+          - USD
+          - COP
+          - PEN
+          - CLP
+          - MXN
+          - BRL
     SubscriptionRequest:
       type: object
-      required: [token, planName, amount, startDate, periodicity, contactDetails]
+      required:
+      - token
+      - planName
+      - amount
+      - startDate
+      - periodicity
+      - contactDetails
       properties:
-        token: { type: string }
-        planName: { type: string }
-        amount: { $ref: '#/components/schemas/Amount' }
-        startDate: { type: string, format: date }
-        endDate: { type: string, format: date }
+        token:
+          type: string
+        planName:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Amount'
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
         periodicity:
           type: string
-          enum: [daily, weekly, biweekly, monthly, bimonthly, quarterly, halfYearly, yearly, custom]
-        contactDetails: { $ref: '#/components/schemas/ContactDetails' }
-        metadata: { type: object, additionalProperties: true }
-    SubscriptionUpdateRequest:
-      type: object
-      properties:
-        planName: { type: string }
-        amount: { $ref: '#/components/schemas/Amount' }
-        periodicity: { type: string }
-        contactDetails: { $ref: '#/components/schemas/ContactDetails' }
-    SubscriptionChargeRequest:
-      type: object
-      properties:
-        amount: { $ref: '#/components/schemas/Amount' }
-        metadata: { type: object, additionalProperties: true }
-    SubscriptionResponse:
-      type: object
-      properties:
-        subscriptionId: { type: string }
-        planName: { type: string }
-        amount: { $ref: '#/components/schemas/Amount' }
-        periodicity: { type: string }
-        startDate: { type: string, format: date }
-        status:
-          type: string
-          enum: [active, pending, cancelled, expired, suspended]
-        contactDetails: { $ref: '#/components/schemas/ContactDetails' }
+          enum:
+          - daily
+          - weekly
+          - biweekly
+          - monthly
+          - bimonthly
+          - quarterly
+          - halfYearly
+          - yearly
+          - custom
+        contactDetails:
+          $ref: '#/components/schemas/ContactDetails'
+        metadata:
+          type: object
+          additionalProperties: true
     SubscriptionChargeResponse:
       type: object
       properties:
-        ticketNumber: { type: string }
-        transactionReference: { type: string }
-        approvedTransactionAmount: { type: number }
-        currencyCode: { type: string }
-        responseText: { type: string }
+        ticketNumber:
+          type: string
+        transactionReference:
+          type: string
+        approvedTransactionAmount:
+          type: number
+        currencyCode:
+          type: string
+        responseText:
+          type: string
+    SubscriptionChargeRequest:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/Amount'
+        metadata:
+          type: object
+          additionalProperties: true
     Error:
       type: object
       properties:
-        code: { type: string }
-        message: { type: string }
+        code:
+          type: string
+        message:
+          type: string
+    SubscriptionResponse:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+        planName:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Amount'
+        periodicity:
+          type: string
+        startDate:
+          type: string
+          format: date
+        status:
+          type: string
+          enum:
+          - active
+          - pending
+          - cancelled
+          - expired
+          - suspended
+        contactDetails:
+          $ref: '#/components/schemas/ContactDetails'
+    SubscriptionUpdateRequest:
+      type: object
+      properties:
+        planName:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Amount'
+        periodicity:
+          type: string
+        contactDetails:
+          $ref: '#/components/schemas/ContactDetails'
   responses:
     ErrorResponse:
       description: Error
@@ -219,3 +293,22 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    SubscriptionId:
+      name: subscriptionId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Kushki subscription identifier.
+  securitySchemes:
+    PublicMerchantId:
+      type: apiKey
+      in: header
+      name: Public-Merchant-Id
+      description: Client-side merchant key. Used by Kushki.js and mobile SDKs to tokenize cards. Never use server-side for charging.
+    PrivateMerchantId:
+      type: apiKey
+      in: header
+      name: Private-Merchant-Id
+      description: Server-side merchant key. Required for charge, capture, void, refund, subscription, and payout calls.

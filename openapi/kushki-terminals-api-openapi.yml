@@ -1,0 +1,103 @@
+openapi: 3.1.0
+info:
+  title: Kushki Card Payments Branches Terminals API
+  description: 'Card-not-present REST API for the Kushki regional non-banking acquirer.
+
+    Card numbers are tokenized client-side by Kushki.js Hosted Fields or the
+
+    iOS / Android SDKs and the resulting `transactionToken` is exchanged
+
+    server-side for a charge, pre-authorization, capture, or void.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Kushki
+    url: https://kushkipagos.com/
+    email: dev@kushkipagos.com
+  license:
+    name: Kushki API Terms
+    url: https://kushkipagos.com/legal
+servers:
+- url: https://api.kushkipagos.com
+  description: Production
+- url: https://api-uat.kushkipagos.com
+  description: UAT / Sandbox
+- url: https://api-stg.kushkipagos.com
+  description: Staging
+security:
+- PublicMerchantId: []
+- PrivateMerchantId: []
+tags:
+- name: Terminals
+  description: Kushki One terminal management
+paths:
+  /cardpresent/v1/terminals:
+    get:
+      summary: Kushki List Terminals
+      description: List Kushki One terminals registered to the merchant.
+      operationId: listTerminals
+      tags:
+      - Terminals
+      responses:
+        '200':
+          description: Terminals
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Terminal'
+  /cardpresent/v1/terminals/{terminalId}:
+    get:
+      summary: Kushki Get Terminal
+      description: Retrieve a Kushki One terminal by its identifier.
+      operationId: getTerminal
+      tags:
+      - Terminals
+      parameters:
+      - name: terminalId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Terminal
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Terminal'
+components:
+  schemas:
+    Terminal:
+      type: object
+      properties:
+        terminalId:
+          type: string
+        serialNumber:
+          type: string
+        model:
+          type: string
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - MAINTENANCE
+        branchId:
+          type: string
+        lastSeen:
+          type: string
+          format: date-time
+  securitySchemes:
+    PublicMerchantId:
+      type: apiKey
+      in: header
+      name: Public-Merchant-Id
+      description: Client-side merchant key. Used by Kushki.js and mobile SDKs to tokenize cards. Never use server-side for charging.
+    PrivateMerchantId:
+      type: apiKey
+      in: header
+      name: Private-Merchant-Id
+      description: Server-side merchant key. Required for charge, capture, void, refund, subscription, and payout calls.

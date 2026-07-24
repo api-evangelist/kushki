@@ -1,0 +1,143 @@
+openapi: 3.1.0
+info:
+  title: Kushki Card Payments Branches Card Present Charges API
+  description: 'Card-not-present REST API for the Kushki regional non-banking acquirer.
+
+    Card numbers are tokenized client-side by Kushki.js Hosted Fields or the
+
+    iOS / Android SDKs and the resulting `transactionToken` is exchanged
+
+    server-side for a charge, pre-authorization, capture, or void.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Kushki
+    url: https://kushkipagos.com/
+    email: dev@kushkipagos.com
+  license:
+    name: Kushki API Terms
+    url: https://kushkipagos.com/legal
+servers:
+- url: https://api.kushkipagos.com
+  description: Production
+- url: https://api-uat.kushkipagos.com
+  description: UAT / Sandbox
+- url: https://api-stg.kushkipagos.com
+  description: Staging
+security:
+- PublicMerchantId: []
+- PrivateMerchantId: []
+tags:
+- name: Card Present Charges
+  description: Sale, void, and settlement for card-present
+paths:
+  /cardpresent/v1/charges:
+    post:
+      summary: Kushki Create Card Present Charge
+      description: Create a card-present charge from an EMV/contactless transaction sealed by the terminal.
+      operationId: createCardPresentCharge
+      tags:
+      - Card Present Charges
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardPresentChargeRequest'
+      responses:
+        '200':
+          description: Charge approved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardPresentChargeResponse'
+  /cardpresent/v1/charges/{ticketNumber}/void:
+    post:
+      summary: Kushki Void Card Present Charge
+      description: Void a card-present charge.
+      operationId: voidCardPresentCharge
+      tags:
+      - Card Present Charges
+      parameters:
+      - name: ticketNumber
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Voided
+components:
+  schemas:
+    CardPresentChargeResponse:
+      type: object
+      properties:
+        ticketNumber:
+          type: string
+        approvalCode:
+          type: string
+        responseText:
+          type: string
+        responseCode:
+          type: string
+        cardBrand:
+          type: string
+        last4:
+          type: string
+        entryMode:
+          type: string
+    CardPresentChargeRequest:
+      type: object
+      required:
+      - terminalId
+      - sealedCard
+      - amount
+      properties:
+        terminalId:
+          type: string
+        sealedCard:
+          type: object
+          description: Encryption envelope sourced from the terminal.
+          properties:
+            ksn:
+              type: string
+            track2:
+              type: string
+            emvData:
+              type: string
+            pinBlock:
+              type: string
+        amount:
+          type: object
+          required:
+          - value
+          - currency
+          properties:
+            value:
+              type: number
+            currency:
+              type: string
+        entryMode:
+          type: string
+          enum:
+          - CHIP
+          - CONTACTLESS
+          - MAG_STRIPE
+          - MANUAL
+        deferred:
+          type: object
+          properties:
+            months:
+              type: integer
+  securitySchemes:
+    PublicMerchantId:
+      type: apiKey
+      in: header
+      name: Public-Merchant-Id
+      description: Client-side merchant key. Used by Kushki.js and mobile SDKs to tokenize cards. Never use server-side for charging.
+    PrivateMerchantId:
+      type: apiKey
+      in: header
+      name: Private-Merchant-Id
+      description: Server-side merchant key. Required for charge, capture, void, refund, subscription, and payout calls.

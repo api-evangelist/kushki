@@ -1,25 +1,36 @@
 openapi: 3.1.0
 info:
-  title: Kushki Payouts API
-  description: |
-    Disburse funds to bank accounts, cards, and cash pickup networks across LatAm.
-    Supports single payouts, batch upload, and country-specific compliance metadata
-    (RUT, RFC, CURP, RUC, CPF, NIT).
-  version: "1.0.0"
+  title: Kushki Card Payments Branches Payouts API
+  description: 'Card-not-present REST API for the Kushki regional non-banking acquirer.
+
+    Card numbers are tokenized client-side by Kushki.js Hosted Fields or the
+
+    iOS / Android SDKs and the resulting `transactionToken` is exchanged
+
+    server-side for a charge, pre-authorization, capture, or void.
+
+    '
+  version: 1.0.0
   contact:
     name: Kushki
     url: https://kushkipagos.com/
     email: dev@kushkipagos.com
+  license:
+    name: Kushki API Terms
+    url: https://kushkipagos.com/legal
 servers:
-  - url: https://api.kushkipagos.com
-    description: Production
-  - url: https://api-uat.kushkipagos.com
-    description: UAT / Sandbox
+- url: https://api.kushkipagos.com
+  description: Production
+- url: https://api-uat.kushkipagos.com
+  description: UAT / Sandbox
+- url: https://api-stg.kushkipagos.com
+  description: Staging
 security:
-  - PrivateMerchantId: []
+- PublicMerchantId: []
+- PrivateMerchantId: []
 tags:
-  - name: Payouts
-    description: Single and batch disbursements
+- name: Payouts
+  description: Single and batch disbursements
 paths:
   /payouts/transfer/v1/init:
     post:
@@ -27,7 +38,7 @@ paths:
       description: Initialize a single payout to a beneficiary bank account.
       operationId: initPayout
       tags:
-        - Payouts
+      - Payouts
       requestBody:
         required: true
         content:
@@ -37,10 +48,10 @@ paths:
             example:
               beneficiaryName: Maria Lopez
               documentType: RUT
-              documentNumber: "12345678-9"
-              bankCode: "0012"
+              documentNumber: 12345678-9
+              bankCode: '0012'
               accountType: SAVINGS
-              accountNumber: "0001234567"
+              accountNumber: '0001234567'
               email: maria@example.com
               amount:
                 value: 150000
@@ -53,7 +64,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PayoutResponse'
-        '4XX':
+        4XX:
           $ref: '#/components/responses/ErrorResponse'
   /payouts/transfer/v1/payouts/{payoutId}:
     get:
@@ -61,12 +72,13 @@ paths:
       description: Retrieve the current status of a payout.
       operationId: getPayout
       tags:
-        - Payouts
+      - Payouts
       parameters:
-        - name: payoutId
-          in: path
-          required: true
-          schema: { type: string }
+      - name: payoutId
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Payout
@@ -80,16 +92,19 @@ paths:
       description: Create a batch of payouts. Accepts up to 1000 payouts per batch.
       operationId: createPayoutBatch
       tags:
-        - Payouts
+      - Payouts
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
-              required: [batchName, payouts]
+              required:
+              - batchName
+              - payouts
               properties:
-                batchName: { type: string }
+                batchName:
+                  type: string
                 payouts:
                   type: array
                   maxItems: 1000
@@ -103,62 +118,118 @@ paths:
               schema:
                 type: object
                 properties:
-                  batchId: { type: string }
-                  accepted: { type: integer }
-                  rejected: { type: integer }
+                  batchId:
+                    type: string
+                  accepted:
+                    type: integer
+                  rejected:
+                    type: integer
 components:
-  securitySchemes:
-    PrivateMerchantId:
-      type: apiKey
-      in: header
-      name: Private-Merchant-Id
   schemas:
-    PayoutInitRequest:
-      type: object
-      required: [beneficiaryName, documentNumber, accountNumber, amount]
-      properties:
-        beneficiaryName: { type: string }
-        documentType:
-          type: string
-          enum: [CC, NIT, CE, DNI, RUT, CURP, RFC, RUC, CPF, CNPJ]
-        documentNumber: { type: string }
-        bankCode: { type: string }
-        accountType:
-          type: string
-          enum: [SAVINGS, CHECKING, VISTA, ELECTRONIC]
-        accountNumber: { type: string }
-        email: { type: string, format: email }
-        phoneNumber: { type: string }
-        amount:
-          type: object
-          required: [value, currency]
-          properties:
-            value: { type: number }
-            currency: { type: string, enum: [USD, COP, PEN, CLP, MXN, BRL] }
-        description: { type: string }
-        metadata: { type: object, additionalProperties: true }
     PayoutResponse:
       type: object
       properties:
-        payoutId: { type: string }
+        payoutId:
+          type: string
         status:
           type: string
-          enum: [INITIALIZED, PROCESSING, COMPLETED, REJECTED, RETURNED]
+          enum:
+          - INITIALIZED
+          - PROCESSING
+          - COMPLETED
+          - REJECTED
+          - RETURNED
         rail:
           type: string
-          enum: [ACH, PSE, SPEI, PIX, WEBPAY_TRANSF, INTRA_BANK]
+          enum:
+          - ACH
+          - PSE
+          - SPEI
+          - PIX
+          - WEBPAY_TRANSF
+          - INTRA_BANK
         amount:
           type: object
           properties:
-            value: { type: number }
-            currency: { type: string }
-        responseText: { type: string }
-        completedAt: { type: string, format: date-time }
+            value:
+              type: number
+            currency:
+              type: string
+        responseText:
+          type: string
+        completedAt:
+          type: string
+          format: date-time
     Error:
       type: object
       properties:
-        code: { type: string }
-        message: { type: string }
+        code:
+          type: string
+        message:
+          type: string
+    PayoutInitRequest:
+      type: object
+      required:
+      - beneficiaryName
+      - documentNumber
+      - accountNumber
+      - amount
+      properties:
+        beneficiaryName:
+          type: string
+        documentType:
+          type: string
+          enum:
+          - CC
+          - NIT
+          - CE
+          - DNI
+          - RUT
+          - CURP
+          - RFC
+          - RUC
+          - CPF
+          - CNPJ
+        documentNumber:
+          type: string
+        bankCode:
+          type: string
+        accountType:
+          type: string
+          enum:
+          - SAVINGS
+          - CHECKING
+          - VISTA
+          - ELECTRONIC
+        accountNumber:
+          type: string
+        email:
+          type: string
+          format: email
+        phoneNumber:
+          type: string
+        amount:
+          type: object
+          required:
+          - value
+          - currency
+          properties:
+            value:
+              type: number
+            currency:
+              type: string
+              enum:
+              - USD
+              - COP
+              - PEN
+              - CLP
+              - MXN
+              - BRL
+        description:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
   responses:
     ErrorResponse:
       description: Error
@@ -166,3 +237,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  securitySchemes:
+    PublicMerchantId:
+      type: apiKey
+      in: header
+      name: Public-Merchant-Id
+      description: Client-side merchant key. Used by Kushki.js and mobile SDKs to tokenize cards. Never use server-side for charging.
+    PrivateMerchantId:
+      type: apiKey
+      in: header
+      name: Private-Merchant-Id
+      description: Server-side merchant key. Required for charge, capture, void, refund, subscription, and payout calls.

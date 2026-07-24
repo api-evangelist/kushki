@@ -1,0 +1,203 @@
+openapi: 3.1.0
+info:
+  title: Kushki Card Payments Branches API
+  description: 'Card-not-present REST API for the Kushki regional non-banking acquirer.
+
+    Card numbers are tokenized client-side by Kushki.js Hosted Fields or the
+
+    iOS / Android SDKs and the resulting `transactionToken` is exchanged
+
+    server-side for a charge, pre-authorization, capture, or void.
+
+    '
+  version: 1.0.0
+  contact:
+    name: Kushki
+    url: https://kushkipagos.com/
+    email: dev@kushkipagos.com
+  license:
+    name: Kushki API Terms
+    url: https://kushkipagos.com/legal
+servers:
+- url: https://api.kushkipagos.com
+  description: Production
+- url: https://api-uat.kushkipagos.com
+  description: UAT / Sandbox
+- url: https://api-stg.kushkipagos.com
+  description: Staging
+security:
+- PublicMerchantId: []
+- PrivateMerchantId: []
+tags:
+- name: Branches
+  description: Branch / sucursal management
+paths:
+  /merchant/v1/branches:
+    get:
+      summary: Kushki List Branches
+      description: List branches (sucursales) registered under the parent merchant.
+      operationId: listBranches
+      tags:
+      - Branches
+      responses:
+        '200':
+          description: Branches
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Branch'
+    post:
+      summary: Kushki Create Branch
+      description: Create a new branch (sucursal) under the parent merchant. Returns the new branch's public and private merchant ids.
+      operationId: createBranch
+      tags:
+      - Branches
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchCreateRequest'
+      responses:
+        '200':
+          description: Branch created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Branch'
+  /merchant/v1/branches/{branchId}:
+    get:
+      summary: Kushki Get Branch
+      description: Retrieve a branch by its identifier.
+      operationId: getBranch
+      tags:
+      - Branches
+      parameters:
+      - name: branchId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Branch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Branch'
+    put:
+      summary: Kushki Update Branch
+      description: Update branch configuration (allowed payment methods, anti-fraud rules, webhook URLs).
+      operationId: updateBranch
+      tags:
+      - Branches
+      parameters:
+      - name: branchId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchUpdateRequest'
+      responses:
+        '200':
+          description: Updated
+components:
+  schemas:
+    BranchUpdateRequest:
+      type: object
+      properties:
+        webhookUrl:
+          type: string
+          format: uri
+        allowedPaymentMethods:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+    Branch:
+      type: object
+      properties:
+        branchId:
+          type: string
+        name:
+          type: string
+        country:
+          type: string
+          enum:
+          - EC
+          - CO
+          - PE
+          - CL
+          - MX
+          - BR
+        currency:
+          type: string
+          enum:
+          - USD
+          - COP
+          - PEN
+          - CLP
+          - MXN
+          - BRL
+        publicMerchantId:
+          type: string
+        privateMerchantId:
+          type: string
+        webhookUrl:
+          type: string
+          format: uri
+        allowedPaymentMethods:
+          type: array
+          items:
+            type: string
+            enum:
+            - CARD
+            - SUBSCRIPTION
+            - TRANSFER
+            - CASH
+            - PAYOUT
+            - CARD_PRESENT
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+    BranchCreateRequest:
+      type: object
+      required:
+      - name
+      - country
+      - currency
+      properties:
+        name:
+          type: string
+        country:
+          type: string
+        currency:
+          type: string
+        webhookUrl:
+          type: string
+          format: uri
+        allowedPaymentMethods:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    PublicMerchantId:
+      type: apiKey
+      in: header
+      name: Public-Merchant-Id
+      description: Client-side merchant key. Used by Kushki.js and mobile SDKs to tokenize cards. Never use server-side for charging.
+    PrivateMerchantId:
+      type: apiKey
+      in: header
+      name: Private-Merchant-Id
+      description: Server-side merchant key. Required for charge, capture, void, refund, subscription, and payout calls.
