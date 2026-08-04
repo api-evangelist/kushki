@@ -1,0 +1,160 @@
+openapi: 3.1.0
+info:
+  title: Kushki Card Present API
+  description: |
+    Process in-person EMV chip, contactless, and PIN-pad transactions through Kushki One
+    terminals. The Raw Card Present API exchanges sealed card data (encryption envelope
+    sourced from the terminal) for a charge response.
+  version: "1.0.0"
+  contact:
+    name: Kushki
+    url: https://kushkipagos.com/
+    email: dev@kushkipagos.com
+servers:
+  - url: https://api.kushkipagos.com
+    description: Production
+  - url: https://api-uat.kushkipagos.com
+    description: UAT / Sandbox
+security:
+  - PrivateMerchantId: []
+tags:
+  - name: Terminals
+    description: Kushki One terminal management
+  - name: Card Present Charges
+    description: Sale, void, and settlement for card-present
+paths:
+  /cardpresent/v1/terminals:
+    get:
+      summary: Kushki List Terminals
+      description: List Kushki One terminals registered to the merchant.
+      operationId: listTerminals
+      tags:
+        - Terminals
+      responses:
+        '200':
+          description: Terminals
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Terminal' }
+  /cardpresent/v1/terminals/{terminalId}:
+    get:
+      summary: Kushki Get Terminal
+      description: Retrieve a Kushki One terminal by its identifier.
+      operationId: getTerminal
+      tags:
+        - Terminals
+      parameters:
+        - name: terminalId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Terminal
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Terminal'
+  /cardpresent/v1/charges:
+    post:
+      summary: Kushki Create Card Present Charge
+      description: Create a card-present charge from an EMV/contactless transaction sealed by the terminal.
+      operationId: createCardPresentCharge
+      tags:
+        - Card Present Charges
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardPresentChargeRequest'
+      responses:
+        '200':
+          description: Charge approved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardPresentChargeResponse'
+  /cardpresent/v1/charges/{ticketNumber}/void:
+    post:
+      summary: Kushki Void Card Present Charge
+      description: Void a card-present charge.
+      operationId: voidCardPresentCharge
+      tags:
+        - Card Present Charges
+      parameters:
+        - name: ticketNumber
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Voided
+components:
+  securitySchemes:
+    PrivateMerchantId:
+      type: apiKey
+      in: header
+      name: Private-Merchant-Id
+  schemas:
+    Terminal:
+      type: object
+      properties:
+        terminalId: { type: string }
+        serialNumber: { type: string }
+        model: { type: string }
+        status:
+          type: string
+          enum: [ACTIVE, INACTIVE, MAINTENANCE]
+        branchId: { type: string }
+        lastSeen: { type: string, format: date-time }
+    CardPresentChargeRequest:
+      type: object
+      required: [terminalId, sealedCard, amount]
+      properties:
+        terminalId: { type: string }
+        sealedCard:
+          type: object
+          description: Encryption envelope sourced from the terminal.
+          properties:
+            ksn: { type: string }
+            track2: { type: string }
+            emvData: { type: string }
+            pinBlock: { type: string }
+        amount:
+          type: object
+          required: [value, currency]
+          properties:
+            value: { type: number }
+            currency: { type: string }
+        entryMode:
+          type: string
+          enum: [CHIP, CONTACTLESS, MAG_STRIPE, MANUAL]
+        deferred:
+          type: object
+          properties:
+            months: { type: integer }
+    CardPresentChargeResponse:
+      type: object
+      properties:
+        ticketNumber: { type: string }
+        approvalCode: { type: string }
+        responseText: { type: string }
+        responseCode: { type: string }
+        cardBrand: { type: string }
+        last4: { type: string }
+        entryMode: { type: string }
+    Error:
+      type: object
+      properties:
+        code: { type: string }
+        message: { type: string }
+  responses:
+    ErrorResponse:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

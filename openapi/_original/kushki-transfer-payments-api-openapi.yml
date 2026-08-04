@@ -1,0 +1,173 @@
+openapi: 3.1.0
+info:
+  title: Kushki Transfer Payments API
+  description: |
+    Bank-rail transfer payments across LatAm — PSE (Colombia), Webpay Transferencia
+    (Chile), SPEI (Mexico), PIX (Brazil), and direct debit (Ecuador, Peru). Returns
+    a redirect URL or QR for the payer; final state is delivered by webhook.
+  version: "1.0.0"
+  contact:
+    name: Kushki
+    url: https://kushkipagos.com/
+    email: dev@kushkipagos.com
+servers:
+  - url: https://api.kushkipagos.com
+    description: Production
+  - url: https://api-uat.kushkipagos.com
+    description: UAT / Sandbox
+security:
+  - PublicMerchantId: []
+  - PrivateMerchantId: []
+tags:
+  - name: Transfer
+    description: Bank-rail transfer charges
+paths:
+  /transfer/v1/init:
+    post:
+      summary: Kushki Initialize Transfer Charge
+      description: Initialize a transfer payment. Returns a redirect URL (PSE / Webpay) or QR/CopyPaste payload (PIX) plus a Kushki ticket number.
+      operationId: initTransferCharge
+      tags:
+        - Transfer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferInitRequest'
+            example:
+              callbackUrl: https://merchant.example.com/checkout/return
+              userType: "0"
+              documentType: CC
+              documentNumber: "100000001"
+              email: payer@example.com
+              paymentDescription: Order 42
+              amount:
+                subtotalIva: 0
+                subtotalIva0: 50000
+                iva: 0
+                currency: COP
+      responses:
+        '200':
+          description: Transfer initialized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferInitResponse'
+        '4XX':
+          $ref: '#/components/responses/ErrorResponse'
+  /transfer/v1/charge:
+    post:
+      summary: Kushki Confirm Transfer Charge
+      description: Confirm a transfer charge after the payer authorizes at the bank. Normally driven by the redirect callback; webhook delivery is the authoritative event.
+      operationId: confirmTransferCharge
+      tags:
+        - Transfer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferChargeRequest'
+      responses:
+        '200':
+          description: Charge confirmed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferChargeResponse'
+  /transfer/v1/charges/{ticketNumber}:
+    get:
+      summary: Kushki Get Transfer Charge
+      description: Retrieve the current status of a transfer charge.
+      operationId: getTransferCharge
+      tags:
+        - Transfer
+      parameters:
+        - name: ticketNumber
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Charge status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferChargeResponse'
+components:
+  securitySchemes:
+    PublicMerchantId:
+      type: apiKey
+      in: header
+      name: Public-Merchant-Id
+    PrivateMerchantId:
+      type: apiKey
+      in: header
+      name: Private-Merchant-Id
+  schemas:
+    Amount:
+      type: object
+      required: [subtotalIva, subtotalIva0, iva, currency]
+      properties:
+        subtotalIva: { type: number }
+        subtotalIva0: { type: number }
+        ice: { type: number, default: 0 }
+        iva: { type: number }
+        currency: { type: string, enum: [USD, COP, PEN, CLP, MXN, BRL] }
+    TransferInitRequest:
+      type: object
+      required: [callbackUrl, email, amount]
+      properties:
+        callbackUrl: { type: string, format: uri }
+        userType:
+          type: string
+          enum: ["0", "1"]
+          description: "0 = natural person, 1 = legal entity (Colombia PSE convention)."
+        documentType:
+          type: string
+          enum: [CC, NIT, CE, DNI, RUT, CURP, RFC, RUC, CPF, CNPJ]
+        documentNumber: { type: string }
+        email: { type: string, format: email }
+        paymentDescription: { type: string }
+        amount: { $ref: '#/components/schemas/Amount' }
+        bankId: { type: string, description: PSE bank identifier (Colombia only). }
+        metadata: { type: object, additionalProperties: true }
+    TransferInitResponse:
+      type: object
+      properties:
+        token: { type: string }
+        redirectUrl: { type: string, format: uri }
+        ticketNumber: { type: string }
+        pixCopyPaste: { type: string, description: PIX copy-paste string (Brazil). }
+        qrCode: { type: string, description: Base64-encoded QR image (PIX). }
+    TransferChargeRequest:
+      type: object
+      required: [token]
+      properties:
+        token: { type: string }
+        amount: { $ref: '#/components/schemas/Amount' }
+        metadata: { type: object, additionalProperties: true }
+    TransferChargeResponse:
+      type: object
+      properties:
+        ticketNumber: { type: string }
+        transactionStatus:
+          type: string
+          enum: [APPROVAL, INITIALIZED, DECLINED, PENDING]
+        approvalCode: { type: string }
+        responseText: { type: string }
+        paymentBrand: { type: string, description: PSE / Webpay / SPEI / PIX. }
+        bankName: { type: string }
+    Error:
+      type: object
+      properties:
+        code: { type: string }
+        message: { type: string }
+  responses:
+    ErrorResponse:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

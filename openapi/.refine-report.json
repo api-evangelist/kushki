@@ -1,0 +1,34 @@
+{
+  "provider": "kushki",
+  "sources": [
+    "kushki-branches-api-openapi.yml",
+    "kushki-card-present-charges-api-openapi.yml",
+    "kushki-cash-api-openapi.yml",
+    "kushki-charges-api-openapi.yml",
+    "kushki-payouts-api-openapi.yml",
+    "kushki-pre-authorization-api-openapi.yml",
+    "kushki-subscriptions-api-openapi.yml",
+    "kushki-terminals-api-openapi.yml",
+    "kushki-tokens-api-openapi.yml",
+    "kushki-transfer-api-openapi.yml",
+    "kushki-voids-and-refunds-api-openapi.yml"
+  ],
+  "outputs": [
+    "kushki-branches-api-openapi.yml",
+    "kushki-card-present-charges-api-openapi.yml",
+    "kushki-cash-api-openapi.yml",
+    "kushki-charges-api-openapi.yml",
+    "kushki-payouts-api-openapi.yml",
+    "kushki-pre-authorization-api-openapi.yml",
+    "kushki-subscriptions-api-openapi.yml",
+    "kushki-terminals-api-openapi.yml",
+    "kushki-tokens-api-openapi.yml",
+    "kushki-transfer-api-openapi.yml",
+    "kushki-voids-and-refunds-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

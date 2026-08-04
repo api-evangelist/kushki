@@ -1,0 +1,139 @@
+openapi: 3.1.0
+info:
+  title: Kushki Cash Payments API
+  description: |
+    Generate cash-payment vouchers redeemable at LatAm correspondent and convenience-store
+    networks — OXXO and 7-Eleven in Mexico, PagoEfectivo in Peru, Boleto in Brazil, and
+    Ecuadorean and Colombian correspondent networks. Returns a barcode/reference and
+    an expiry date.
+  version: "1.0.0"
+  contact:
+    name: Kushki
+    url: https://kushkipagos.com/
+    email: dev@kushkipagos.com
+servers:
+  - url: https://api.kushkipagos.com
+    description: Production
+  - url: https://api-uat.kushkipagos.com
+    description: UAT / Sandbox
+security:
+  - PrivateMerchantId: []
+tags:
+  - name: Cash
+    description: Cash voucher generation and lookup
+paths:
+  /cash/v1/charges:
+    post:
+      summary: Kushki Create Cash Voucher
+      description: Generate a cash voucher. Returns a unique reference (PIN, barcode, or numeric token) the payer presents at the cash network.
+      operationId: createCashCharge
+      tags:
+        - Cash
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CashChargeRequest'
+            example:
+              name: Juan
+              lastName: Perez
+              identification: "100000001"
+              documentType: CC
+              email: payer@example.com
+              totalAmount: 50000
+              currency: COP
+              description: Order 42
+              expirationDate: "2026-05-31"
+      responses:
+        '200':
+          description: Voucher created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CashChargeResponse'
+        '4XX':
+          $ref: '#/components/responses/ErrorResponse'
+  /cash/v1/charges/{ticketNumber}:
+    get:
+      summary: Kushki Get Cash Voucher
+      description: Retrieve the current status of a cash voucher (PENDING, PAID, EXPIRED, CANCELLED).
+      operationId: getCashCharge
+      tags:
+        - Cash
+      parameters:
+        - name: ticketNumber
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Voucher
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CashChargeResponse'
+    delete:
+      summary: Kushki Cancel Cash Voucher
+      description: Cancel an outstanding cash voucher before it is paid.
+      operationId: cancelCashCharge
+      tags:
+        - Cash
+      parameters:
+        - name: ticketNumber
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Cancelled
+components:
+  securitySchemes:
+    PrivateMerchantId:
+      type: apiKey
+      in: header
+      name: Private-Merchant-Id
+  schemas:
+    CashChargeRequest:
+      type: object
+      required: [name, lastName, identification, email, totalAmount, currency]
+      properties:
+        name: { type: string }
+        lastName: { type: string }
+        identification: { type: string }
+        documentType:
+          type: string
+          enum: [CC, NIT, CE, DNI, RUT, CURP, RFC, RUC, CPF, CNPJ]
+        email: { type: string, format: email }
+        phoneNumber: { type: string }
+        totalAmount: { type: number }
+        currency: { type: string, enum: [USD, COP, PEN, CLP, MXN, BRL] }
+        description: { type: string }
+        expirationDate: { type: string, format: date }
+        metadata: { type: object, additionalProperties: true }
+    CashChargeResponse:
+      type: object
+      properties:
+        pin: { type: string, description: Numeric or alphanumeric reference shown to the payer. }
+        ticketNumber: { type: string }
+        barcode: { type: string, description: Barcode payload (Boleto / OXXO). }
+        url: { type: string, format: uri, description: Hosted voucher page. }
+        expirationDate: { type: string, format: date }
+        status:
+          type: string
+          enum: [PENDING, PAID, EXPIRED, CANCELLED]
+        paymentBrand:
+          type: string
+          enum: [OXXO, SEVEN_ELEVEN, PAGOEFECTIVO, BOLETO, EFECTIVO_EC, EFECTIVO_CO]
+    Error:
+      type: object
+      properties:
+        code: { type: string }
+        message: { type: string }
+  responses:
+    ErrorResponse:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

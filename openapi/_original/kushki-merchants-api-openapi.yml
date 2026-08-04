@@ -1,0 +1,144 @@
+openapi: 3.1.0
+info:
+  title: Kushki Merchants and Branches API
+  description: |
+    Manage merchant branches (sucursales) and their per-branch configuration.
+    Used by marketplaces, franchise networks, and aggregators to onboard and
+    administer sub-merchants programmatically.
+  version: "1.0.0"
+  contact:
+    name: Kushki
+    url: https://kushkipagos.com/
+    email: dev@kushkipagos.com
+servers:
+  - url: https://api.kushkipagos.com
+    description: Production
+  - url: https://api-uat.kushkipagos.com
+    description: UAT / Sandbox
+security:
+  - PrivateMerchantId: []
+tags:
+  - name: Branches
+    description: Branch / sucursal management
+paths:
+  /merchant/v1/branches:
+    get:
+      summary: Kushki List Branches
+      description: List branches (sucursales) registered under the parent merchant.
+      operationId: listBranches
+      tags:
+        - Branches
+      responses:
+        '200':
+          description: Branches
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Branch' }
+    post:
+      summary: Kushki Create Branch
+      description: Create a new branch (sucursal) under the parent merchant. Returns the new branch's public and private merchant ids.
+      operationId: createBranch
+      tags:
+        - Branches
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchCreateRequest'
+      responses:
+        '200':
+          description: Branch created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Branch'
+  /merchant/v1/branches/{branchId}:
+    get:
+      summary: Kushki Get Branch
+      description: Retrieve a branch by its identifier.
+      operationId: getBranch
+      tags:
+        - Branches
+      parameters:
+        - name: branchId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Branch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Branch'
+    put:
+      summary: Kushki Update Branch
+      description: Update branch configuration (allowed payment methods, anti-fraud rules, webhook URLs).
+      operationId: updateBranch
+      tags:
+        - Branches
+      parameters:
+        - name: branchId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BranchUpdateRequest'
+      responses:
+        '200':
+          description: Updated
+components:
+  securitySchemes:
+    PrivateMerchantId:
+      type: apiKey
+      in: header
+      name: Private-Merchant-Id
+  schemas:
+    Branch:
+      type: object
+      properties:
+        branchId: { type: string }
+        name: { type: string }
+        country:
+          type: string
+          enum: [EC, CO, PE, CL, MX, BR]
+        currency:
+          type: string
+          enum: [USD, COP, PEN, CLP, MXN, BRL]
+        publicMerchantId: { type: string }
+        privateMerchantId: { type: string }
+        webhookUrl: { type: string, format: uri }
+        allowedPaymentMethods:
+          type: array
+          items:
+            type: string
+            enum: [CARD, SUBSCRIPTION, TRANSFER, CASH, PAYOUT, CARD_PRESENT]
+        status:
+          type: string
+          enum: [ACTIVE, INACTIVE]
+    BranchCreateRequest:
+      type: object
+      required: [name, country, currency]
+      properties:
+        name: { type: string }
+        country: { type: string }
+        currency: { type: string }
+        webhookUrl: { type: string, format: uri }
+        allowedPaymentMethods:
+          type: array
+          items: { type: string }
+    BranchUpdateRequest:
+      type: object
+      properties:
+        webhookUrl: { type: string, format: uri }
+        allowedPaymentMethods:
+          type: array
+          items: { type: string }
+        status: { type: string }

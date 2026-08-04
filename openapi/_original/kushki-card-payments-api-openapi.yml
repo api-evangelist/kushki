@@ -1,0 +1,363 @@
+openapi: 3.1.0
+info:
+  title: Kushki Card Payments API
+  description: |
+    Card-not-present REST API for the Kushki regional non-banking acquirer.
+    Card numbers are tokenized client-side by Kushki.js Hosted Fields or the
+    iOS / Android SDKs and the resulting `transactionToken` is exchanged
+    server-side for a charge, pre-authorization, capture, or void.
+  version: "1.0.0"
+  contact:
+    name: Kushki
+    url: https://kushkipagos.com/
+    email: dev@kushkipagos.com
+  license:
+    name: Kushki API Terms
+    url: https://kushkipagos.com/legal
+servers:
+  - url: https://api.kushkipagos.com
+    description: Production
+  - url: https://api-uat.kushkipagos.com
+    description: UAT / Sandbox
+  - url: https://api-stg.kushkipagos.com
+    description: Staging
+security:
+  - PublicMerchantId: []
+  - PrivateMerchantId: []
+tags:
+  - name: Tokens
+    description: Card tokenization (client-side via Kushki.js, returns a one-time transactionToken)
+  - name: Charges
+    description: Direct charge against a previously created card token
+  - name: Pre-Authorization
+    description: Two-step authorize + capture flow
+  - name: Voids and Refunds
+    description: Void or refund a previously captured charge
+paths:
+  /card/v1/tokens:
+    post:
+      summary: Kushki Tokenize Card
+      description: Tokenize a card. Normally invoked from Kushki.js Hosted Fields in the browser using the Public-Merchant-Id.
+      operationId: createCardToken
+      tags:
+        - Tokens
+      security:
+        - PublicMerchantId: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+            example:
+              card:
+                name: Juan Perez
+                number: "4242424242424242"
+                expiryMonth: "12"
+                expiryYear: "29"
+                cvv: "123"
+              totalAmount: 1000
+              currency: USD
+      responses:
+        '200':
+          description: Token created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '4XX':
+          $ref: '#/components/responses/ErrorResponse'
+  /card/v1/charges:
+    post:
+      summary: Kushki Create Card Charge
+      description: Charge a previously tokenized card in a single step. Returns a ticketNumber used for void or refund.
+      operationId: createCardCharge
+      tags:
+        - Charges
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChargeRequest'
+            example:
+              token: 0aabF1aae450476cb7547bda5bdfc11d
+              amount:
+                subtotalIva: 0
+                subtotalIva0: 1000
+                ice: 0
+                iva: 0
+                currency: USD
+              fullResponse: true
+      responses:
+        '200':
+          description: Charge approved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeResponse'
+        '4XX':
+          $ref: '#/components/responses/ErrorResponse'
+  /card/v1/preAuthorization:
+    post:
+      summary: Kushki Pre-Authorize Card
+      description: Reserve funds on a card without capturing them. Capture or void within the issuer-specific window.
+      operationId: preAuthorizeCard
+      tags:
+        - Pre-Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChargeRequest'
+      responses:
+        '200':
+          description: Authorization approved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeResponse'
+        '4XX':
+          $ref: '#/components/responses/ErrorResponse'
+  /card/v1/capture:
+    post:
+      summary: Kushki Capture Pre-Authorization
+      description: Capture funds previously held via /card/v1/preAuthorization. Supports partial capture below the original amount.
+      operationId: captureCardCharge
+      tags:
+        - Pre-Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaptureRequest'
+            example:
+              ticketNumber: "175632110000000123"
+              amount:
+                subtotalIva: 0
+                subtotalIva0: 1000
+                iva: 0
+              fullResponse: true
+      responses:
+        '200':
+          description: Capture approved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeResponse'
+        '4XX':
+          $ref: '#/components/responses/ErrorResponse'
+  /card/v1/deferred:
+    post:
+      summary: Kushki Create Deferred Card Charge
+      description: Charge a card with deferred/installment terms. Specify months and rate_of_interest per the issuer's deferred catalog.
+      operationId: createDeferredCharge
+      tags:
+        - Charges
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeferredChargeRequest'
+      responses:
+        '200':
+          description: Deferred charge approved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeResponse'
+        '4XX':
+          $ref: '#/components/responses/ErrorResponse'
+  /v1/charges/{ticketNumber}:
+    delete:
+      summary: Kushki Void Or Refund Charge
+      description: |
+        Void (same day, before settlement) or refund (after settlement) a previously approved charge.
+        Pass a partial amount in the body to perform a partial refund; omit amount to void the full transaction.
+      operationId: voidOrRefundCharge
+      tags:
+        - Voids and Refunds
+      parameters:
+        - name: ticketNumber
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Ticket number returned by the original charge.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoidRequest'
+      responses:
+        '200':
+          description: Void or refund accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeResponse'
+        '4XX':
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  securitySchemes:
+    PublicMerchantId:
+      type: apiKey
+      in: header
+      name: Public-Merchant-Id
+      description: Client-side merchant key. Used by Kushki.js and mobile SDKs to tokenize cards. Never use server-side for charging.
+    PrivateMerchantId:
+      type: apiKey
+      in: header
+      name: Private-Merchant-Id
+      description: Server-side merchant key. Required for charge, capture, void, refund, subscription, and payout calls.
+  parameters: {}
+  schemas:
+    Amount:
+      type: object
+      required: [subtotalIva, subtotalIva0, iva, currency]
+      properties:
+        subtotalIva:
+          type: number
+          description: Subtotal taxed at IVA / VAT.
+        subtotalIva0:
+          type: number
+          description: Subtotal at 0% IVA / VAT.
+        ice:
+          type: number
+          description: ICE (Ecuadorian excise tax). Use 0 if not applicable.
+          default: 0
+        iva:
+          type: number
+          description: IVA / VAT amount.
+        extraTaxes:
+          type: object
+          additionalProperties:
+            type: number
+          description: Country-specific extra taxes (e.g. propina, tasaAeroportuaria, agenciaDeViaje).
+        currency:
+          type: string
+          enum: [USD, COP, PEN, CLP, MXN, BRL]
+    TokenRequest:
+      type: object
+      required: [card, totalAmount, currency]
+      properties:
+        card:
+          type: object
+          properties:
+            name: { type: string }
+            number: { type: string }
+            expiryMonth: { type: string }
+            expiryYear: { type: string }
+            cvv: { type: string }
+        totalAmount:
+          type: number
+        currency:
+          type: string
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: One-time transactionToken to pass to /card/v1/charges or /card/v1/preAuthorization.
+    ChargeRequest:
+      type: object
+      required: [token, amount]
+      properties:
+        token:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Amount'
+        months:
+          type: integer
+          description: Installment count for deferred payments.
+        deferred:
+          type: object
+          properties:
+            months: { type: integer }
+            graceMonths: { type: integer }
+            creditType: { type: string }
+        contactDetails:
+          $ref: '#/components/schemas/ContactDetails'
+        metadata:
+          type: object
+          additionalProperties: true
+        fullResponse:
+          type: boolean
+          default: false
+        threeDomainSecure:
+          type: object
+          description: 3DS 2.0 authentication payload (eci, cavv, xid, directoryServerTransactionId).
+    DeferredChargeRequest:
+      allOf:
+        - $ref: '#/components/schemas/ChargeRequest'
+        - type: object
+          required: [months]
+          properties:
+            months: { type: integer, minimum: 1, maximum: 48 }
+            interestRate: { type: number }
+    CaptureRequest:
+      type: object
+      required: [ticketNumber, amount]
+      properties:
+        ticketNumber: { type: string }
+        amount:
+          $ref: '#/components/schemas/Amount'
+        fullResponse:
+          type: boolean
+          default: false
+    VoidRequest:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/Amount'
+        fullResponse:
+          type: boolean
+          default: false
+    ChargeResponse:
+      type: object
+      properties:
+        ticketNumber: { type: string }
+        transactionReference: { type: string }
+        approvedTransactionAmount: { type: number }
+        currencyCode: { type: string }
+        approvalCode: { type: string }
+        token: { type: string }
+        rrn: { type: string }
+        responseText: { type: string }
+        responseCode: { type: string }
+        details:
+          type: object
+          properties:
+            transactionId: { type: string }
+            transactionStatus: { type: string }
+            cardHolderName: { type: string }
+            paymentBrand: { type: string }
+            bin: { type: string }
+            lastFourDigits: { type: string }
+            cardType: { type: string }
+            cardCountry: { type: string }
+    ContactDetails:
+      type: object
+      properties:
+        firstName: { type: string }
+        lastName: { type: string }
+        documentType: { type: string, enum: [CC, NIT, CE, DNI, RUT, CURP, RFC, RUC, CPF, CNPJ] }
+        documentNumber: { type: string }
+        email: { type: string, format: email }
+        phoneNumber: { type: string }
+    Error:
+      type: object
+      properties:
+        code: { type: string }
+        message: { type: string }
+  responses:
+    ErrorResponse:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
