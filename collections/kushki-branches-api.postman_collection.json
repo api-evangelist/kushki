@@ -1,28 +1,109 @@
 {
   "item": [
     {
-      "id": "3a431e04-e3f3-410f-9a39-08318986e964",
-      "name": "Payouts",
+      "id": "4224959b-4f14-44fc-84a6-43041e421d6d",
+      "name": "Branches",
       "description": {
-        "content": "Single and batch disbursements",
+        "content": "Branch / sucursal management",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "26777d24-f635-4573-af86-634be5cff5bb",
-          "name": "Kushki Initialize Payout",
+          "id": "830c5b8d-16ab-4e35-b515-88b0da1cde04",
+          "name": "Kushki List Branches",
           "request": {
-            "name": "Kushki Initialize Payout",
+            "name": "Kushki List Branches",
             "description": {
-              "content": "Initialize a single payout to a beneficiary bank account.",
+              "content": "List branches (sucursales) registered under the parent merchant.",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "payouts",
-                "transfer",
+                "merchant",
                 "v1",
-                "init"
+                "branches"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b6e6f37-4e74-42eb-81ac-7007e19fbfce",
+              "name": "Branches",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "merchant",
+                    "v1",
+                    "branches"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Public-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"branchId\": \"string\",\n    \"name\": \"string\",\n    \"country\": \"CL\",\n    \"currency\": \"PEN\",\n    \"publicMerchantId\": \"string\",\n    \"privateMerchantId\": \"string\",\n    \"webhookUrl\": \"http://quxskTTkiBdyvmGXtIachyyRkavHS.ohbla1Ml8vYAfi6q4ycrRP9XtRtk-\",\n    \"allowedPaymentMethods\": [\n      \"SUBSCRIPTION\",\n      \"TRANSFER\"\n    ],\n    \"status\": \"ACTIVE\"\n  },\n  {\n    \"branchId\": \"string\",\n    \"name\": \"string\",\n    \"country\": \"BR\",\n    \"currency\": \"MXN\",\n    \"publicMerchantId\": \"string\",\n    \"privateMerchantId\": \"string\",\n    \"webhookUrl\": \"http://MRCJpYXBcfrO.aigf4F.SOMvBnHAwu34m47DLnFUnt\",\n    \"allowedPaymentMethods\": [\n      \"PAYOUT\",\n      \"CARD\"\n    ],\n    \"status\": \"INACTIVE\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2692a393-749f-491f-b3f4-f65fb2b71eb0",
+          "name": "Kushki Create Branch",
+          "request": {
+            "name": "Kushki Create Branch",
+            "description": {
+              "content": "Create a new branch (sucursal) under the parent merchant. Returns the new branch's public and private merchant ids.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "merchant",
+                "v1",
+                "branches"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -44,7 +125,7 @@
             "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"beneficiaryName\": \"<string>\",\n  \"documentNumber\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"amount\": {\n    \"value\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"documentType\": \"<string>\",\n  \"bankCode\": \"<string>\",\n  \"accountType\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phoneNumber\": \"<string>\",\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": true,\n    \"key_1\": \"string\"\n  }\n}",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"country\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"webhookUrl\": \"<uri>\",\n  \"allowedPaymentMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -54,15 +135,14 @@
           },
           "response": [
             {
-              "id": "c829e71b-f278-4f84-92ee-c973b120fbbd",
-              "name": "Payout initialized",
+              "id": "897d7993-8000-4a2f-bc30-9784176e6451",
+              "name": "Branch created",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "payouts",
-                    "transfer",
+                    "merchant",
                     "v1",
-                    "init"
+                    "branches"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -87,7 +167,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"beneficiaryName\": \"Maria Lopez\",\n  \"documentType\": \"RUT\",\n  \"documentNumber\": \"12345678-9\",\n  \"bankCode\": \"0012\",\n  \"accountType\": \"SAVINGS\",\n  \"accountNumber\": \"0001234567\",\n  \"email\": \"maria@example.com\",\n  \"amount\": {\n    \"value\": 150000,\n    \"currency\": \"CLP\"\n  },\n  \"description\": \"Marketplace payout May\"\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"country\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"webhookUrl\": \"<uri>\",\n  \"allowedPaymentMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -103,61 +183,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"payoutId\": \"string\",\n  \"status\": \"COMPLETED\",\n  \"rail\": \"WEBPAY_TRANSF\",\n  \"amount\": {\n    \"value\": 5553.052430674466,\n    \"currency\": \"string\"\n  },\n  \"responseText\": \"string\",\n  \"completedAt\": \"1984-11-03T01:08:39.396Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "16a8c826-a115-484f-8082-2b7fbd2a71d4",
-              "name": "Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payouts",
-                    "transfer",
-                    "v1",
-                    "init"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Public-Merchant-Id",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"beneficiaryName\": \"Maria Lopez\",\n  \"documentType\": \"RUT\",\n  \"documentNumber\": \"12345678-9\",\n  \"bankCode\": \"0012\",\n  \"accountType\": \"SAVINGS\",\n  \"accountNumber\": \"0001234567\",\n  \"email\": \"maria@example.com\",\n  \"amount\": {\n    \"value\": 150000,\n    \"currency\": \"CLP\"\n  },\n  \"description\": \"Marketplace payout May\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "body": "{\n  \"branchId\": \"string\",\n  \"name\": \"string\",\n  \"country\": \"PE\",\n  \"currency\": \"PEN\",\n  \"publicMerchantId\": \"string\",\n  \"privateMerchantId\": \"string\",\n  \"webhookUrl\": \"https://mYPFaDXfSHoTIFFbgaLMpoAzRz.qtjqGaoNDh5Oi6KCvaTG.-YHvFAJDfLMABnWnwz3roUFyxR1\",\n  \"allowedPaymentMethods\": [\n    \"TRANSFER\",\n    \"SUBSCRIPTION\"\n  ],\n  \"status\": \"INACTIVE\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -168,21 +194,20 @@
           }
         },
         {
-          "id": "7ea428dc-b476-4b81-ba84-1356b53dad21",
-          "name": "Kushki Get Payout",
+          "id": "af51ceee-e5a0-44ca-8d08-0228141f0d71",
+          "name": "Kushki Get Branch",
           "request": {
-            "name": "Kushki Get Payout",
+            "name": "Kushki Get Branch",
             "description": {
-              "content": "Retrieve the current status of a payout.",
+              "content": "Retrieve a branch by its identifier.",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "payouts",
-                "transfer",
+                "merchant",
                 "v1",
-                "payouts",
-                ":payoutId"
+                "branches",
+                ":branchId"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -193,7 +218,7 @@
                   "disabled": false,
                   "type": "any",
                   "value": "<string>",
-                  "key": "payoutId",
+                  "key": "branchId",
                   "description": "(Required) "
                 }
               ]
@@ -209,16 +234,15 @@
           },
           "response": [
             {
-              "id": "45e18712-0abe-4041-ac15-54fd44d579b8",
-              "name": "Payout",
+              "id": "aeb8d482-7431-4cde-b388-2bd4952ea28c",
+              "name": "Branch",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "payouts",
-                    "transfer",
+                    "merchant",
                     "v1",
-                    "payouts",
-                    ":payoutId"
+                    "branches",
+                    ":branchId"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -229,7 +253,7 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "payoutId",
+                      "key": "branchId",
                       "description": "(Required) "
                     }
                   ]
@@ -259,7 +283,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"payoutId\": \"string\",\n  \"status\": \"COMPLETED\",\n  \"rail\": \"WEBPAY_TRANSF\",\n  \"amount\": {\n    \"value\": 5553.052430674466,\n    \"currency\": \"string\"\n  },\n  \"responseText\": \"string\",\n  \"completedAt\": \"1984-11-03T01:08:39.396Z\"\n}",
+              "body": "{\n  \"branchId\": \"string\",\n  \"name\": \"string\",\n  \"country\": \"PE\",\n  \"currency\": \"PEN\",\n  \"publicMerchantId\": \"string\",\n  \"privateMerchantId\": \"string\",\n  \"webhookUrl\": \"https://mYPFaDXfSHoTIFFbgaLMpoAzRz.qtjqGaoNDh5Oi6KCvaTG.-YHvFAJDfLMABnWnwz3roUFyxR1\",\n  \"allowedPaymentMethods\": [\n    \"TRANSFER\",\n    \"SUBSCRIPTION\"\n  ],\n  \"status\": \"INACTIVE\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -270,42 +294,46 @@
           }
         },
         {
-          "id": "e858584b-fcf0-41e3-8031-ff3cef66c230",
-          "name": "Kushki Create Payout Batch",
+          "id": "6570b04d-7cbc-463e-a480-878003d53358",
+          "name": "Kushki Update Branch",
           "request": {
-            "name": "Kushki Create Payout Batch",
+            "name": "Kushki Update Branch",
             "description": {
-              "content": "Create a batch of payouts. Accepts up to 1000 payouts per batch.",
+              "content": "Update branch configuration (allowed payment methods, anti-fraud rules, webhook URLs).",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "payouts",
-                "transfer",
+                "merchant",
                 "v1",
-                "batch"
+                "branches",
+                ":branchId"
               ],
               "host": [
                 "{{baseUrl}}"
               ],
               "query": [],
-              "variable": []
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "branchId",
+                  "description": "(Required) "
+                }
+              ]
             },
             "header": [
               {
                 "key": "Content-Type",
                 "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
               }
             ],
-            "method": "POST",
+            "method": "PUT",
             "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"batchName\": \"<string>\",\n  \"payouts\": [\n    {\n      \"beneficiaryName\": \"<string>\",\n      \"documentNumber\": \"<string>\",\n      \"accountNumber\": \"<string>\",\n      \"amount\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"documentType\": \"<string>\",\n      \"bankCode\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phoneNumber\": \"<string>\",\n      \"description\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": \"string\"\n      }\n    },\n    {\n      \"beneficiaryName\": \"<string>\",\n      \"documentNumber\": \"<string>\",\n      \"accountNumber\": \"<string>\",\n      \"amount\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"documentType\": \"<string>\",\n      \"bankCode\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phoneNumber\": \"<string>\",\n      \"description\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": 8860.782502142314,\n        \"key_1\": false,\n        \"key_2\": 1821\n      }\n    }\n  ]\n}",
+              "raw": "{\n  \"webhookUrl\": \"<uri>\",\n  \"allowedPaymentMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"<string>\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -315,21 +343,29 @@
           },
           "response": [
             {
-              "id": "b368e9f9-06e0-41ec-9387-903edb156c1a",
-              "name": "Batch accepted",
+              "id": "fb891c94-8571-474d-a5f2-9dd81210eb44",
+              "name": "Updated",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "payouts",
-                    "transfer",
+                    "merchant",
                     "v1",
-                    "batch"
+                    "branches",
+                    ":branchId"
                   ],
                   "host": [
                     "{{baseUrl}}"
                   ],
                   "query": [],
-                  "variable": []
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "branchId",
+                      "description": "(Required) "
+                    }
+                  ]
                 },
                 "header": [
                   {
@@ -339,16 +375,12 @@
                     },
                     "key": "Public-Merchant-Id",
                     "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
                   }
                 ],
-                "method": "POST",
+                "method": "PUT",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"batchName\": \"<string>\",\n  \"payouts\": [\n    {\n      \"beneficiaryName\": \"string\",\n      \"documentNumber\": \"string\",\n      \"accountNumber\": \"string\",\n      \"amount\": {\n        \"value\": 3305.4241292218967,\n        \"currency\": \"BRL\"\n      },\n      \"documentType\": \"NIT\",\n      \"bankCode\": \"string\",\n      \"accountType\": \"SAVINGS\",\n      \"email\": \"RiEZc@z.jibk\",\n      \"phoneNumber\": \"string\",\n      \"description\": \"string\",\n      \"metadata\": {\n        \"key_0\": 488,\n        \"key_1\": 547,\n        \"key_2\": 1490\n      }\n    },\n    {\n      \"beneficiaryName\": \"string\",\n      \"documentNumber\": \"string\",\n      \"accountNumber\": \"string\",\n      \"amount\": {\n        \"value\": 8892.05226197513,\n        \"currency\": \"MXN\"\n      },\n      \"documentType\": \"CURP\",\n      \"bankCode\": \"string\",\n      \"accountType\": \"SAVINGS\",\n      \"email\": \"TVBXj5@MyQgcSgNj.im\",\n      \"phoneNumber\": \"string\",\n      \"description\": \"string\",\n      \"metadata\": {\n        \"key_0\": 751,\n        \"key_1\": 8485,\n        \"key_2\": 3632\n      }\n    }\n  ]\n}",
+                  "raw": "{\n  \"webhookUrl\": \"<uri>\",\n  \"allowedPaymentMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"status\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -361,12 +393,12 @@
               "header": [
                 {
                   "key": "Content-Type",
-                  "value": "application/json"
+                  "value": "text/plain"
                 }
               ],
-              "body": "{\n  \"batchId\": \"string\",\n  \"accepted\": 7194,\n  \"rejected\": 6595\n}",
+              "body": "",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "_postman_previewlanguage": "text"
             }
           ],
           "event": [],
@@ -404,8 +436,8 @@
     ]
   },
   "info": {
-    "_postman_id": "ce871228-fc74-4e60-b7fa-97b6db68b6cd",
-    "name": "Kushki Card Payments Branches Payouts API",
+    "_postman_id": "d36e7090-0316-4e6a-8934-fd5b639ab7ee",
+    "name": "Kushki Card Payments Branches API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "Card-not-present REST API for the Kushki regional non-banking acquirer.\nCard numbers are tokenized client-side by Kushki.js Hosted Fields or the\niOS / Android SDKs and the resulting `transactionToken` is exchanged\nserver-side for a charge, pre-authorization, capture, or void.\n\n\nContact Support:\n Name: Kushki\n Email: dev@kushkipagos.com",

@@ -1,0 +1,361 @@
+{
+  "item": [
+    {
+      "id": "35132c98-4f24-4d21-8703-13840438a7e6",
+      "name": "Charges",
+      "description": {
+        "content": "Direct charge against a previously created card token",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "27d623b0-9903-42c3-b37d-562129e074bf",
+          "name": "Kushki Create Card Charge",
+          "request": {
+            "name": "Kushki Create Card Charge",
+            "description": {
+              "content": "Charge a previously tokenized card in a single step. Returns a ticketNumber used for void or refund.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "card",
+                "v1",
+                "charges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"<string>\",\n  \"amount\": {\n    \"subtotalIva\": \"<number>\",\n    \"subtotalIva0\": \"<number>\",\n    \"iva\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"ice\": 0,\n    \"extraTaxes\": {\n      \"key_0\": \"<number>\",\n      \"key_1\": \"<number>\",\n      \"key_2\": \"<number>\"\n    }\n  },\n  \"months\": \"<integer>\",\n  \"deferred\": {\n    \"months\": \"<integer>\",\n    \"graceMonths\": \"<integer>\",\n    \"creditType\": \"<string>\"\n  },\n  \"contactDetails\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"documentType\": \"<string>\",\n    \"documentNumber\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": 1133\n  },\n  \"fullResponse\": false,\n  \"threeDomainSecure\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "782a8984-8a48-4541-9f7e-44587964b6ac",
+              "name": "Charge approved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card",
+                    "v1",
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Public-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"0aabF1aae450476cb7547bda5bdfc11d\",\n  \"amount\": {\n    \"subtotalIva\": 0,\n    \"subtotalIva0\": 1000,\n    \"ice\": 0,\n    \"iva\": 0,\n    \"currency\": \"USD\"\n  },\n  \"fullResponse\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ticketNumber\": \"string\",\n  \"transactionReference\": \"string\",\n  \"approvedTransactionAmount\": 1736.6818314439124,\n  \"currencyCode\": \"string\",\n  \"approvalCode\": \"string\",\n  \"token\": \"string\",\n  \"rrn\": \"string\",\n  \"responseText\": \"string\",\n  \"responseCode\": \"string\",\n  \"details\": {\n    \"transactionId\": \"string\",\n    \"transactionStatus\": \"string\",\n    \"cardHolderName\": \"string\",\n    \"paymentBrand\": \"string\",\n    \"bin\": \"string\",\n    \"lastFourDigits\": \"string\",\n    \"cardType\": \"string\",\n    \"cardCountry\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eebdcf76-ee01-4429-9647-c8ca70b4c3eb",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card",
+                    "v1",
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Public-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"0aabF1aae450476cb7547bda5bdfc11d\",\n  \"amount\": {\n    \"subtotalIva\": 0,\n    \"subtotalIva0\": 1000,\n    \"ice\": 0,\n    \"iva\": 0,\n    \"currency\": \"USD\"\n  },\n  \"fullResponse\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c599112c-c353-4d96-86f2-00ef2fe8929a",
+          "name": "Kushki Create Deferred Card Charge",
+          "request": {
+            "name": "Kushki Create Deferred Card Charge",
+            "description": {
+              "content": "Charge a card with deferred/installment terms. Specify months and rate_of_interest per the issuer's deferred catalog.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "card",
+                "v1",
+                "deferred"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": {\n    \"subtotalIva\": \"<number>\",\n    \"subtotalIva0\": \"<number>\",\n    \"iva\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"ice\": 0,\n    \"extraTaxes\": {\n      \"key_0\": \"<number>\",\n      \"key_1\": \"<number>\"\n    }\n  },\n  \"months\": \"<integer>\",\n  \"token\": \"<string>\",\n  \"deferred\": {\n    \"months\": \"<integer>\",\n    \"graceMonths\": \"<integer>\",\n    \"creditType\": \"<string>\"\n  },\n  \"contactDetails\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"documentType\": \"<string>\",\n    \"documentNumber\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"metadata\": {\n    \"key_0\": 7071.987136730666,\n    \"key_1\": \"string\"\n  },\n  \"fullResponse\": false,\n  \"threeDomainSecure\": \"<object>\",\n  \"interestRate\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3a6fd251-8ef6-4985-b459-4e9d1e511509",
+              "name": "Deferred charge approved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card",
+                    "v1",
+                    "deferred"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Public-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"subtotalIva\": 7115.444511624496,\n    \"subtotalIva0\": 4495.516268622872,\n    \"iva\": 9126.845716921258,\n    \"currency\": \"CLP\",\n    \"ice\": 0,\n    \"extraTaxes\": {\n      \"key_0\": 577.1335897576956,\n      \"key_1\": 2441.075806935591\n    }\n  },\n  \"months\": \"<integer>\",\n  \"token\": \"string\",\n  \"deferred\": {\n    \"months\": 6953,\n    \"graceMonths\": 6237,\n    \"creditType\": \"string\"\n  },\n  \"contactDetails\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"documentType\": \"CPF\",\n    \"documentNumber\": \"string\",\n    \"email\": \"kSIDYPcrso6@GRyUmAWnVtykIRjbwbLoiNqWFKWK.bodc\",\n    \"phoneNumber\": \"string\"\n  },\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": true\n  },\n  \"fullResponse\": false,\n  \"threeDomainSecure\": {},\n  \"interestRate\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ticketNumber\": \"string\",\n  \"transactionReference\": \"string\",\n  \"approvedTransactionAmount\": 1736.6818314439124,\n  \"currencyCode\": \"string\",\n  \"approvalCode\": \"string\",\n  \"token\": \"string\",\n  \"rrn\": \"string\",\n  \"responseText\": \"string\",\n  \"responseCode\": \"string\",\n  \"details\": {\n    \"transactionId\": \"string\",\n    \"transactionStatus\": \"string\",\n    \"cardHolderName\": \"string\",\n    \"paymentBrand\": \"string\",\n    \"bin\": \"string\",\n    \"lastFourDigits\": \"string\",\n    \"cardType\": \"string\",\n    \"cardCountry\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af7dc3fd-8182-4caf-9155-52ff668563a7",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card",
+                    "v1",
+                    "deferred"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Public-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"subtotalIva\": 7115.444511624496,\n    \"subtotalIva0\": 4495.516268622872,\n    \"iva\": 9126.845716921258,\n    \"currency\": \"CLP\",\n    \"ice\": 0,\n    \"extraTaxes\": {\n      \"key_0\": 577.1335897576956,\n      \"key_1\": 2441.075806935591\n    }\n  },\n  \"months\": \"<integer>\",\n  \"token\": \"string\",\n  \"deferred\": {\n    \"months\": 6953,\n    \"graceMonths\": 6237,\n    \"creditType\": \"string\"\n  },\n  \"contactDetails\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"documentType\": \"CPF\",\n    \"documentNumber\": \"string\",\n    \"email\": \"kSIDYPcrso6@GRyUmAWnVtykIRjbwbLoiNqWFKWK.bodc\",\n    \"phoneNumber\": \"string\"\n  },\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": true\n  },\n  \"fullResponse\": false,\n  \"threeDomainSecure\": {},\n  \"interestRate\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kushkipagos.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Public-Merchant-Id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "772c6664-6807-4c7c-ba8f-53ddd5667324",
+    "name": "Kushki Card Payments Branches Charges API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Card-not-present REST API for the Kushki regional non-banking acquirer.\nCard numbers are tokenized client-side by Kushki.js Hosted Fields or the\niOS / Android SDKs and the resulting `transactionToken` is exchanged\nserver-side for a charge, pre-authorization, capture, or void.\n\n\nContact Support:\n Name: Kushki\n Email: dev@kushkipagos.com",
+      "type": "text/plain"
+    }
+  }
+}

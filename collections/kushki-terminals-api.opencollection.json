@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kushki Card Payments Branches Terminals API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Public-Merchant-Id",
+      "value": "{{Public-Merchant-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Terminals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kushki List Terminals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kushkipagos.com/cardpresent/v1/terminals"
+          },
+          "docs": "List Kushki One terminals registered to the merchant."
+        },
+        {
+          "info": {
+            "name": "Kushki Get Terminal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kushkipagos.com/cardpresent/v1/terminals/:terminalId",
+            "params": [
+              {
+                "name": "terminalId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Kushki One terminal by its identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

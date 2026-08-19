@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kushki Card Payments Branches Pre-Authorization API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Public-Merchant-Id",
+      "value": "{{Public-Merchant-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pre-Authorization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kushki Pre-Authorize Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/card/v1/preAuthorization",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reserve funds on a card without capturing them. Capture or void within the issuer-specific window."
+        },
+        {
+          "info": {
+            "name": "Kushki Capture Pre-Authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/card/v1/capture",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Capture funds previously held via /card/v1/preAuthorization. Supports partial capture below the original amount."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

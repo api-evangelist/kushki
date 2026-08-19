@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kushki Card Payments Branches Tokens API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Public-Merchant-Id",
+      "value": "{{Public-Merchant-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kushki Tokenize Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/card/v1/tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Public-Merchant-Id",
+              "value": "{{Public-Merchant-Id}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Tokenize a card. Normally invoked from Kushki.js Hosted Fields in the browser using the Public-Merchant-Id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

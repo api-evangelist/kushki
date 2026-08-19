@@ -1,0 +1,221 @@
+{
+  "item": [
+    {
+      "id": "1be7dca1-23ce-47ad-9602-808f49914c44",
+      "name": "Tokens",
+      "description": {
+        "content": "Card tokenization (client-side via Kushki.js, returns a one-time transactionToken)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5f799ae9-c74e-4336-9b8b-4c951400691a",
+          "name": "Kushki Tokenize Card",
+          "request": {
+            "name": "Kushki Tokenize Card",
+            "description": {
+              "content": "Tokenize a card. Normally invoked from Kushki.js Hosted Fields in the browser using the Public-Merchant-Id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "card",
+                "v1",
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Public-Merchant-Id"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"card\": {\n    \"name\": \"<string>\",\n    \"number\": \"<string>\",\n    \"expiryMonth\": \"<string>\",\n    \"expiryYear\": \"<string>\",\n    \"cvv\": \"<string>\"\n  },\n  \"totalAmount\": \"<number>\",\n  \"currency\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cde6e872-f55e-44ca-b823-32b3fd67ba66",
+              "name": "Token created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card",
+                    "v1",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Public-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"name\": \"Juan Perez\",\n    \"number\": \"4242424242424242\",\n    \"expiryMonth\": \"12\",\n    \"expiryYear\": \"29\",\n    \"cvv\": \"123\"\n  },\n  \"totalAmount\": 1000,\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7edb818-b31e-41dc-a955-10701ab74435",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card",
+                    "v1",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Public-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card\": {\n    \"name\": \"Juan Perez\",\n    \"number\": \"4242424242424242\",\n    \"expiryMonth\": \"12\",\n    \"expiryYear\": \"29\",\n    \"cvv\": \"123\"\n  },\n  \"totalAmount\": 1000,\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kushkipagos.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Public-Merchant-Id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1747f8da-839f-4702-8df4-631be324048c",
+    "name": "Kushki Card Payments Branches Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Card-not-present REST API for the Kushki regional non-banking acquirer.\nCard numbers are tokenized client-side by Kushki.js Hosted Fields or the\niOS / Android SDKs and the resulting `transactionToken` is exchanged\nserver-side for a charge, pre-authorization, capture, or void.\n\n\nContact Support:\n Name: Kushki\n Email: dev@kushkipagos.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,25 +1,24 @@
 {
   "item": [
     {
-      "id": "3a431e04-e3f3-410f-9a39-08318986e964",
-      "name": "Payouts",
+      "id": "42a43e13-26bd-4de2-b86f-a8948d0ed4bc",
+      "name": "Transfer",
       "description": {
-        "content": "Single and batch disbursements",
+        "content": "Bank-rail transfer charges",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "26777d24-f635-4573-af86-634be5cff5bb",
-          "name": "Kushki Initialize Payout",
+          "id": "330ee20d-0377-4656-a8ba-bb95bb84e692",
+          "name": "Kushki Initialize Transfer Charge",
           "request": {
-            "name": "Kushki Initialize Payout",
+            "name": "Kushki Initialize Transfer Charge",
             "description": {
-              "content": "Initialize a single payout to a beneficiary bank account.",
+              "content": "Initialize a transfer payment. Returns a redirect URL (PSE / Webpay) or QR/CopyPaste payload (PIX) plus a Kushki ticket number.",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "payouts",
                 "transfer",
                 "v1",
                 "init"
@@ -44,7 +43,7 @@
             "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"beneficiaryName\": \"<string>\",\n  \"documentNumber\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"amount\": {\n    \"value\": \"<number>\",\n    \"currency\": \"<string>\"\n  },\n  \"documentType\": \"<string>\",\n  \"bankCode\": \"<string>\",\n  \"accountType\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phoneNumber\": \"<string>\",\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": true,\n    \"key_1\": \"string\"\n  }\n}",
+              "raw": "{\n  \"callbackUrl\": \"<uri>\",\n  \"email\": \"<email>\",\n  \"amount\": {\n    \"subtotalIva\": \"<number>\",\n    \"subtotalIva0\": \"<number>\",\n    \"iva\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"ice\": 0\n  },\n  \"userType\": \"<string>\",\n  \"documentType\": \"<string>\",\n  \"documentNumber\": \"<string>\",\n  \"paymentDescription\": \"<string>\",\n  \"bankId\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": true,\n    \"key_1\": true,\n    \"key_2\": 4776\n  }\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -54,12 +53,11 @@
           },
           "response": [
             {
-              "id": "c829e71b-f278-4f84-92ee-c973b120fbbd",
-              "name": "Payout initialized",
+              "id": "30129816-d3de-448b-957c-8438503c9bf3",
+              "name": "Transfer initialized",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "payouts",
                     "transfer",
                     "v1",
                     "init"
@@ -87,7 +85,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"beneficiaryName\": \"Maria Lopez\",\n  \"documentType\": \"RUT\",\n  \"documentNumber\": \"12345678-9\",\n  \"bankCode\": \"0012\",\n  \"accountType\": \"SAVINGS\",\n  \"accountNumber\": \"0001234567\",\n  \"email\": \"maria@example.com\",\n  \"amount\": {\n    \"value\": 150000,\n    \"currency\": \"CLP\"\n  },\n  \"description\": \"Marketplace payout May\"\n}",
+                  "raw": "{\n  \"callbackUrl\": \"https://merchant.example.com/checkout/return\",\n  \"userType\": \"0\",\n  \"documentType\": \"CC\",\n  \"documentNumber\": \"100000001\",\n  \"email\": \"payer@example.com\",\n  \"paymentDescription\": \"Order 42\",\n  \"amount\": {\n    \"subtotalIva\": 0,\n    \"subtotalIva0\": 50000,\n    \"iva\": 0,\n    \"currency\": \"COP\"\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -103,17 +101,16 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"payoutId\": \"string\",\n  \"status\": \"COMPLETED\",\n  \"rail\": \"WEBPAY_TRANSF\",\n  \"amount\": {\n    \"value\": 5553.052430674466,\n    \"currency\": \"string\"\n  },\n  \"responseText\": \"string\",\n  \"completedAt\": \"1984-11-03T01:08:39.396Z\"\n}",
+              "body": "{\n  \"token\": \"string\",\n  \"redirectUrl\": \"https://eFOOrruHkzKATmeekBACaon.utodYVVOegtFf0+A.wNoGw7jrgc\",\n  \"ticketNumber\": \"string\",\n  \"pixCopyPaste\": \"string\",\n  \"qrCode\": \"string\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "16a8c826-a115-484f-8082-2b7fbd2a71d4",
+              "id": "3fa0e385-8ead-4a2f-8861-9cd1a3e68ef7",
               "name": "Error",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "payouts",
                     "transfer",
                     "v1",
                     "init"
@@ -141,7 +138,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"beneficiaryName\": \"Maria Lopez\",\n  \"documentType\": \"RUT\",\n  \"documentNumber\": \"12345678-9\",\n  \"bankCode\": \"0012\",\n  \"accountType\": \"SAVINGS\",\n  \"accountNumber\": \"0001234567\",\n  \"email\": \"maria@example.com\",\n  \"amount\": {\n    \"value\": 150000,\n    \"currency\": \"CLP\"\n  },\n  \"description\": \"Marketplace payout May\"\n}",
+                  "raw": "{\n  \"callbackUrl\": \"https://merchant.example.com/checkout/return\",\n  \"userType\": \"0\",\n  \"documentType\": \"CC\",\n  \"documentNumber\": \"100000001\",\n  \"email\": \"payer@example.com\",\n  \"paymentDescription\": \"Order 42\",\n  \"amount\": {\n    \"subtotalIva\": 0,\n    \"subtotalIva0\": 50000,\n    \"iva\": 0,\n    \"currency\": \"COP\"\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -168,21 +165,123 @@
           }
         },
         {
-          "id": "7ea428dc-b476-4b81-ba84-1356b53dad21",
-          "name": "Kushki Get Payout",
+          "id": "f61eb032-a137-4740-acaa-20bbeebfbeaf",
+          "name": "Kushki Confirm Transfer Charge",
           "request": {
-            "name": "Kushki Get Payout",
+            "name": "Kushki Confirm Transfer Charge",
             "description": {
-              "content": "Retrieve the current status of a payout.",
+              "content": "Confirm a transfer charge after the payer authorizes at the bank. Normally driven by the redirect callback; webhook delivery is the authoritative event.",
               "type": "text/plain"
             },
             "url": {
               "path": [
-                "payouts",
                 "transfer",
                 "v1",
-                "payouts",
-                ":payoutId"
+                "charge"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"<string>\",\n  \"amount\": {\n    \"subtotalIva\": \"<number>\",\n    \"subtotalIva0\": \"<number>\",\n    \"iva\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"ice\": 0\n  },\n  \"metadata\": {\n    \"key_0\": 4569.376384507975,\n    \"key_1\": \"string\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ceed17ff-c8f1-484b-b0be-92a8944ebb51",
+              "name": "Charge confirmed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transfer",
+                    "v1",
+                    "charge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Public-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"amount\": {\n    \"subtotalIva\": 6868.570318581214,\n    \"subtotalIva0\": 779.1051230458978,\n    \"iva\": 1490.6398357740359,\n    \"currency\": \"BRL\",\n    \"ice\": 0\n  },\n  \"metadata\": {\n    \"key_0\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ticketNumber\": \"string\",\n  \"transactionStatus\": \"INITIALIZED\",\n  \"approvalCode\": \"string\",\n  \"responseText\": \"string\",\n  \"paymentBrand\": \"string\",\n  \"bankName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec286107-7db9-4f5c-a40d-58099fbcadf8",
+          "name": "Kushki Get Transfer Charge",
+          "request": {
+            "name": "Kushki Get Transfer Charge",
+            "description": {
+              "content": "Retrieve the current status of a transfer charge.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transfer",
+                "v1",
+                "charges",
+                ":ticketNumber"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -193,7 +292,7 @@
                   "disabled": false,
                   "type": "any",
                   "value": "<string>",
-                  "key": "payoutId",
+                  "key": "ticketNumber",
                   "description": "(Required) "
                 }
               ]
@@ -209,16 +308,15 @@
           },
           "response": [
             {
-              "id": "45e18712-0abe-4041-ac15-54fd44d579b8",
-              "name": "Payout",
+              "id": "87ca89f8-40b1-4829-b8de-f0e959165caf",
+              "name": "Charge status",
               "originalRequest": {
                 "url": {
                   "path": [
-                    "payouts",
                     "transfer",
                     "v1",
-                    "payouts",
-                    ":payoutId"
+                    "charges",
+                    ":ticketNumber"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -229,7 +327,7 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "payoutId",
+                      "key": "ticketNumber",
                       "description": "(Required) "
                     }
                   ]
@@ -259,112 +357,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"payoutId\": \"string\",\n  \"status\": \"COMPLETED\",\n  \"rail\": \"WEBPAY_TRANSF\",\n  \"amount\": {\n    \"value\": 5553.052430674466,\n    \"currency\": \"string\"\n  },\n  \"responseText\": \"string\",\n  \"completedAt\": \"1984-11-03T01:08:39.396Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e858584b-fcf0-41e3-8031-ff3cef66c230",
-          "name": "Kushki Create Payout Batch",
-          "request": {
-            "name": "Kushki Create Payout Batch",
-            "description": {
-              "content": "Create a batch of payouts. Accepts up to 1000 payouts per batch.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "payouts",
-                "transfer",
-                "v1",
-                "batch"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"batchName\": \"<string>\",\n  \"payouts\": [\n    {\n      \"beneficiaryName\": \"<string>\",\n      \"documentNumber\": \"<string>\",\n      \"accountNumber\": \"<string>\",\n      \"amount\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"documentType\": \"<string>\",\n      \"bankCode\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phoneNumber\": \"<string>\",\n      \"description\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": \"string\"\n      }\n    },\n    {\n      \"beneficiaryName\": \"<string>\",\n      \"documentNumber\": \"<string>\",\n      \"accountNumber\": \"<string>\",\n      \"amount\": {\n        \"value\": \"<number>\",\n        \"currency\": \"<string>\"\n      },\n      \"documentType\": \"<string>\",\n      \"bankCode\": \"<string>\",\n      \"accountType\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phoneNumber\": \"<string>\",\n      \"description\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": 8860.782502142314,\n        \"key_1\": false,\n        \"key_2\": 1821\n      }\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "b368e9f9-06e0-41ec-9387-903edb156c1a",
-              "name": "Batch accepted",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "payouts",
-                    "transfer",
-                    "v1",
-                    "batch"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "Public-Merchant-Id",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"batchName\": \"<string>\",\n  \"payouts\": [\n    {\n      \"beneficiaryName\": \"string\",\n      \"documentNumber\": \"string\",\n      \"accountNumber\": \"string\",\n      \"amount\": {\n        \"value\": 3305.4241292218967,\n        \"currency\": \"BRL\"\n      },\n      \"documentType\": \"NIT\",\n      \"bankCode\": \"string\",\n      \"accountType\": \"SAVINGS\",\n      \"email\": \"RiEZc@z.jibk\",\n      \"phoneNumber\": \"string\",\n      \"description\": \"string\",\n      \"metadata\": {\n        \"key_0\": 488,\n        \"key_1\": 547,\n        \"key_2\": 1490\n      }\n    },\n    {\n      \"beneficiaryName\": \"string\",\n      \"documentNumber\": \"string\",\n      \"accountNumber\": \"string\",\n      \"amount\": {\n        \"value\": 8892.05226197513,\n        \"currency\": \"MXN\"\n      },\n      \"documentType\": \"CURP\",\n      \"bankCode\": \"string\",\n      \"accountType\": \"SAVINGS\",\n      \"email\": \"TVBXj5@MyQgcSgNj.im\",\n      \"phoneNumber\": \"string\",\n      \"description\": \"string\",\n      \"metadata\": {\n        \"key_0\": 751,\n        \"key_1\": 8485,\n        \"key_2\": 3632\n      }\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"batchId\": \"string\",\n  \"accepted\": 7194,\n  \"rejected\": 6595\n}",
+              "body": "{\n  \"ticketNumber\": \"string\",\n  \"transactionStatus\": \"INITIALIZED\",\n  \"approvalCode\": \"string\",\n  \"responseText\": \"string\",\n  \"paymentBrand\": \"string\",\n  \"bankName\": \"string\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -404,8 +397,8 @@
     ]
   },
   "info": {
-    "_postman_id": "ce871228-fc74-4e60-b7fa-97b6db68b6cd",
-    "name": "Kushki Card Payments Branches Payouts API",
+    "_postman_id": "e94a33a8-c623-4844-bfe4-b13232618d39",
+    "name": "Kushki Card Payments Branches Transfer API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "Card-not-present REST API for the Kushki regional non-banking acquirer.\nCard numbers are tokenized client-side by Kushki.js Hosted Fields or the\niOS / Android SDKs and the resulting `transactionToken` is exchanged\nserver-side for a charge, pre-authorization, capture, or void.\n\n\nContact Support:\n Name: Kushki\n Email: dev@kushkipagos.com",

@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kushki Card Payments Branches Voids and Refunds API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Public-Merchant-Id",
+      "value": "{{Public-Merchant-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Voids and Refunds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kushki Void Or Refund Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.kushkipagos.com/v1/charges/:ticketNumber",
+            "params": [
+              {
+                "name": "ticketNumber",
+                "value": "",
+                "type": "path",
+                "description": "Ticket number returned by the original charge."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Void (same day, before settlement) or refund (after settlement) a previously approved charge.\nPass a partial amount in the body to perform a partial refund; omit amount to void the full transaction.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

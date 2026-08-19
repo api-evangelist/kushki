@@ -1,0 +1,231 @@
+{
+  "item": [
+    {
+      "id": "efcbd32b-9393-4b17-aaac-def159f92b48",
+      "name": "Terminals",
+      "description": {
+        "content": "Kushki One terminal management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dd3afcdf-e6ed-4616-8ff6-19cdb728c9e7",
+          "name": "Kushki List Terminals",
+          "request": {
+            "name": "Kushki List Terminals",
+            "description": {
+              "content": "List Kushki One terminals registered to the merchant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cardpresent",
+                "v1",
+                "terminals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d256ae6f-0005-4759-afeb-be0eb4472a1a",
+              "name": "Terminals",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardpresent",
+                    "v1",
+                    "terminals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Public-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"terminalId\": \"string\",\n    \"serialNumber\": \"string\",\n    \"model\": \"string\",\n    \"status\": \"MAINTENANCE\",\n    \"branchId\": \"string\",\n    \"lastSeen\": \"1991-02-15T18:36:37.145Z\"\n  },\n  {\n    \"terminalId\": \"string\",\n    \"serialNumber\": \"string\",\n    \"model\": \"string\",\n    \"status\": \"MAINTENANCE\",\n    \"branchId\": \"string\",\n    \"lastSeen\": \"1999-07-06T13:41:04.591Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dfe124be-4505-4997-809a-95ae60f6109f",
+          "name": "Kushki Get Terminal",
+          "request": {
+            "name": "Kushki Get Terminal",
+            "description": {
+              "content": "Retrieve a Kushki One terminal by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cardpresent",
+                "v1",
+                "terminals",
+                ":terminalId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "terminalId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ebd904d-a9c8-4084-af2d-f65dca963fff",
+              "name": "Terminal",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cardpresent",
+                    "v1",
+                    "terminals",
+                    ":terminalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "terminalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Public-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"terminalId\": \"string\",\n  \"serialNumber\": \"string\",\n  \"model\": \"string\",\n  \"status\": \"ACTIVE\",\n  \"branchId\": \"string\",\n  \"lastSeen\": \"1950-12-29T14:57:54.132Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kushkipagos.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Public-Merchant-Id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "735da6c6-472f-4d3d-a639-b8311777fd5b",
+    "name": "Kushki Card Payments Branches Terminals API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Card-not-present REST API for the Kushki regional non-banking acquirer.\nCard numbers are tokenized client-side by Kushki.js Hosted Fields or the\niOS / Android SDKs and the resulting `transactionToken` is exchanged\nserver-side for a charge, pre-authorization, capture, or void.\n\n\nContact Support:\n Name: Kushki\n Email: dev@kushkipagos.com",
+      "type": "text/plain"
+    }
+  }
+}

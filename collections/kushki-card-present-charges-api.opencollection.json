@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kushki Card Payments Branches Card Present Charges API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Public-Merchant-Id",
+      "value": "{{Public-Merchant-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Card Present Charges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kushki Create Card Present Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/cardpresent/v1/charges",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a card-present charge from an EMV/contactless transaction sealed by the terminal."
+        },
+        {
+          "info": {
+            "name": "Kushki Void Card Present Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kushkipagos.com/cardpresent/v1/charges/:ticketNumber/void",
+            "params": [
+              {
+                "name": "ticketNumber",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Void a card-present charge."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

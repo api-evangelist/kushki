@@ -1,14 +1,14 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Kushki Payouts API",
+    "name": "Kushki Card Payments Branches Payouts API",
     "version": "1.0.0"
   },
   "request": {
     "auth": {
       "type": "apikey",
-      "key": "Private-Merchant-Id",
-      "value": "{{Private-Merchant-Id}}",
+      "key": "Public-Merchant-Id",
+      "value": "{{Public-Merchant-Id}}",
       "placement": "header"
     }
   },

@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "bf94ba18-5536-4f93-964e-b870f34bc5e3",
+      "id": "a5eb1885-e204-4645-9fac-2de2e0319622",
       "name": "Subscriptions",
       "description": {
         "content": "Recurring card subscriptions",
@@ -9,7 +9,7 @@
       },
       "item": [
         {
-          "id": "48718317-39a3-488c-a82d-a198c0764a44",
+          "id": "5a8bb780-8cf0-4df7-b698-a21c47c7902d",
           "name": "Kushki Create Subscription",
           "request": {
             "name": "Kushki Create Subscription",
@@ -43,7 +43,7 @@
             "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"token\": \"<string>\",\n  \"planName\": \"<string>\",\n  \"amount\": {\n    \"subtotalIva\": \"<number>\",\n    \"subtotalIva0\": \"<number>\",\n    \"iva\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"ice\": 0\n  },\n  \"startDate\": \"<date>\",\n  \"periodicity\": \"<string>\",\n  \"contactDetails\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"documentType\": \"<string>\",\n    \"documentNumber\": \"<string>\"\n  },\n  \"endDate\": \"<date>\",\n  \"metadata\": {\n    \"key_0\": 1582,\n    \"key_1\": 8942\n  }\n}",
+              "raw": "{\n  \"token\": \"<string>\",\n  \"planName\": \"<string>\",\n  \"amount\": {\n    \"subtotalIva\": \"<number>\",\n    \"subtotalIva0\": \"<number>\",\n    \"iva\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"ice\": 0\n  },\n  \"startDate\": \"<date>\",\n  \"periodicity\": \"<string>\",\n  \"contactDetails\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phoneNumber\": \"<string>\",\n    \"documentType\": \"<string>\",\n    \"documentNumber\": \"<string>\"\n  },\n  \"endDate\": \"<date>\",\n  \"metadata\": {\n    \"key_0\": 8338\n  }\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -53,7 +53,7 @@
           },
           "response": [
             {
-              "id": "08ece0d3-d7a7-4818-adaa-d3cef0fca18f",
+              "id": "0e934bae-e9a7-4413-8fb9-63ddc3ce90ea",
               "name": "Subscription created",
               "originalRequest": {
                 "url": {
@@ -74,7 +74,7 @@
                       "content": "Added as a part of security scheme: apikey",
                       "type": "text/plain"
                     },
-                    "key": "Private-Merchant-Id",
+                    "key": "Public-Merchant-Id",
                     "value": "<API Key>"
                   },
                   {
@@ -101,12 +101,12 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"subscriptionId\": \"string\",\n  \"planName\": \"string\",\n  \"amount\": {\n    \"subtotalIva\": 6274.204432621574,\n    \"subtotalIva0\": 7925.274943014685,\n    \"iva\": 2271.7896269795056,\n    \"currency\": \"USD\",\n    \"ice\": 0\n  },\n  \"periodicity\": \"string\",\n  \"startDate\": \"1957-09-05\",\n  \"status\": \"expired\",\n  \"contactDetails\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"vIhFs5HlD9Oo@cwPkKPrNAHFmZrbnIZWjwJk.gcva\",\n    \"phoneNumber\": \"string\",\n    \"documentType\": \"string\",\n    \"documentNumber\": \"string\"\n  }\n}",
+              "body": "{\n  \"subscriptionId\": \"string\",\n  \"planName\": \"string\",\n  \"amount\": {\n    \"subtotalIva\": 1628.047980202637,\n    \"subtotalIva0\": 3521.3247120511205,\n    \"iva\": 9733.678159607814,\n    \"currency\": \"CLP\",\n    \"ice\": 0\n  },\n  \"periodicity\": \"string\",\n  \"startDate\": \"1957-03-20\",\n  \"status\": \"pending\",\n  \"contactDetails\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"JZmFNUDLipx@tcGkOdXvQeMmJINcoqnmmYjjUQplQPrDY.ttx\",\n    \"phoneNumber\": \"string\",\n    \"documentType\": \"string\",\n    \"documentNumber\": \"string\"\n  }\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "ac7ce214-d256-432a-8116-4358dfb37d67",
+              "id": "3233d0b8-149e-4d92-b54c-fc5335daca31",
               "name": "Error",
               "originalRequest": {
                 "url": {
@@ -127,7 +127,7 @@
                       "content": "Added as a part of security scheme: apikey",
                       "type": "text/plain"
                     },
-                    "key": "Private-Merchant-Id",
+                    "key": "Public-Merchant-Id",
                     "value": "<API Key>"
                   },
                   {
@@ -165,7 +165,7 @@
           }
         },
         {
-          "id": "389a0a1a-03a5-482d-8687-e0b7f69b2b6c",
+          "id": "767d784f-9aab-48fe-854f-aee3c5fb013f",
           "name": "Kushki Retrieve Subscription",
           "request": {
             "name": "Kushki Retrieve Subscription",
@@ -205,7 +205,7 @@
           },
           "response": [
             {
-              "id": "5b12c070-d99d-45cd-8127-d2da4288688a",
+              "id": "51856f14-8f7a-47c8-8bde-d12c948ef6c0",
               "name": "Subscription",
               "originalRequest": {
                 "url": {
@@ -235,7 +235,7 @@
                       "content": "Added as a part of security scheme: apikey",
                       "type": "text/plain"
                     },
-                    "key": "Private-Merchant-Id",
+                    "key": "Public-Merchant-Id",
                     "value": "<API Key>"
                   },
                   {
@@ -254,7 +254,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"subscriptionId\": \"string\",\n  \"planName\": \"string\",\n  \"amount\": {\n    \"subtotalIva\": 6274.204432621574,\n    \"subtotalIva0\": 7925.274943014685,\n    \"iva\": 2271.7896269795056,\n    \"currency\": \"USD\",\n    \"ice\": 0\n  },\n  \"periodicity\": \"string\",\n  \"startDate\": \"1957-09-05\",\n  \"status\": \"expired\",\n  \"contactDetails\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"vIhFs5HlD9Oo@cwPkKPrNAHFmZrbnIZWjwJk.gcva\",\n    \"phoneNumber\": \"string\",\n    \"documentType\": \"string\",\n    \"documentNumber\": \"string\"\n  }\n}",
+              "body": "{\n  \"subscriptionId\": \"string\",\n  \"planName\": \"string\",\n  \"amount\": {\n    \"subtotalIva\": 1628.047980202637,\n    \"subtotalIva0\": 3521.3247120511205,\n    \"iva\": 9733.678159607814,\n    \"currency\": \"CLP\",\n    \"ice\": 0\n  },\n  \"periodicity\": \"string\",\n  \"startDate\": \"1957-03-20\",\n  \"status\": \"pending\",\n  \"contactDetails\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"JZmFNUDLipx@tcGkOdXvQeMmJINcoqnmmYjjUQplQPrDY.ttx\",\n    \"phoneNumber\": \"string\",\n    \"documentType\": \"string\",\n    \"documentNumber\": \"string\"\n  }\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -265,7 +265,7 @@
           }
         },
         {
-          "id": "9fd2a029-b9a3-4b24-9c4d-3cd7449ec14e",
+          "id": "1f853c2a-8269-4a97-8726-d17a4225d5b1",
           "name": "Kushki Update Subscription",
           "request": {
             "name": "Kushki Update Subscription",
@@ -318,7 +318,7 @@
           },
           "response": [
             {
-              "id": "39564acc-8c39-4a1a-aee7-554b7b39b6e0",
+              "id": "13136d3e-bbd4-4c54-bd34-2efd63853717",
               "name": "Updated",
               "originalRequest": {
                 "url": {
@@ -348,7 +348,7 @@
                       "content": "Added as a part of security scheme: apikey",
                       "type": "text/plain"
                     },
-                    "key": "Private-Merchant-Id",
+                    "key": "Public-Merchant-Id",
                     "value": "<API Key>"
                   },
                   {
@@ -359,7 +359,7 @@
                 "method": "PUT",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"planName\": \"<string>\",\n  \"amount\": {\n    \"subtotalIva\": 6588.5159361539045,\n    \"subtotalIva0\": 9231.327485722799,\n    \"iva\": 4530.62797675553,\n    \"currency\": \"BRL\",\n    \"ice\": 0\n  },\n  \"periodicity\": \"<string>\",\n  \"contactDetails\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"S8zJ4cznFJMHq@kAtvkzTNuirUPYcojkiNAiQzwmsHCgYMZ.wv\",\n    \"phoneNumber\": \"string\",\n    \"documentType\": \"string\",\n    \"documentNumber\": \"string\"\n  }\n}",
+                  "raw": "{\n  \"planName\": \"<string>\",\n  \"amount\": {\n    \"subtotalIva\": 9704.34840346284,\n    \"subtotalIva0\": 1521.581286192516,\n    \"iva\": 7271.487390533955,\n    \"currency\": \"PEN\",\n    \"ice\": 0\n  },\n  \"periodicity\": \"<string>\",\n  \"contactDetails\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"5zDHH9nrYf@xPIFgklfkQD.xqnz\",\n    \"phoneNumber\": \"string\",\n    \"documentType\": \"string\",\n    \"documentNumber\": \"string\"\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -375,7 +375,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"subscriptionId\": \"string\",\n  \"planName\": \"string\",\n  \"amount\": {\n    \"subtotalIva\": 6274.204432621574,\n    \"subtotalIva0\": 7925.274943014685,\n    \"iva\": 2271.7896269795056,\n    \"currency\": \"USD\",\n    \"ice\": 0\n  },\n  \"periodicity\": \"string\",\n  \"startDate\": \"1957-09-05\",\n  \"status\": \"expired\",\n  \"contactDetails\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"vIhFs5HlD9Oo@cwPkKPrNAHFmZrbnIZWjwJk.gcva\",\n    \"phoneNumber\": \"string\",\n    \"documentType\": \"string\",\n    \"documentNumber\": \"string\"\n  }\n}",
+              "body": "{\n  \"subscriptionId\": \"string\",\n  \"planName\": \"string\",\n  \"amount\": {\n    \"subtotalIva\": 1628.047980202637,\n    \"subtotalIva0\": 3521.3247120511205,\n    \"iva\": 9733.678159607814,\n    \"currency\": \"CLP\",\n    \"ice\": 0\n  },\n  \"periodicity\": \"string\",\n  \"startDate\": \"1957-03-20\",\n  \"status\": \"pending\",\n  \"contactDetails\": {\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"JZmFNUDLipx@tcGkOdXvQeMmJINcoqnmmYjjUQplQPrDY.ttx\",\n    \"phoneNumber\": \"string\",\n    \"documentType\": \"string\",\n    \"documentNumber\": \"string\"\n  }\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -386,7 +386,7 @@
           }
         },
         {
-          "id": "8a7a6e09-78fb-4d2f-8dc2-603a9421b305",
+          "id": "cd45361a-26e6-4c0d-ba6a-02cb08cc5fd1",
           "name": "Kushki Cancel Subscription",
           "request": {
             "name": "Kushki Cancel Subscription",
@@ -420,7 +420,7 @@
           },
           "response": [
             {
-              "id": "68519b29-76d6-4ed8-9579-60667a017630",
+              "id": "37ff55dc-34d8-4cd0-8b57-bc8ab43c4d27",
               "name": "Cancelled",
               "originalRequest": {
                 "url": {
@@ -450,7 +450,7 @@
                       "content": "Added as a part of security scheme: apikey",
                       "type": "text/plain"
                     },
-                    "key": "Private-Merchant-Id",
+                    "key": "Public-Merchant-Id",
                     "value": "<API Key>"
                   }
                 ],
@@ -476,7 +476,7 @@
           }
         },
         {
-          "id": "db2b080d-1af0-4798-84c7-ac065901c52e",
+          "id": "7b05c135-9e92-41e9-9156-87e7d8185fb3",
           "name": "Kushki Charge Subscription On Demand",
           "request": {
             "name": "Kushki Charge Subscription On Demand",
@@ -520,7 +520,7 @@
             "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"amount\": {\n    \"subtotalIva\": \"<number>\",\n    \"subtotalIva0\": \"<number>\",\n    \"iva\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"ice\": 0\n  },\n  \"metadata\": {\n    \"key_0\": 6775.935709885735\n  }\n}",
+              "raw": "{\n  \"amount\": {\n    \"subtotalIva\": \"<number>\",\n    \"subtotalIva0\": \"<number>\",\n    \"iva\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"ice\": 0\n  },\n  \"metadata\": {\n    \"key_0\": 3429.6638691831795\n  }\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -530,7 +530,7 @@
           },
           "response": [
             {
-              "id": "87624c33-8765-418c-a48e-3502ac6dfb6c",
+              "id": "a755e913-9098-479b-81a2-9e2ab7473a5f",
               "name": "Charge approved",
               "originalRequest": {
                 "url": {
@@ -561,7 +561,7 @@
                       "content": "Added as a part of security scheme: apikey",
                       "type": "text/plain"
                     },
-                    "key": "Private-Merchant-Id",
+                    "key": "Public-Merchant-Id",
                     "value": "<API Key>"
                   },
                   {
@@ -572,7 +572,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"amount\": {\n    \"subtotalIva\": 5369.877315500713,\n    \"subtotalIva0\": 9948.070352623725,\n    \"iva\": 2722.0440074247676,\n    \"currency\": \"COP\",\n    \"ice\": 0\n  },\n  \"metadata\": {\n    \"key_0\": 9943.786475731871,\n    \"key_1\": \"string\"\n  }\n}",
+                  "raw": "{\n  \"amount\": {\n    \"subtotalIva\": 9685.847823706556,\n    \"subtotalIva0\": 9619.377338262258,\n    \"iva\": 3319.0010089172592,\n    \"currency\": \"COP\",\n    \"ice\": 0\n  },\n  \"metadata\": {\n    \"key_0\": 7595,\n    \"key_1\": \"string\"\n  }\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -588,7 +588,7 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"ticketNumber\": \"string\",\n  \"transactionReference\": \"string\",\n  \"approvedTransactionAmount\": 235.1621277092708,\n  \"currencyCode\": \"string\",\n  \"responseText\": \"string\"\n}",
+              "body": "{\n  \"ticketNumber\": \"string\",\n  \"transactionReference\": \"string\",\n  \"approvedTransactionAmount\": 1579.4868418757003,\n  \"currencyCode\": \"string\",\n  \"responseText\": \"string\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             }
@@ -615,7 +615,7 @@
     "apikey": [
       {
         "key": "key",
-        "value": "Private-Merchant-Id"
+        "value": "Public-Merchant-Id"
       },
       {
         "key": "value",
@@ -628,11 +628,11 @@
     ]
   },
   "info": {
-    "_postman_id": "a85b916b-2a45-496d-be21-78d9545196c6",
-    "name": "Kushki Subscriptions API",
+    "_postman_id": "9cd6c4f0-7d98-42a2-8448-0a365ac45884",
+    "name": "Kushki Card Payments Branches Subscriptions API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
-      "content": "Scheduled and one-click card subscriptions. Create a subscription against a\ntokenized card, manage its periodicity and amount, charge on demand, update\nthe underlying card, and cancel.\n\n\nContact Support:\n Name: Kushki\n Email: dev@kushkipagos.com",
+      "content": "Card-not-present REST API for the Kushki regional non-banking acquirer.\nCard numbers are tokenized client-side by Kushki.js Hosted Fields or the\niOS / Android SDKs and the resulting `transactionToken` is exchanged\nserver-side for a charge, pre-authorization, capture, or void.\n\n\nContact Support:\n Name: Kushki\n Email: dev@kushkipagos.com",
       "type": "text/plain"
     }
   }

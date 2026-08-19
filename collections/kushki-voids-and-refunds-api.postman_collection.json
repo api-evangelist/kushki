@@ -1,0 +1,229 @@
+{
+  "item": [
+    {
+      "id": "b871751f-8315-4974-affe-f8b1283ded8e",
+      "name": "Voids and Refunds",
+      "description": {
+        "content": "Void or refund a previously captured charge",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9e967197-c2cd-4d6e-a11b-6d448b688e32",
+          "name": "Kushki Void Or Refund Charge",
+          "request": {
+            "name": "Kushki Void Or Refund Charge",
+            "description": {
+              "content": "Void (same day, before settlement) or refund (after settlement) a previously approved charge.\nPass a partial amount in the body to perform a partial refund; omit amount to void the full transaction.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "charges",
+                ":ticketNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticketNumber",
+                  "description": "(Required) Ticket number returned by the original charge."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": {\n    \"subtotalIva\": \"<number>\",\n    \"subtotalIva0\": \"<number>\",\n    \"iva\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"ice\": 0,\n    \"extraTaxes\": {\n      \"key_0\": \"<number>\",\n      \"key_1\": \"<number>\",\n      \"key_2\": \"<number>\"\n    }\n  },\n  \"fullResponse\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f296e6cc-9878-49e8-a2da-b5087d6d5bd1",
+              "name": "Void or refund accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "charges",
+                    ":ticketNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketNumber",
+                      "description": "(Required) Ticket number returned by the original charge."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Public-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"subtotalIva\": 7060.772329203596,\n    \"subtotalIva0\": 6904.355950032534,\n    \"iva\": 4715.417274638739,\n    \"currency\": \"CLP\",\n    \"ice\": 0,\n    \"extraTaxes\": {\n      \"key_0\": 3789.425596666801\n    }\n  },\n  \"fullResponse\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ticketNumber\": \"string\",\n  \"transactionReference\": \"string\",\n  \"approvedTransactionAmount\": 3322.7483840636783,\n  \"currencyCode\": \"string\",\n  \"approvalCode\": \"string\",\n  \"token\": \"string\",\n  \"rrn\": \"string\",\n  \"responseText\": \"string\",\n  \"responseCode\": \"string\",\n  \"details\": {\n    \"transactionId\": \"string\",\n    \"transactionStatus\": \"string\",\n    \"cardHolderName\": \"string\",\n    \"paymentBrand\": \"string\",\n    \"bin\": \"string\",\n    \"lastFourDigits\": \"string\",\n    \"cardType\": \"string\",\n    \"cardCountry\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "593c071a-a661-43a8-b438-91a563d2487a",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "charges",
+                    ":ticketNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketNumber",
+                      "description": "(Required) Ticket number returned by the original charge."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Public-Merchant-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"subtotalIva\": 7060.772329203596,\n    \"subtotalIva0\": 6904.355950032534,\n    \"iva\": 4715.417274638739,\n    \"currency\": \"CLP\",\n    \"ice\": 0,\n    \"extraTaxes\": {\n      \"key_0\": 3789.425596666801\n    }\n  },\n  \"fullResponse\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kushkipagos.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Public-Merchant-Id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "21d98e0d-dd5d-4050-b8de-c2c3bf8cf2af",
+    "name": "Kushki Card Payments Branches Voids and Refunds API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Card-not-present REST API for the Kushki regional non-banking acquirer.\nCard numbers are tokenized client-side by Kushki.js Hosted Fields or the\niOS / Android SDKs and the resulting `transactionToken` is exchanged\nserver-side for a charge, pre-authorization, capture, or void.\n\n\nContact Support:\n Name: Kushki\n Email: dev@kushkipagos.com",
+      "type": "text/plain"
+    }
+  }
+}
