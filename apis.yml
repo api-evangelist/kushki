@@ -4,6 +4,11 @@ apis:
 - aid: kushki:kushki-subscriptions-api
   name: Kushki Subscriptions API
   tags:
+  - Subscription
+  - Recurring Payments
+  - Payments
+  - One-Click
+  tags_raw:
   - Subscriptions
   - Recurring Payments
   - Payments
@@ -42,6 +47,10 @@ apis:
 - aid: kushki:kushki-webhooks
   name: Kushki Webhooks
   tags:
+  - Webhook
+  - Notification
+  - Event
+  tags_raw:
   - Webhooks
   - Notifications
   - Events
@@ -238,6 +247,28 @@ apis:
     url: json-ld/kushki-context.jsonld
 name: Kushki
 tags:
+  - Payments
+  - LatAm
+  - Andean Region
+  - Card Payments
+  - Subscription
+  - Cash
+  - Bank Transfers
+  - Payouts
+  - PSE
+  - Webpay
+  - SPEI
+  - Pix
+  - OXXO
+  - PagoEfectivo
+  - Fintech
+  - Ecuador
+  - Colombia
+  - Peru
+  - Chile
+  - Mexico
+  - Brazil
+tags_raw:
   - Payments
   - LatAm
   - Andean Region
