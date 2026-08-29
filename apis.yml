@@ -366,10 +366,10 @@ common:
   - type: Plugin
     url: https://github.com/Kushki/kushki-vtex
     name: VTEX Plugin
-  - type: Samples
+  - type: Examples
     url: https://github.com/Kushki/kushki-backend-examples
     name: Backend Examples (Node.js)
-  - type: Samples
+  - type: Examples
     url: https://github.com/Kushki/kushki-demo-php
     name: PHP Demo App
   - type: Docker
