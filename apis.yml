@@ -7,7 +7,7 @@ apis:
   - Subscription
   - Recurring Payments
   - Payments
-  - One-Click
+  - One Click
   tags_raw:
   - Subscriptions
   - Recurring Payments
@@ -258,7 +258,7 @@ tags:
   - PSE
   - Webpay
   - SPEI
-  - Pix
+  - PIX
   - OXXO
   - PagoEfectivo
   - Fintech
