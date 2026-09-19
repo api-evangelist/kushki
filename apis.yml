@@ -171,6 +171,8 @@ apis:
   humanURL: https://docs.kushki.com/
   baseURL: https://api.kushkipagos.com
   tags:
+  - Terminal
+  tags_raw:
   - Terminals
   properties:
   - type: OpenAPI
@@ -248,7 +250,7 @@ apis:
 name: Kushki
 tags:
   - Payments
-  - LatAm
+  - Latin America
   - Andean Region
   - Card Payments
   - Subscription
