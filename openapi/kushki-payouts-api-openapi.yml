@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Kushki Card Payments Branches Payouts API
   description: 'Card-not-present REST API for the Kushki regional non-banking acquirer.
@@ -7,9 +7,7 @@ info:
 
     iOS / Android SDKs and the resulting `transactionToken` is exchanged
 
-    server-side for a charge, pre-authorization, capture, or void.
-
-    '
+    server-side for a charge, pre-authorization, capture, or void.'
   version: 1.0.0
   contact:
     name: Kushki
@@ -125,41 +123,14 @@ paths:
                   rejected:
                     type: integer
 components:
+  responses:
+    ErrorResponse:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    PayoutResponse:
-      type: object
-      properties:
-        payoutId:
-          type: string
-        status:
-          type: string
-          enum:
-          - INITIALIZED
-          - PROCESSING
-          - COMPLETED
-          - REJECTED
-          - RETURNED
-        rail:
-          type: string
-          enum:
-          - ACH
-          - PSE
-          - SPEI
-          - PIX
-          - WEBPAY_TRANSF
-          - INTRA_BANK
-        amount:
-          type: object
-          properties:
-            value:
-              type: number
-            currency:
-              type: string
-        responseText:
-          type: string
-        completedAt:
-          type: string
-          format: date-time
     Error:
       type: object
       properties:
@@ -230,13 +201,40 @@ components:
         metadata:
           type: object
           additionalProperties: true
-  responses:
-    ErrorResponse:
-      description: Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    PayoutResponse:
+      type: object
+      properties:
+        payoutId:
+          type: string
+        status:
+          type: string
+          enum:
+          - INITIALIZED
+          - PROCESSING
+          - COMPLETED
+          - REJECTED
+          - RETURNED
+        rail:
+          type: string
+          enum:
+          - ACH
+          - PSE
+          - SPEI
+          - PIX
+          - WEBPAY_TRANSF
+          - INTRA_BANK
+        amount:
+          type: object
+          properties:
+            value:
+              type: number
+            currency:
+              type: string
+        responseText:
+          type: string
+        completedAt:
+          type: string
+          format: date-time
   securitySchemes:
     PublicMerchantId:
       type: apiKey

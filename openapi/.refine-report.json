@@ -1,34 +1,51 @@
 {
   "provider": "kushki",
   "sources": [
-    "kushki-branches-api-openapi.yml",
-    "kushki-card-present-charges-api-openapi.yml",
-    "kushki-cash-api-openapi.yml",
-    "kushki-charges-api-openapi.yml",
+    "_original/kushki-card-payments-api-openapi.yml",
+    "_original/kushki-card-present-api-openapi.yml",
+    "_original/kushki-cash-payments-api-openapi.yml",
+    "_original/kushki-merchants-api-openapi.yml",
+    "_original/kushki-transfer-payments-api-openapi.yml",
     "kushki-payouts-api-openapi.yml",
-    "kushki-pre-authorization-api-openapi.yml",
-    "kushki-subscriptions-api-openapi.yml",
-    "kushki-terminals-api-openapi.yml",
-    "kushki-tokens-api-openapi.yml",
-    "kushki-transfer-api-openapi.yml",
-    "kushki-voids-and-refunds-api-openapi.yml"
+    "kushki-subscriptions-api-openapi.yml"
   ],
   "outputs": [
-    "kushki-branches-api-openapi.yml",
-    "kushki-card-present-charges-api-openapi.yml",
-    "kushki-cash-api-openapi.yml",
     "kushki-charges-api-openapi.yml",
-    "kushki-payouts-api-openapi.yml",
     "kushki-pre-authorization-api-openapi.yml",
-    "kushki-subscriptions-api-openapi.yml",
-    "kushki-terminals-api-openapi.yml",
     "kushki-tokens-api-openapi.yml",
+    "kushki-voids-and-refunds-api-openapi.yml",
+    "kushki-card-present-charges-api-openapi.yml",
+    "kushki-terminals-api-openapi.yml",
+    "kushki-cash-api-openapi.yml",
+    "kushki-branches-api-openapi.yml",
     "kushki-transfer-api-openapi.yml",
-    "kushki-voids-and-refunds-api-openapi.yml"
+    "kushki-payouts-api-openapi.yml",
+    "kushki-subscriptions-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
-  "warnings": [],
-  "notes": [],
-  "skipped": []
+  "warnings": [
+    "kushki-payouts-api-openapi.yml: previously refined output kept for 3 operation(s) no archived document covers (e.g. /payouts/transfer/v1/batch post, /payouts/transfer/v1/init post, /payouts/transfer/v1/payouts/{payoutId} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "kushki-subscriptions-api-openapi.yml: previously refined output kept for 5 operation(s) no archived document covers (e.g. /subscriptions/v1/card post, /subscriptions/v1/card/{subscriptionId} delete, /subscriptions/v1/card/{subscriptionId} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
+  "notes": [
+    "sourced from openapi/_original/ (5 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "kushki-card-payments-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "kushki-card-present-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "kushki-cash-payments-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "kushki-merchants-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "kushki-transfer-payments-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "kushki-branches-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kushki-card-present-charges-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kushki-cash-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kushki-charges-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kushki-pre-authorization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kushki-terminals-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kushki-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kushki-transfer-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kushki-voids-and-refunds-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

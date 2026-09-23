@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Kushki Card Payments Branches Subscriptions API
   description: 'Card-not-present REST API for the Kushki regional non-banking acquirer.
@@ -7,9 +7,7 @@ info:
 
     iOS / Android SDKs and the resulting `transactionToken` is exchanged
 
-    server-side for a charge, pre-authorization, capture, or void.
-
-    '
+    server-side for a charge, pre-authorization, capture, or void.'
   version: 1.0.0
   contact:
     name: Kushki
@@ -142,22 +140,24 @@ paths:
                 $ref: '#/components/schemas/SubscriptionChargeResponse'
 components:
   schemas:
-    ContactDetails:
+    Error:
       type: object
       properties:
-        firstName:
+        code:
           type: string
-        lastName:
+        message:
           type: string
-        email:
+    SubscriptionUpdateRequest:
+      type: object
+      properties:
+        planName:
           type: string
-          format: email
-        phoneNumber:
+        amount:
+          $ref: '#/components/schemas/Amount'
+        periodicity:
           type: string
-        documentType:
-          type: string
-        documentNumber:
-          type: string
+        contactDetails:
+          $ref: '#/components/schemas/ContactDetails'
     Amount:
       type: object
       required:
@@ -236,20 +236,21 @@ components:
           type: string
         responseText:
           type: string
-    SubscriptionChargeRequest:
+    ContactDetails:
       type: object
       properties:
-        amount:
-          $ref: '#/components/schemas/Amount'
-        metadata:
-          type: object
-          additionalProperties: true
-    Error:
-      type: object
-      properties:
-        code:
+        firstName:
           type: string
-        message:
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        phoneNumber:
+          type: string
+        documentType:
+          type: string
+        documentNumber:
           type: string
     SubscriptionResponse:
       type: object
@@ -275,17 +276,14 @@ components:
           - suspended
         contactDetails:
           $ref: '#/components/schemas/ContactDetails'
-    SubscriptionUpdateRequest:
+    SubscriptionChargeRequest:
       type: object
       properties:
-        planName:
-          type: string
         amount:
           $ref: '#/components/schemas/Amount'
-        periodicity:
-          type: string
-        contactDetails:
-          $ref: '#/components/schemas/ContactDetails'
+        metadata:
+          type: object
+          additionalProperties: true
   responses:
     ErrorResponse:
       description: Error

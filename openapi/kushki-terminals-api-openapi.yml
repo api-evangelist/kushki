@@ -1,32 +1,22 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Kushki Card Payments Branches Terminals API
-  description: 'Card-not-present REST API for the Kushki regional non-banking acquirer.
+  title: Kushki Card Present Terminals API
+  description: 'Process in-person EMV chip, contactless, and PIN-pad transactions through Kushki One
 
-    Card numbers are tokenized client-side by Kushki.js Hosted Fields or the
+    terminals. The Raw Card Present API exchanges sealed card data (encryption envelope
 
-    iOS / Android SDKs and the resulting `transactionToken` is exchanged
-
-    server-side for a charge, pre-authorization, capture, or void.
-
-    '
+    sourced from the terminal) for a charge response.'
   version: 1.0.0
   contact:
     name: Kushki
     url: https://kushkipagos.com/
     email: dev@kushkipagos.com
-  license:
-    name: Kushki API Terms
-    url: https://kushkipagos.com/legal
 servers:
 - url: https://api.kushkipagos.com
   description: Production
 - url: https://api-uat.kushkipagos.com
   description: UAT / Sandbox
-- url: https://api-stg.kushkipagos.com
-  description: Staging
 security:
-- PublicMerchantId: []
 - PrivateMerchantId: []
 tags:
 - name: Terminals
@@ -91,13 +81,7 @@ components:
           type: string
           format: date-time
   securitySchemes:
-    PublicMerchantId:
-      type: apiKey
-      in: header
-      name: Public-Merchant-Id
-      description: Client-side merchant key. Used by Kushki.js and mobile SDKs to tokenize cards. Never use server-side for charging.
     PrivateMerchantId:
       type: apiKey
       in: header
       name: Private-Merchant-Id
-      description: Server-side merchant key. Required for charge, capture, void, refund, subscription, and payout calls.

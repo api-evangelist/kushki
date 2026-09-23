@@ -1,15 +1,13 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Kushki Card Payments Branches Tokens API
+  title: Kushki Card Payments Tokens API
   description: 'Card-not-present REST API for the Kushki regional non-banking acquirer.
 
     Card numbers are tokenized client-side by Kushki.js Hosted Fields or the
 
     iOS / Android SDKs and the resulting `transactionToken` is exchanged
 
-    server-side for a charge, pre-authorization, capture, or void.
-
-    '
+    server-side for a charge, pre-authorization, capture, or void.'
   version: 1.0.0
   contact:
     name: Kushki

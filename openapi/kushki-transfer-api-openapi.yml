@@ -1,30 +1,21 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Kushki Card Payments Branches Transfer API
-  description: 'Card-not-present REST API for the Kushki regional non-banking acquirer.
+  title: Kushki Payments Transfer API
+  description: 'Bank-rail transfer payments across LatAm — PSE (Colombia), Webpay Transferencia
 
-    Card numbers are tokenized client-side by Kushki.js Hosted Fields or the
+    (Chile), SPEI (Mexico), PIX (Brazil), and direct debit (Ecuador, Peru). Returns
 
-    iOS / Android SDKs and the resulting `transactionToken` is exchanged
-
-    server-side for a charge, pre-authorization, capture, or void.
-
-    '
+    a redirect URL or QR for the payer; final state is delivered by webhook.'
   version: 1.0.0
   contact:
     name: Kushki
     url: https://kushkipagos.com/
     email: dev@kushkipagos.com
-  license:
-    name: Kushki API Terms
-    url: https://kushkipagos.com/legal
 servers:
 - url: https://api.kushkipagos.com
   description: Production
 - url: https://api-uat.kushkipagos.com
   description: UAT / Sandbox
-- url: https://api-stg.kushkipagos.com
-  description: Staging
 security:
 - PublicMerchantId: []
 - PrivateMerchantId: []
@@ -108,27 +99,67 @@ paths:
                 $ref: '#/components/schemas/TransferChargeResponse'
 components:
   schemas:
-    TransferChargeResponse:
+    TransferChargeRequest:
+      type: object
+      required:
+      - token
+      properties:
+        token:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Amount'
+        metadata:
+          type: object
+          additionalProperties: true
+    Error:
       type: object
       properties:
-        ticketNumber:
+        code:
           type: string
-        transactionStatus:
+        message:
+          type: string
+    Amount:
+      type: object
+      required:
+      - subtotalIva
+      - subtotalIva0
+      - iva
+      - currency
+      properties:
+        subtotalIva:
+          type: number
+        subtotalIva0:
+          type: number
+        ice:
+          type: number
+          default: 0
+        iva:
+          type: number
+        currency:
           type: string
           enum:
-          - APPROVAL
-          - INITIALIZED
-          - DECLINED
-          - PENDING
-        approvalCode:
+          - USD
+          - COP
+          - PEN
+          - CLP
+          - MXN
+          - BRL
+    TransferInitResponse:
+      type: object
+      properties:
+        token:
           type: string
-        responseText:
+        redirectUrl:
           type: string
-        paymentBrand:
+          format: uri
+        ticketNumber:
           type: string
-          description: PSE / Webpay / SPEI / PIX.
-        bankName:
+        pixCopyPaste:
           type: string
+          description: PIX copy-paste string (Brazil).
+        qrCode:
+          type: string
+          description: Base64-encoded QR image (PIX).
     TransferInitRequest:
       type: object
       required:
@@ -173,67 +204,27 @@ components:
         metadata:
           type: object
           additionalProperties: true
-    Amount:
-      type: object
-      required:
-      - subtotalIva
-      - subtotalIva0
-      - iva
-      - currency
-      properties:
-        subtotalIva:
-          type: number
-        subtotalIva0:
-          type: number
-        ice:
-          type: number
-          default: 0
-        iva:
-          type: number
-        currency:
-          type: string
-          enum:
-          - USD
-          - COP
-          - PEN
-          - CLP
-          - MXN
-          - BRL
-    TransferInitResponse:
+    TransferChargeResponse:
       type: object
       properties:
-        token:
-          type: string
-        redirectUrl:
-          type: string
-          format: uri
         ticketNumber:
           type: string
-        pixCopyPaste:
+        transactionStatus:
           type: string
-          description: PIX copy-paste string (Brazil).
-        qrCode:
+          enum:
+          - APPROVAL
+          - INITIALIZED
+          - DECLINED
+          - PENDING
+        approvalCode:
           type: string
-          description: Base64-encoded QR image (PIX).
-    Error:
-      type: object
-      properties:
-        code:
+        responseText:
           type: string
-        message:
+        paymentBrand:
           type: string
-    TransferChargeRequest:
-      type: object
-      required:
-      - token
-      properties:
-        token:
+          description: PSE / Webpay / SPEI / PIX.
+        bankName:
           type: string
-        amount:
-          $ref: '#/components/schemas/Amount'
-        metadata:
-          type: object
-          additionalProperties: true
   responses:
     ErrorResponse:
       description: Error
@@ -246,9 +237,7 @@ components:
       type: apiKey
       in: header
       name: Public-Merchant-Id
-      description: Client-side merchant key. Used by Kushki.js and mobile SDKs to tokenize cards. Never use server-side for charging.
     PrivateMerchantId:
       type: apiKey
       in: header
       name: Private-Merchant-Id
-      description: Server-side merchant key. Required for charge, capture, void, refund, subscription, and payout calls.
