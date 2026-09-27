@@ -85,13 +85,6 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     DeferredChargeRequest:
       allOf:
       - $ref: '#/components/schemas/ChargeRequest'
@@ -105,6 +98,33 @@ components:
             maximum: 48
           interestRate:
             type: number
+    ContactDetails:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        documentType:
+          type: string
+          enum:
+          - CC
+          - NIT
+          - CE
+          - DNI
+          - RUT
+          - CURP
+          - RFC
+          - RUC
+          - CPF
+          - CNPJ
+        documentNumber:
+          type: string
+        email:
+          type: string
+          format: email
+        phoneNumber:
+          type: string
     ChargeResponse:
       type: object
       properties:
@@ -145,6 +165,39 @@ components:
               type: string
             cardCountry:
               type: string
+    ChargeRequest:
+      type: object
+      required:
+      - token
+      - amount
+      properties:
+        token:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Amount'
+        months:
+          type: integer
+          description: Installment count for deferred payments.
+        deferred:
+          type: object
+          properties:
+            months:
+              type: integer
+            graceMonths:
+              type: integer
+            creditType:
+              type: string
+        contactDetails:
+          $ref: '#/components/schemas/ContactDetails'
+        metadata:
+          type: object
+          additionalProperties: true
+        fullResponse:
+          type: boolean
+          default: false
+        threeDomainSecure:
+          type: object
+          description: 3DS 2.0 authentication payload (eci, cavv, xid, directoryServerTransactionId).
     Amount:
       type: object
       required:
@@ -180,66 +233,13 @@ components:
           - CLP
           - MXN
           - BRL
-    ContactDetails:
+    Error:
       type: object
       properties:
-        firstName:
+        code:
           type: string
-        lastName:
+        message:
           type: string
-        documentType:
-          type: string
-          enum:
-          - CC
-          - NIT
-          - CE
-          - DNI
-          - RUT
-          - CURP
-          - RFC
-          - RUC
-          - CPF
-          - CNPJ
-        documentNumber:
-          type: string
-        email:
-          type: string
-          format: email
-        phoneNumber:
-          type: string
-    ChargeRequest:
-      type: object
-      required:
-      - token
-      - amount
-      properties:
-        token:
-          type: string
-        amount:
-          $ref: '#/components/schemas/Amount'
-        months:
-          type: integer
-          description: Installment count for deferred payments.
-        deferred:
-          type: object
-          properties:
-            months:
-              type: integer
-            graceMonths:
-              type: integer
-            creditType:
-              type: string
-        contactDetails:
-          $ref: '#/components/schemas/ContactDetails'
-        metadata:
-          type: object
-          additionalProperties: true
-        fullResponse:
-          type: boolean
-          default: false
-        threeDomainSecure:
-          type: object
-          description: 3DS 2.0 authentication payload (eci, cavv, xid, directoryServerTransactionId).
   responses:
     ErrorResponse:
       description: Error

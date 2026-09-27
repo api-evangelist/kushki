@@ -148,18 +148,6 @@ components:
           enum:
           - ACTIVE
           - INACTIVE
-    BranchUpdateRequest:
-      type: object
-      properties:
-        webhookUrl:
-          type: string
-          format: uri
-        allowedPaymentMethods:
-          type: array
-          items:
-            type: string
-        status:
-          type: string
     BranchCreateRequest:
       type: object
       required:
@@ -180,6 +168,18 @@ components:
           type: array
           items:
             type: string
+    BranchUpdateRequest:
+      type: object
+      properties:
+        webhookUrl:
+          type: string
+          format: uri
+        allowedPaymentMethods:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
   securitySchemes:
     PrivateMerchantId:
       type: apiKey

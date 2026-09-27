@@ -60,6 +60,23 @@ paths:
           description: Voided
 components:
   schemas:
+    CardPresentChargeResponse:
+      type: object
+      properties:
+        ticketNumber:
+          type: string
+        approvalCode:
+          type: string
+        responseText:
+          type: string
+        responseCode:
+          type: string
+        cardBrand:
+          type: string
+        last4:
+          type: string
+        entryMode:
+          type: string
     CardPresentChargeRequest:
       type: object
       required:
@@ -103,23 +120,6 @@ components:
           properties:
             months:
               type: integer
-    CardPresentChargeResponse:
-      type: object
-      properties:
-        ticketNumber:
-          type: string
-        approvalCode:
-          type: string
-        responseText:
-          type: string
-        responseCode:
-          type: string
-        cardBrand:
-          type: string
-        last4:
-          type: string
-        entryMode:
-          type: string
   securitySchemes:
     PrivateMerchantId:
       type: apiKey

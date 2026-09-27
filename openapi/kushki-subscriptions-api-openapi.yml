@@ -140,50 +140,6 @@ paths:
                 $ref: '#/components/schemas/SubscriptionChargeResponse'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    SubscriptionUpdateRequest:
-      type: object
-      properties:
-        planName:
-          type: string
-        amount:
-          $ref: '#/components/schemas/Amount'
-        periodicity:
-          type: string
-        contactDetails:
-          $ref: '#/components/schemas/ContactDetails'
-    Amount:
-      type: object
-      required:
-      - subtotalIva
-      - subtotalIva0
-      - iva
-      - currency
-      properties:
-        subtotalIva:
-          type: number
-        subtotalIva0:
-          type: number
-        ice:
-          type: number
-          default: 0
-        iva:
-          type: number
-        currency:
-          type: string
-          enum:
-          - USD
-          - COP
-          - PEN
-          - CLP
-          - MXN
-          - BRL
     SubscriptionRequest:
       type: object
       required:
@@ -223,19 +179,17 @@ components:
         metadata:
           type: object
           additionalProperties: true
-    SubscriptionChargeResponse:
+    SubscriptionUpdateRequest:
       type: object
       properties:
-        ticketNumber:
+        planName:
           type: string
-        transactionReference:
+        amount:
+          $ref: '#/components/schemas/Amount'
+        periodicity:
           type: string
-        approvedTransactionAmount:
-          type: number
-        currencyCode:
-          type: string
-        responseText:
-          type: string
+        contactDetails:
+          $ref: '#/components/schemas/ContactDetails'
     ContactDetails:
       type: object
       properties:
@@ -251,6 +205,60 @@ components:
         documentType:
           type: string
         documentNumber:
+          type: string
+    SubscriptionChargeResponse:
+      type: object
+      properties:
+        ticketNumber:
+          type: string
+        transactionReference:
+          type: string
+        approvedTransactionAmount:
+          type: number
+        currencyCode:
+          type: string
+        responseText:
+          type: string
+    SubscriptionChargeRequest:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/Amount'
+        metadata:
+          type: object
+          additionalProperties: true
+    Amount:
+      type: object
+      required:
+      - subtotalIva
+      - subtotalIva0
+      - iva
+      - currency
+      properties:
+        subtotalIva:
+          type: number
+        subtotalIva0:
+          type: number
+        ice:
+          type: number
+          default: 0
+        iva:
+          type: number
+        currency:
+          type: string
+          enum:
+          - USD
+          - COP
+          - PEN
+          - CLP
+          - MXN
+          - BRL
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
           type: string
     SubscriptionResponse:
       type: object
@@ -276,21 +284,6 @@ components:
           - suspended
         contactDetails:
           $ref: '#/components/schemas/ContactDetails'
-    SubscriptionChargeRequest:
-      type: object
-      properties:
-        amount:
-          $ref: '#/components/schemas/Amount'
-        metadata:
-          type: object
-          additionalProperties: true
-  responses:
-    ErrorResponse:
-      description: Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     SubscriptionId:
       name: subscriptionId
@@ -299,6 +292,13 @@ components:
       schema:
         type: string
       description: Kushki subscription identifier.
+  responses:
+    ErrorResponse:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     PublicMerchantId:
       type: apiKey

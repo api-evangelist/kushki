@@ -99,67 +99,6 @@ paths:
                 $ref: '#/components/schemas/TransferChargeResponse'
 components:
   schemas:
-    TransferChargeRequest:
-      type: object
-      required:
-      - token
-      properties:
-        token:
-          type: string
-        amount:
-          $ref: '#/components/schemas/Amount'
-        metadata:
-          type: object
-          additionalProperties: true
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    Amount:
-      type: object
-      required:
-      - subtotalIva
-      - subtotalIva0
-      - iva
-      - currency
-      properties:
-        subtotalIva:
-          type: number
-        subtotalIva0:
-          type: number
-        ice:
-          type: number
-          default: 0
-        iva:
-          type: number
-        currency:
-          type: string
-          enum:
-          - USD
-          - COP
-          - PEN
-          - CLP
-          - MXN
-          - BRL
-    TransferInitResponse:
-      type: object
-      properties:
-        token:
-          type: string
-        redirectUrl:
-          type: string
-          format: uri
-        ticketNumber:
-          type: string
-        pixCopyPaste:
-          type: string
-          description: PIX copy-paste string (Brazil).
-        qrCode:
-          type: string
-          description: Base64-encoded QR image (PIX).
     TransferInitRequest:
       type: object
       required:
@@ -204,6 +143,34 @@ components:
         metadata:
           type: object
           additionalProperties: true
+    TransferChargeRequest:
+      type: object
+      required:
+      - token
+      properties:
+        token:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Amount'
+        metadata:
+          type: object
+          additionalProperties: true
+    TransferInitResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        redirectUrl:
+          type: string
+          format: uri
+        ticketNumber:
+          type: string
+        pixCopyPaste:
+          type: string
+          description: PIX copy-paste string (Brazil).
+        qrCode:
+          type: string
+          description: Base64-encoded QR image (PIX).
     TransferChargeResponse:
       type: object
       properties:
@@ -224,6 +191,39 @@ components:
           type: string
           description: PSE / Webpay / SPEI / PIX.
         bankName:
+          type: string
+    Amount:
+      type: object
+      required:
+      - subtotalIva
+      - subtotalIva0
+      - iva
+      - currency
+      properties:
+        subtotalIva:
+          type: number
+        subtotalIva0:
+          type: number
+        ice:
+          type: number
+          default: 0
+        iva:
+          type: number
+        currency:
+          type: string
+          enum:
+          - USD
+          - COP
+          - PEN
+          - CLP
+          - MXN
+          - BRL
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
           type: string
   responses:
     ErrorResponse:
