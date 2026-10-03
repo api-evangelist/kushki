@@ -98,51 +98,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/TransferChargeResponse'
 components:
+  responses:
+    ErrorResponse:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    TransferInitRequest:
-      type: object
-      required:
-      - callbackUrl
-      - email
-      - amount
-      properties:
-        callbackUrl:
-          type: string
-          format: uri
-        userType:
-          type: string
-          enum:
-          - '0'
-          - '1'
-          description: 0 = natural person, 1 = legal entity (Colombia PSE convention).
-        documentType:
-          type: string
-          enum:
-          - CC
-          - NIT
-          - CE
-          - DNI
-          - RUT
-          - CURP
-          - RFC
-          - RUC
-          - CPF
-          - CNPJ
-        documentNumber:
-          type: string
-        email:
-          type: string
-          format: email
-        paymentDescription:
-          type: string
-        amount:
-          $ref: '#/components/schemas/Amount'
-        bankId:
-          type: string
-          description: PSE bank identifier (Colombia only).
-        metadata:
-          type: object
-          additionalProperties: true
     TransferChargeRequest:
       type: object
       required:
@@ -155,22 +118,6 @@ components:
         metadata:
           type: object
           additionalProperties: true
-    TransferInitResponse:
-      type: object
-      properties:
-        token:
-          type: string
-        redirectUrl:
-          type: string
-          format: uri
-        ticketNumber:
-          type: string
-        pixCopyPaste:
-          type: string
-          description: PIX copy-paste string (Brazil).
-        qrCode:
-          type: string
-          description: Base64-encoded QR image (PIX).
     TransferChargeResponse:
       type: object
       properties:
@@ -218,6 +165,22 @@ components:
           - CLP
           - MXN
           - BRL
+    TransferInitResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        redirectUrl:
+          type: string
+          format: uri
+        ticketNumber:
+          type: string
+        pixCopyPaste:
+          type: string
+          description: PIX copy-paste string (Brazil).
+        qrCode:
+          type: string
+          description: Base64-encoded QR image (PIX).
     Error:
       type: object
       properties:
@@ -225,13 +188,50 @@ components:
           type: string
         message:
           type: string
-  responses:
-    ErrorResponse:
-      description: Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    TransferInitRequest:
+      type: object
+      required:
+      - callbackUrl
+      - email
+      - amount
+      properties:
+        callbackUrl:
+          type: string
+          format: uri
+        userType:
+          type: string
+          enum:
+          - '0'
+          - '1'
+          description: 0 = natural person, 1 = legal entity (Colombia PSE convention).
+        documentType:
+          type: string
+          enum:
+          - CC
+          - NIT
+          - CE
+          - DNI
+          - RUT
+          - CURP
+          - RFC
+          - RUC
+          - CPF
+          - CNPJ
+        documentNumber:
+          type: string
+        email:
+          type: string
+          format: email
+        paymentDescription:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Amount'
+        bankId:
+          type: string
+          description: PSE bank identifier (Colombia only).
+        metadata:
+          type: object
+          additionalProperties: true
   securitySchemes:
     PublicMerchantId:
       type: apiKey

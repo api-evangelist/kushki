@@ -82,87 +82,14 @@ paths:
         4XX:
           $ref: '#/components/responses/ErrorResponse'
 components:
+  responses:
+    ErrorResponse:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    ContactDetails:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        documentType:
-          type: string
-          enum:
-          - CC
-          - NIT
-          - CE
-          - DNI
-          - RUT
-          - CURP
-          - RFC
-          - RUC
-          - CPF
-          - CNPJ
-        documentNumber:
-          type: string
-        email:
-          type: string
-          format: email
-        phoneNumber:
-          type: string
-    ChargeResponse:
-      type: object
-      properties:
-        ticketNumber:
-          type: string
-        transactionReference:
-          type: string
-        approvedTransactionAmount:
-          type: number
-        currencyCode:
-          type: string
-        approvalCode:
-          type: string
-        token:
-          type: string
-        rrn:
-          type: string
-        responseText:
-          type: string
-        responseCode:
-          type: string
-        details:
-          type: object
-          properties:
-            transactionId:
-              type: string
-            transactionStatus:
-              type: string
-            cardHolderName:
-              type: string
-            paymentBrand:
-              type: string
-            bin:
-              type: string
-            lastFourDigits:
-              type: string
-            cardType:
-              type: string
-            cardCountry:
-              type: string
-    CaptureRequest:
-      type: object
-      required:
-      - ticketNumber
-      - amount
-      properties:
-        ticketNumber:
-          type: string
-        amount:
-          $ref: '#/components/schemas/Amount'
-        fullResponse:
-          type: boolean
-          default: false
     ChargeRequest:
       type: object
       required:
@@ -238,13 +165,86 @@ components:
           type: string
         message:
           type: string
-  responses:
-    ErrorResponse:
-      description: Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    ContactDetails:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        documentType:
+          type: string
+          enum:
+          - CC
+          - NIT
+          - CE
+          - DNI
+          - RUT
+          - CURP
+          - RFC
+          - RUC
+          - CPF
+          - CNPJ
+        documentNumber:
+          type: string
+        email:
+          type: string
+          format: email
+        phoneNumber:
+          type: string
+    CaptureRequest:
+      type: object
+      required:
+      - ticketNumber
+      - amount
+      properties:
+        ticketNumber:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Amount'
+        fullResponse:
+          type: boolean
+          default: false
+    ChargeResponse:
+      type: object
+      properties:
+        ticketNumber:
+          type: string
+        transactionReference:
+          type: string
+        approvedTransactionAmount:
+          type: number
+        currencyCode:
+          type: string
+        approvalCode:
+          type: string
+        token:
+          type: string
+        rrn:
+          type: string
+        responseText:
+          type: string
+        responseCode:
+          type: string
+        details:
+          type: object
+          properties:
+            transactionId:
+              type: string
+            transactionStatus:
+              type: string
+            cardHolderName:
+              type: string
+            paymentBrand:
+              type: string
+            bin:
+              type: string
+            lastFourDigits:
+              type: string
+            cardType:
+              type: string
+            cardCountry:
+              type: string
   securitySchemes:
     PublicMerchantId:
       type: apiKey

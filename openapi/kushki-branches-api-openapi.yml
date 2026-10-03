@@ -100,6 +100,38 @@ paths:
           description: Updated
 components:
   schemas:
+    BranchUpdateRequest:
+      type: object
+      properties:
+        webhookUrl:
+          type: string
+          format: uri
+        allowedPaymentMethods:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+    BranchCreateRequest:
+      type: object
+      required:
+      - name
+      - country
+      - currency
+      properties:
+        name:
+          type: string
+        country:
+          type: string
+        currency:
+          type: string
+        webhookUrl:
+          type: string
+          format: uri
+        allowedPaymentMethods:
+          type: array
+          items:
+            type: string
     Branch:
       type: object
       properties:
@@ -148,38 +180,6 @@ components:
           enum:
           - ACTIVE
           - INACTIVE
-    BranchCreateRequest:
-      type: object
-      required:
-      - name
-      - country
-      - currency
-      properties:
-        name:
-          type: string
-        country:
-          type: string
-        currency:
-          type: string
-        webhookUrl:
-          type: string
-          format: uri
-        allowedPaymentMethods:
-          type: array
-          items:
-            type: string
-    BranchUpdateRequest:
-      type: object
-      properties:
-        webhookUrl:
-          type: string
-          format: uri
-        allowedPaymentMethods:
-          type: array
-          items:
-            type: string
-        status:
-          type: string
   securitySchemes:
     PrivateMerchantId:
       type: apiKey

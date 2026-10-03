@@ -62,47 +62,14 @@ paths:
         4XX:
           $ref: '#/components/responses/ErrorResponse'
 components:
+  responses:
+    ErrorResponse:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    ChargeResponse:
-      type: object
-      properties:
-        ticketNumber:
-          type: string
-        transactionReference:
-          type: string
-        approvedTransactionAmount:
-          type: number
-        currencyCode:
-          type: string
-        approvalCode:
-          type: string
-        token:
-          type: string
-        rrn:
-          type: string
-        responseText:
-          type: string
-        responseCode:
-          type: string
-        details:
-          type: object
-          properties:
-            transactionId:
-              type: string
-            transactionStatus:
-              type: string
-            cardHolderName:
-              type: string
-            paymentBrand:
-              type: string
-            bin:
-              type: string
-            lastFourDigits:
-              type: string
-            cardType:
-              type: string
-            cardCountry:
-              type: string
     Amount:
       type: object
       required:
@@ -153,13 +120,46 @@ components:
         fullResponse:
           type: boolean
           default: false
-  responses:
-    ErrorResponse:
-      description: Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    ChargeResponse:
+      type: object
+      properties:
+        ticketNumber:
+          type: string
+        transactionReference:
+          type: string
+        approvedTransactionAmount:
+          type: number
+        currencyCode:
+          type: string
+        approvalCode:
+          type: string
+        token:
+          type: string
+        rrn:
+          type: string
+        responseText:
+          type: string
+        responseCode:
+          type: string
+        details:
+          type: object
+          properties:
+            transactionId:
+              type: string
+            transactionStatus:
+              type: string
+            cardHolderName:
+              type: string
+            paymentBrand:
+              type: string
+            bin:
+              type: string
+            lastFourDigits:
+              type: string
+            cardType:
+              type: string
+            cardCountry:
+              type: string
   securitySchemes:
     PublicMerchantId:
       type: apiKey

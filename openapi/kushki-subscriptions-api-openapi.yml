@@ -140,6 +140,30 @@ paths:
                 $ref: '#/components/schemas/SubscriptionChargeResponse'
 components:
   schemas:
+    SubscriptionResponse:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+        planName:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Amount'
+        periodicity:
+          type: string
+        startDate:
+          type: string
+          format: date
+        status:
+          type: string
+          enum:
+          - active
+          - pending
+          - cancelled
+          - expired
+          - suspended
+        contactDetails:
+          $ref: '#/components/schemas/ContactDetails'
     SubscriptionRequest:
       type: object
       required:
@@ -179,54 +203,6 @@ components:
         metadata:
           type: object
           additionalProperties: true
-    SubscriptionUpdateRequest:
-      type: object
-      properties:
-        planName:
-          type: string
-        amount:
-          $ref: '#/components/schemas/Amount'
-        periodicity:
-          type: string
-        contactDetails:
-          $ref: '#/components/schemas/ContactDetails'
-    ContactDetails:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        email:
-          type: string
-          format: email
-        phoneNumber:
-          type: string
-        documentType:
-          type: string
-        documentNumber:
-          type: string
-    SubscriptionChargeResponse:
-      type: object
-      properties:
-        ticketNumber:
-          type: string
-        transactionReference:
-          type: string
-        approvedTransactionAmount:
-          type: number
-        currencyCode:
-          type: string
-        responseText:
-          type: string
-    SubscriptionChargeRequest:
-      type: object
-      properties:
-        amount:
-          $ref: '#/components/schemas/Amount'
-        metadata:
-          type: object
-          additionalProperties: true
     Amount:
       type: object
       required:
@@ -253,6 +229,30 @@ components:
           - CLP
           - MXN
           - BRL
+    SubscriptionChargeResponse:
+      type: object
+      properties:
+        ticketNumber:
+          type: string
+        transactionReference:
+          type: string
+        approvedTransactionAmount:
+          type: number
+        currencyCode:
+          type: string
+        responseText:
+          type: string
+    SubscriptionUpdateRequest:
+      type: object
+      properties:
+        planName:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Amount'
+        periodicity:
+          type: string
+        contactDetails:
+          $ref: '#/components/schemas/ContactDetails'
     Error:
       type: object
       properties:
@@ -260,30 +260,37 @@ components:
           type: string
         message:
           type: string
-    SubscriptionResponse:
+    SubscriptionChargeRequest:
       type: object
       properties:
-        subscriptionId:
-          type: string
-        planName:
-          type: string
         amount:
           $ref: '#/components/schemas/Amount'
-        periodicity:
+        metadata:
+          type: object
+          additionalProperties: true
+    ContactDetails:
+      type: object
+      properties:
+        firstName:
           type: string
-        startDate:
+        lastName:
           type: string
-          format: date
-        status:
+        email:
           type: string
-          enum:
-          - active
-          - pending
-          - cancelled
-          - expired
-          - suspended
-        contactDetails:
-          $ref: '#/components/schemas/ContactDetails'
+          format: email
+        phoneNumber:
+          type: string
+        documentType:
+          type: string
+        documentNumber:
+          type: string
+  responses:
+    ErrorResponse:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     SubscriptionId:
       name: subscriptionId
@@ -292,13 +299,6 @@ components:
       schema:
         type: string
       description: Kushki subscription identifier.
-  responses:
-    ErrorResponse:
-      description: Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     PublicMerchantId:
       type: apiKey

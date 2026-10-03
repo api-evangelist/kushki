@@ -127,13 +127,6 @@ components:
           - BOLETO
           - EFECTIVO_EC
           - EFECTIVO_CO
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
     CashChargeRequest:
       type: object
       required:
@@ -187,6 +180,13 @@ components:
         metadata:
           type: object
           additionalProperties: true
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
   responses:
     ErrorResponse:
       description: Error
