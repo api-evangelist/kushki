@@ -322,6 +322,9 @@ accessModel:
 image: https://kushki-cdn-production.s3.amazonaws.com/docs/Logo+Kushki+3+Horizontal+White+2019+08.png
 access: 3rd-Party
 common:
+  - type: CapabilityMap
+    url: capabilities/kushki-capability-edges.yml
+    name: Kushki Business Capability Map
   - type: Website
     url: https://www.kushkipagos.com/
   - type: AgenticAccess
