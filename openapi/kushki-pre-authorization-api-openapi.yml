@@ -82,47 +82,41 @@ paths:
         4XX:
           $ref: '#/components/responses/ErrorResponse'
 components:
-  responses:
-    ErrorResponse:
-      description: Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    ChargeRequest:
+    ContactDetails:
       type: object
-      required:
-      - token
-      - amount
       properties:
-        token:
+        firstName:
           type: string
-        amount:
-          $ref: '#/components/schemas/Amount'
-        months:
-          type: integer
-          description: Installment count for deferred payments.
-        deferred:
-          type: object
-          properties:
-            months:
-              type: integer
-            graceMonths:
-              type: integer
-            creditType:
-              type: string
-        contactDetails:
-          $ref: '#/components/schemas/ContactDetails'
-        metadata:
-          type: object
-          additionalProperties: true
-        fullResponse:
-          type: boolean
-          default: false
-        threeDomainSecure:
-          type: object
-          description: 3DS 2.0 authentication payload (eci, cavv, xid, directoryServerTransactionId).
+        lastName:
+          type: string
+        documentType:
+          type: string
+          enum:
+          - CC
+          - NIT
+          - CE
+          - DNI
+          - RUT
+          - CURP
+          - RFC
+          - RUC
+          - CPF
+          - CNPJ
+        documentNumber:
+          type: string
+        email:
+          type: string
+          format: email
+        phoneNumber:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     Amount:
       type: object
       required:
@@ -158,40 +152,6 @@ components:
           - CLP
           - MXN
           - BRL
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    ContactDetails:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        documentType:
-          type: string
-          enum:
-          - CC
-          - NIT
-          - CE
-          - DNI
-          - RUT
-          - CURP
-          - RFC
-          - RUC
-          - CPF
-          - CNPJ
-        documentNumber:
-          type: string
-        email:
-          type: string
-          format: email
-        phoneNumber:
-          type: string
     CaptureRequest:
       type: object
       required:
@@ -205,6 +165,39 @@ components:
         fullResponse:
           type: boolean
           default: false
+    ChargeRequest:
+      type: object
+      required:
+      - token
+      - amount
+      properties:
+        token:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Amount'
+        months:
+          type: integer
+          description: Installment count for deferred payments.
+        deferred:
+          type: object
+          properties:
+            months:
+              type: integer
+            graceMonths:
+              type: integer
+            creditType:
+              type: string
+        contactDetails:
+          $ref: '#/components/schemas/ContactDetails'
+        metadata:
+          type: object
+          additionalProperties: true
+        fullResponse:
+          type: boolean
+          default: false
+        threeDomainSecure:
+          type: object
+          description: 3DS 2.0 authentication payload (eci, cavv, xid, directoryServerTransactionId).
     ChargeResponse:
       type: object
       properties:
@@ -245,6 +238,13 @@ components:
               type: string
             cardCountry:
               type: string
+  responses:
+    ErrorResponse:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     PublicMerchantId:
       type: apiKey

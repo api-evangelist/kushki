@@ -93,40 +93,6 @@ paths:
           description: Cancelled
 components:
   schemas:
-    CashChargeResponse:
-      type: object
-      properties:
-        pin:
-          type: string
-          description: Numeric or alphanumeric reference shown to the payer.
-        ticketNumber:
-          type: string
-        barcode:
-          type: string
-          description: Barcode payload (Boleto / OXXO).
-        url:
-          type: string
-          format: uri
-          description: Hosted voucher page.
-        expirationDate:
-          type: string
-          format: date
-        status:
-          type: string
-          enum:
-          - PENDING
-          - PAID
-          - EXPIRED
-          - CANCELLED
-        paymentBrand:
-          type: string
-          enum:
-          - OXXO
-          - SEVEN_ELEVEN
-          - PAGOEFECTIVO
-          - BOLETO
-          - EFECTIVO_EC
-          - EFECTIVO_CO
     CashChargeRequest:
       type: object
       required:
@@ -187,6 +153,40 @@ components:
           type: string
         message:
           type: string
+    CashChargeResponse:
+      type: object
+      properties:
+        pin:
+          type: string
+          description: Numeric or alphanumeric reference shown to the payer.
+        ticketNumber:
+          type: string
+        barcode:
+          type: string
+          description: Barcode payload (Boleto / OXXO).
+        url:
+          type: string
+          format: uri
+          description: Hosted voucher page.
+        expirationDate:
+          type: string
+          format: date
+        status:
+          type: string
+          enum:
+          - PENDING
+          - PAID
+          - EXPIRED
+          - CANCELLED
+        paymentBrand:
+          type: string
+          enum:
+          - OXXO
+          - SEVEN_ELEVEN
+          - PAGOEFECTIVO
+          - BOLETO
+          - EFECTIVO_EC
+          - EFECTIVO_CO
   responses:
     ErrorResponse:
       description: Error

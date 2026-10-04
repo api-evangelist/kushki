@@ -65,6 +65,12 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
 components:
   schemas:
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: One-time transactionToken to pass to /card/v1/charges or /card/v1/preAuthorization.
     TokenRequest:
       type: object
       required:
@@ -96,12 +102,6 @@ components:
           type: string
         message:
           type: string
-    TokenResponse:
-      type: object
-      properties:
-        token:
-          type: string
-          description: One-time transactionToken to pass to /card/v1/charges or /card/v1/preAuthorization.
   responses:
     ErrorResponse:
       description: Error

@@ -62,14 +62,22 @@ paths:
         4XX:
           $ref: '#/components/responses/ErrorResponse'
 components:
-  responses:
-    ErrorResponse:
-      description: Error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    VoidRequest:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/Amount'
+        fullResponse:
+          type: boolean
+          default: false
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
     Amount:
       type: object
       required:
@@ -105,21 +113,6 @@ components:
           - CLP
           - MXN
           - BRL
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-    VoidRequest:
-      type: object
-      properties:
-        amount:
-          $ref: '#/components/schemas/Amount'
-        fullResponse:
-          type: boolean
-          default: false
     ChargeResponse:
       type: object
       properties:
@@ -160,6 +153,13 @@ components:
               type: string
             cardCountry:
               type: string
+  responses:
+    ErrorResponse:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     PublicMerchantId:
       type: apiKey
