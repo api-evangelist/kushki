@@ -1,3 +1,8 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (dated 2026-05-24 by the file itself), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
+generated: '2026-05-24'
 specification: FinOps Framework
 specificationVersion: '1.0'
 schema: https://www.finops.org/framework/
@@ -96,16 +101,12 @@ discountModels:
 unitEconomics:
   - name: Effective cost per transaction
     metric: total_fees / total_transactions
-    target: Track against country baseline.
   - name: Cost as percent of volume
     metric: total_fees / total_transaction_volume
-    target: Stay within negotiated MDR ceiling.
   - name: Chargeback rate
     metric: chargebacks / card_transactions
-    target: '<0.9% (Visa/Mastercard threshold)'
   - name: Refund rate
     metric: refunds / card_transactions
-    target: Monitor; sustained >5% may trigger rolling reserve.
 principles:
   - name: Visibility
     description: Use the Kushki Console exports and webhook stream to ingest per-transaction events into a
