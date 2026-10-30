@@ -1,4 +1,4 @@
-# Kushki (kushki)
+# Kushki
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,273 +66,186 @@
 
 Kushki is an Ecuador-headquartered LatAm fintech operating as a regional non-banking acquirer for the Andean and Pacific Alliance markets — Ecuador, Colombia, Peru, Chile, Mexico, and Brazil. The Kushki API unifies card payments, scheduled and one-click subscriptions, bank transfers (PSE, Webpay Transferencia, SPEI, PIX), cash vouchers (OXXO, PagoEfectivo, Boleto), payouts/dispersions, and card-present (Kushki One POS) behind a single REST surface. Authentication is split across a Public-Merchant-Id (used in the browser to tokenize cards) and a Private-Merchant-Id (used server-side to charge). PCI DSS Level 1, 3DS 2.0, multi-layer anti-fraud, hosted fields, Kajita payment forms, Smartlinks, and e-commerce plugins (Shopify, VTEX, WooCommerce, Magento, PrestaShop) round out the platform.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/kushki/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/kushki/refs/heads/main/apis.yml)
+**Areas:** Payments · Latin America · Andean Region · Card Payments · Subscription · Cash · Bank Transfers · Payouts · PSE · Webpay · SPEI · Pix
 
-## Scope
+## Kushki on APIs.io
 
-- **Position:** Producing
-- **Access:** 3rd-Party
+Everything profiled for Kushki is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/kushki/](https://apis.io/providers/kushki/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (12)
 
-- Payments
-- LatAm
-- Andean Region
-- Card Payments
-- Subscriptions
-- Cash
-- Bank Transfers
-- Payouts
-- PSE
-- Webpay
-- SPEI
-- PIX
-- OXXO
-- PagoEfectivo
-- Fintech
-- Ecuador
-- Colombia
-- Peru
-- Chile
-- Mexico
-- Brazil
+- [Kushki Subscriptions API](https://apis.io/apis/kushki/kushki-subscriptions-api/) — Create, update, retrieve, charge, and cancel scheduled card subscriptions and one-click recurring payments. Plans support monthly, weekly, daily, biweekly,…
+- [Kushki Payouts API](https://apis.io/apis/kushki/kushki-payouts-api/) — Disburse funds to suppliers, partners, payroll, marketplace sellers, and refunds via bank transfer, card push, or cash pickup. Supports same-day and…
+- [Kushki Webhooks](https://apis.io/apis/kushki/kushki-webhooks/) — Real-time event notifications for approved, declined, voided, refunded, and captured transactions across every product (card, transfer, cash, subscription,…
+- [Kushki Branches API](https://apis.io/apis/kushki/kushki-branches-api/) — Branch / sucursal management
+- [Kushki Card Present Charges API](https://apis.io/apis/kushki/kushki-card-present-charges-api/) — Sale, void, and settlement for card-present
+- [Kushki Cash API](https://apis.io/apis/kushki/kushki-cash-api/) — Cash voucher generation and lookup
+- [Kushki Charges API](https://apis.io/apis/kushki/kushki-charges-api/) — Direct charge against a previously created card token
+- [Kushki Pre-Authorization API](https://apis.io/apis/kushki/kushki-pre-authorization-api/) — Two-step authorize + capture flow
+- [Kushki Terminals API](https://apis.io/apis/kushki/kushki-terminals-api/) — Kushki One terminal management
+- [Kushki Tokens API](https://apis.io/apis/kushki/kushki-tokens-api/) — Card tokenization (client-side via Kushki.js, returns a one-time transactionToken)
+- [Kushki Transfer API](https://apis.io/apis/kushki/kushki-transfer-api/) — Bank-rail transfer charges
+- [Kushki Voids and Refunds API](https://apis.io/apis/kushki/kushki-voids-and-refunds-api/) — Void or refund a previously captured charge
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-24
-- **Modified:** 2026-05-24
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Kushki Card Payments API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Charge, void, refund, capture, and pre-authorize card transactions via the Kushki Card REST API. Card numbers are tokenized client-side (Kushki.js Hosted Fields or mobile SDKs) so PAN never touches the merchant server. One-step and two-step (auth/capture) flows, deferred payments with months and rate-of-interest, partial refunds, and 3DS 2.0 authentication are supported across Ecuador, Colombia, Peru, Chile, Mexico, and Brazil.
+- [Kushki Agentic Access](https://apis.io/agentic-access/kushki/kushki-agentic-access/)
 
-- **Human URL:** [https://docs.kushki.com/](https://docs.kushki.com/)
-- **Base URL:** `https://api.kushkipagos.com`
+#### JSON Schema (4)
 
-#### Tags
+The data models the API reads and writes.
 
-- Card Payments
-- Payments
-- Tokenization
-- 3DS
-- Refunds
-- Captures
+- [Kushki Charge](https://apis.io/schemas/kushki/kushki-charge/)
+- [Kushki Subscription](https://apis.io/schemas/kushki/kushki-subscription/)
+- [Kushki Card Token](https://apis.io/schemas/kushki/kushki-token/)
+- [Kushki Webhook Event](https://apis.io/schemas/kushki/kushki-webhook-event/)
 
-#### Properties
+#### JSON-LD (1)
 
+Linked-data contexts for the provider's vocabulary.
+
+- [Kushki Context](https://apis.io/jsonld/kushki/kushki-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Kushki Vocabulary](https://apis.io/vocabularies/kushki/kushki-vocabulary/)
+
+#### Examples (6)
+
+Example requests and responses.
+
+- [Kushki Create Card Charge Example](https://apis.io/examples/kushki/kushki-create-card-charge-example/)
+- [Kushki Create Cash Voucher Example](https://apis.io/examples/kushki/kushki-create-cash-voucher-example/)
+- [Kushki Create Subscription Example](https://apis.io/examples/kushki/kushki-create-subscription-example/)
+- [Kushki Init Payout Example](https://apis.io/examples/kushki/kushki-init-payout-example/)
+- [Kushki Init Transfer Charge Example](https://apis.io/examples/kushki/kushki-init-transfer-charge-example/)
+- [Kushki Webhook Event Example](https://apis.io/examples/kushki/kushki-webhook-event-example/)
+
+#### Collections (16)
+
+Postman and Open Collection request collections.
+
+- [Kushki Card Payments Branches API](https://apis.io/collections/kushki/open-kushki-branches-api/)
+- [Kushki Card Payments API](https://apis.io/collections/kushki/open-kushki-card-payments-api/)
+- [Kushki Card Present API](https://apis.io/collections/kushki/open-kushki-card-present-api/)
+- [Kushki Card Payments Branches Card Present Charges API](https://apis.io/collections/kushki/open-kushki-card-present-charges-api/)
+- [Kushki Card Payments Branches Cash API](https://apis.io/collections/kushki/open-kushki-cash-api/)
+- [Kushki Cash Payments API](https://apis.io/collections/kushki/open-kushki-cash-payments-api/)
+- [Kushki Card Payments Branches Charges API](https://apis.io/collections/kushki/open-kushki-charges-api/)
+- [Kushki Merchants and Branches API](https://apis.io/collections/kushki/open-kushki-merchants-api/)
+- [Kushki Card Payments Branches Payouts API](https://apis.io/collections/kushki/open-kushki-payouts-api/)
+- [Kushki Card Payments Branches Pre-Authorization API](https://apis.io/collections/kushki/open-kushki-pre-authorization-api/)
+- [Kushki Card Payments Branches Subscriptions API](https://apis.io/collections/kushki/open-kushki-subscriptions-api/)
+- [Kushki Card Payments Branches Terminals API](https://apis.io/collections/kushki/open-kushki-terminals-api/)
+- [Kushki Card Payments Branches Tokens API](https://apis.io/collections/kushki/open-kushki-tokens-api/)
+- [Kushki Card Payments Branches Transfer API](https://apis.io/collections/kushki/open-kushki-transfer-api/)
+- [Kushki Transfer Payments API](https://apis.io/collections/kushki/open-kushki-transfer-payments-api/)
+- [Kushki Card Payments Branches Voids and Refunds API](https://apis.io/collections/kushki/open-kushki-voids-and-refunds-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Kushki — jsonschema rules](https://apis.io/rules/kushki/kushki-jsonschema-spectral-rules/)
+- [Kushki API Rules](https://apis.io/rules/kushki/kushki-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Kushki Authentication](https://apis.io/security/kushki/kushki-authentication/)
+- [Kushki Domain Security](https://apis.io/security/kushki/kushki-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Kushki Plans Pricing](https://apis.io/plans/kushki/kushki-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Kushki Rate Limits](https://apis.io/rate-limits/kushki/kushki-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Kushki Finops](https://apis.io/finops/kushki/kushki-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.kushkipagos.com/)
 - [Documentation](https://docs.kushki.com/)
-- [API Reference](https://api-docs.kushkipagos.com/api-reference)
-- [OpenAPI](openapi/kushki-card-payments-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kushki-card-payments-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kushki-card-payments-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/kushki-charge-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/kushki-token-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/kushki-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-
-### Kushki Subscriptions API
-
-Create, update, retrieve, charge, and cancel scheduled card subscriptions and one-click recurring payments. Plans support monthly, weekly, daily, biweekly, quarterly, and yearly periodicity, fixed or variable amounts, start/end dates, contact details, and Webpay OneClick on the Chile rail.
-
-- **Human URL:** [https://docs.kushki.com/](https://docs.kushki.com/)
-- **Base URL:** `https://api.kushkipagos.com`
-
-#### Tags
-
-- Subscriptions
-- Recurring Payments
-- Payments
-- One Click
-
-#### Properties
-
-- [Documentation](https://docs.kushki.com/)
-- [OpenAPI](openapi/kushki-subscriptions-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kushki-subscriptions-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kushki-subscriptions-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/kushki-subscription-schema.json) — [JSON Schema](https://json-schema.org/specification)
-
-### Kushki Transfer Payments API
-
-Accept bank-rail transfers across LatAm — PSE in Colombia, Webpay Transferencia in Chile, SPEI in Mexico, PIX in Brazil, and direct debit in Ecuador and Peru. Initiate the charge, return a redirect/QR for the payer, and receive webhook confirmation when the bank settles.
-
-- **Human URL:** [https://docs.kushki.com/](https://docs.kushki.com/)
-- **Base URL:** `https://api.kushkipagos.com`
-
-#### Tags
-
-- Bank Transfers
-- Payments
-- PSE
-- Webpay
-- PIX
-- SPEI
-
-#### Properties
-
-- [Documentation](https://docs.kushki.com/)
-- [OpenAPI](openapi/kushki-transfer-payments-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kushki-transfer-payments-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kushki-transfer-payments-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Kushki Cash Payments API
-
-Generate cash-payment vouchers redeemable at authorized retail networks — OXXO and 7-Eleven in Mexico, PagoEfectivo in Peru, Boleto in Brazil, Western Union and PagoFacil in Argentina, plus Ecuadorean and Colombian correspondent networks. Returns a barcode/reference plus expiry date.
-
-- **Human URL:** [https://docs.kushki.com/](https://docs.kushki.com/)
-- **Base URL:** `https://api.kushkipagos.com`
-
-#### Tags
-
-- Cash
-- Payments
-- Vouchers
-- OXXO
-- PagoEfectivo
-- Boleto
-
-#### Properties
-
-- [Documentation](https://docs.kushki.com/)
-- [OpenAPI](openapi/kushki-cash-payments-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kushki-cash-payments-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kushki-cash-payments-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Kushki Payouts API
-
-Disburse funds to suppliers, partners, payroll, marketplace sellers, and refunds via bank transfer, card push, or cash pickup. Supports same-day and standard rails, batch upload, and country-specific compliance metadata (RUT, RFC, CURP, RUC, CPF).
-
-- **Human URL:** [https://docs.kushki.com/](https://docs.kushki.com/)
-- **Base URL:** `https://api.kushkipagos.com`
-
-#### Tags
-
-- Payouts
-- Dispersions
-- Bank Transfers
-- Mass Payments
-
-#### Properties
-
-- [Documentation](https://docs.kushki.com/)
-- [OpenAPI](openapi/kushki-payouts-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kushki-payouts-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kushki-payouts-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Kushki Card Present API
-
-Process in-person EMV chip and contactless transactions through Kushki One terminals and the Raw Card Present API. Includes pairing, terminal management, sale, void, settlement, and an encryption envelope so payment data is sealed end-to-end from the PIN pad.
-
-- **Human URL:** [https://docs.kushki.com/](https://docs.kushki.com/)
-- **Base URL:** `https://api.kushkipagos.com`
-
-#### Tags
-
-- POS
-- Card Present
-- EMV
-- Kushki One
-- In Person
-
-#### Properties
-
-- [Documentation](https://docs.kushki.com/)
-- [OpenAPI](openapi/kushki-card-present-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kushki-card-present-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kushki-card-present-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Kushki Webhooks
-
-Real-time event notifications for approved, declined, voided, refunded, and captured transactions across every product (card, transfer, cash, subscription, payout). Webhooks ship a signed JSON payload, include retry with exponential backoff, and target merchant-configured endpoints managed in the Kushki Console.
-
-- **Human URL:** [https://docs.kushki.com/](https://docs.kushki.com/)
-
-#### Tags
-
-- Webhooks
-- Notifications
-- Events
-
-#### Properties
-
-- [Documentation](https://docs.kushki.com/)
-- [JSON Schema](json-schema/kushki-webhook-event-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [Postman Collection](collections/kushki-card-payments-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kushki-card-payments-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/kushki-card-present-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kushki-card-present-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/kushki-cash-payments-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kushki-cash-payments-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/kushki-merchants-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kushki-merchants-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/kushki-payouts-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kushki-payouts-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/kushki-subscriptions-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kushki-subscriptions-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/kushki-transfer-payments-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kushki-transfer-payments-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Kushki Merchants and Branches API
-
-Manage merchant branches (sucursales) and their per-branch configuration — public/private keys, allowed payment methods, country, currency, anti-fraud rules, and webhook URLs. Used by marketplaces, franchise networks, and aggregators that need to onboard sub-merchants programmatically.
-
-- **Human URL:** [https://docs.kushki.com/](https://docs.kushki.com/)
-- **Base URL:** `https://api.kushkipagos.com`
-
-#### Tags
-
-- Merchants
-- Branches
-- Administration
-- Configuration
-
-#### Properties
-
-- [Documentation](https://docs.kushki.com/)
-- [OpenAPI](openapi/kushki-merchants-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kushki-merchants-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kushki-merchants-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Portal](https://kushkipagos.com/)
-- [Documentation](https://docs.kushki.com/)
-- [API Reference](https://api-docs.kushkipagos.com/api-reference)
-- [Getting Started](https://docs.kushki.com/)
+- [Getting started](https://docs.kushki.com/)
+- [API reference](https://api-docs.kushkipagos.com/api-reference)
 - [Support](https://soporte.kushkipagos.com/)
-- [Status Page](https://status.kushkipagos.com/)
-- [GitHub Organization](https://github.com/Kushki)
-- [SDK](https://github.com/Kushki/kushki-php)
-- [SDK](https://github.com/Kushki/kushki-android)
-- [SDK](https://github.com/Kushki/kushki-ios)
-- [SDK](https://github.com/Kushki/kushki-ios-intel)
-- [SDK](https://github.com/Kushki/kushki-ios-arm)
-- [Plugin](https://github.com/Kushki/kushki-woocommerce)
-- [Plugin](https://github.com/Kushki/kushki-magento)
-- [Plugin](https://github.com/Kushki/kushki-prestashop)
-- [Plugin](https://github.com/Kushki/kushki-vtex)
-- [Samples](https://github.com/Kushki/kushki-backend-examples)
-- [Samples](https://github.com/Kushki/kushki-demo-php)
-- [Docker](https://github.com/Kushki/kushki-docker)
-- [Console](https://uat-console.kushkipagos.com/)
-- [Console](https://console.kushkipagos.com/)
-- [LinkedIn](https://www.linkedin.com/company/kushki/)
-- [Twitter](https://twitter.com/kushkipagos)
-- [Authentication](https://docs.kushki.com/)
-- [Environments](undefined)
-- [Regions](undefined)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
-- [Plans](plans/kushki-plans-pricing.yml)
-- [Rate Limits](rate-limits/kushki-rate-limits.yml)
-- [Fin Ops](finops/kushki-finops.yml)
-- [Vocabulary](vocabulary/kushki-vocabulary.yml)
-- [Spectral Rules](rules/kushki-rules.yml)
+- [Blog](https://www.kushkipagos.com/blog)
+- [GitHub](https://github.com/Kushki)
+- [Status](https://status.kushkipagos.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** info@apievangelist.com
-**URL:** https://apievangelist.com
+**Kin Score 44.8** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 64.3 |
+| Contract governance | 27.3 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 75.0 |
+| Access clarity | 15.8 |
+
+**Agent readiness 23.0** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 15.2** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/kushki/](https://apis.io/providers/kushki/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Kushki: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/kushki/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
